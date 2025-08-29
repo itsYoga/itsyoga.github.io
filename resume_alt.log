@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.13)  14 AUG 2025 10:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.13)  28 AUG 2025 23:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**resume_alt.tex
-(./resume_alt.tex
+**Resume_alt.tex
+(./Resume_alt.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
 (/usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
@@ -283,8 +283,8 @@ File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count279
 \l__pdf_internal_box=\box55
 )
-(./resume_alt.aux)
-\openout1 = `resume_alt.aux'.
+(./Resume_alt.aux)
+\openout1 = `Resume_alt.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 107.
 LaTeX Font Info:    ... okay on input line 107.
@@ -320,9 +320,9 @@ LaTeX Font Info:    ... okay on input line 107.
 \everyMPtoPDFconversion=\toks26
 )
 Package hyperref Info: Link coloring OFF on input line 107.
- (./resume_alt.out) (./resume_alt.out)
+ (./Resume_alt.out) (./Resume_alt.out)
 \@outlinefile=\write3
-\openout3 = `resume_alt.out'.
+\openout3 = `Resume_alt.out'.
 
 
 
@@ -358,7 +358,7 @@ Package fancyhdr Warning: \footskip is too small (0.0pt):
 (fancyhdr)                Make it at least 4.08003pt, for example:
 (fancyhdr)                \setlength{\footskip}{4.08003pt}.
 
-[2] (./resume_alt.aux)
+[2] (./Resume_alt.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -367,7 +367,7 @@ L3 programming layer <2024-02-20>
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package rerunfilecheck Info: File `resume_alt.out' has not changed.
+Package rerunfilecheck Info: File `Resume_alt.out' has not changed.
 (rerunfilecheck)             Checksum: 20AA14C672EB0366E98E269651E3D794;630.
  ) 
 Here is how much of TeX's memory you used:
@@ -385,7 +385,7 @@ Here is how much of TeX's memory you used:
 usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
 sr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr
 /local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on resume_alt.pdf (2 pages, 111156 bytes).
+Output written on Resume_alt.pdf (2 pages, 111571 bytes).
 PDF statistics:
  78 PDF objects out of 1000 (max. 8388607)
  59 compressed objects within 1 object stream
