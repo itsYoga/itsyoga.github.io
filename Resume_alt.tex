@@ -54,8 +54,8 @@
 
 % Sections formatting
 \titleformat{\section}{
-  \vspace{-4pt}\scshape\raggedright\large
-}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+  \vspace{-5pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
 
 % Ensure that generate pdf is machine readable/ATS parsable
 \pdfgentounicode=1
@@ -64,16 +64,16 @@
 % Custom commands
 \newcommand{\resumeItem}[1]{
   \item\small{
-    {#1 \vspace{-2pt}}
+    {#1 \vspace{-3pt}}
   }
 }
 
 \newcommand{\resumeSubheading}[4]{
-  \vspace{-2pt}\item
+  \vspace{-3pt}\item
     \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
       \textbf{#1} & #2 \\
       \textit{\small#3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-7pt}
+    \end{tabular*}\vspace{-8pt}
 }
 
 \newcommand{\resumeSubSubheading}[2]{
@@ -98,7 +98,7 @@
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
 \newcommand{\resumeItemListStart}{\begin{itemize}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-6pt}}
 
 %-------------------------------------------
 %%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -118,63 +118,13 @@
   \resumeSubHeadingListStart
     \resumeSubheading
       {National Taiwan Ocean University}{Keelung, Taiwan}
-      {B.S. in Computer Science and Engineering - GPA: 3.6/4.0} {Sep. 2022 -- Present (EST. May 2026)}\hfill \break
+      {B.S. in Computer Science and Engineering - GPA: 3.6/4.0}{Sep. 2022 -- May 2026 (Expected)}
 
-  \textbf{Relevant Courses}{: Data Structures, Algorithms, Graph Theory Algorithms, Operating Systems, Computer Networks, Computer Organization, Digital Logic, Database Systems, Introduction to AI, Machine Learning, Generative AI, Information Security, Programming Design, iOS Development, Flutter Development, Linear Algebra, Discrete Mathematics, Probability Theory, Object-Oriented Programming} 
-
+  \vspace{2pt}
+  \small{\textbf{Relevant Courses}: Data Structures \& Algorithms, Graph Theory Algorithms, Operating Systems, Database Systems, Computer Networks, Machine Learning, Natural Language Processing, Generative AI, Object-Oriented Programming, Cyber Security}
+  
   \resumeSubHeadingListEnd
 
-
-%-----------PROJECTS-----------
-\section{Research \& Projects}
-    \resumeSubHeadingListStart
-      \resumeSubheading
-      {Volleyball Officiating and Analytics System}{Nov. 2024 -- present}
-      {OpenCV, Python, PyTorch | Advisor: Prof. Pei-Yi, Ding}{Team size: 3}
-      \resumeItemListStart
-        \resumeItem{Designed and developed a comprehensive volleyball officiating and analytics system that not only determines accurate in/out calls but also analyzes game statistics including player scores, turnovers, and ball pass quality.}
-        \resumeItem{Engineered a computer vision pipeline using OpenCV to capture and process real-time court imagery, identifying ball position relative to court boundaries and tracking player movements to enhance officiating accuracy and provide detailed game analytics.}
-      \resumeItemListEnd
-
-      \resumeSubheading
-      {Archon RWA Tokenization DApp}{2025}
-      {React, TypeScript, Solidity, Hardhat, Ethers.js, Tailwind CSS}{Team size: 1}
-      \resumeItemListStart
-        \resumeItem{Developed a comprehensive DeFi platform for Real-World Asset (RWA) tokenization featuring role-based access control (ADMIN, VERIFIER, MINTER).}
-        \resumeItem{Implemented secure smart contracts for identity verification, asset lifecycle management, and dynamic ERC20 token creation, with automated deployment scripts.}
-        \resumeItem{Built a modern, responsive frontend using React and TypeScript, integrating real-time wallet connectivity with MetaMask and dynamic account switching.}
-      \resumeItemListEnd
-
-      \resumeSubheading
-      {Image Processing Project}{2025}
-      {Python, OpenCV, NumPy, scikit-image}{Team size: 1}
-      \resumeItemListStart
-        \resumeItem{Implemented a complete Image Signal Processing (ISP) pipeline and developed robust 3A algorithms (Auto Exposure, Auto Focus, Auto White Balance).}
-        \resumeItem{Engineered a suite of computer vision features, including edge detection, feature detection, image enhancement, noise reduction, and image segmentation.}
-      \resumeItemListEnd
-
-      \resumeSubheading
-      {ASL Hand Gesture Recognition App}{2024}
-      {SwiftUI, CreateML}{Team size: 1}
-      \resumeItemListStart
-        \resumeItem{Trained and deployed a custom machine learning model using CreateML to classify 28 distinct American Sign Language hand gestures (A-Z, Space, Delete) with high accuracy.}
-        \resumeItem{Integrated a real-time camera feed into a native SwiftUI iOS application, allowing users to construct sentences from recognized gestures.}
-        \resumeItem{Designed a clean, accessible, and user-friendly interface focused on improving communication for users.}
-        \resumeItem{WWDC2025 Submission}
-      \resumeItemListEnd
-      
-      \resumeSubheading
-      {SyncUp - Social Calendar App}{2025}
-      {Flutter, Dart, Firebase, Google API, LLM API, RAG}{Team size: 1}
-      \resumeItemListStart
-        \resumeItem{Developed a modern social calendar app with real-time sharing and friend management using Flutter and Firebase.}
-        \resumeItem{Implemented location-based event suggestions and interactivity with Google Maps integration.}
-        \resumeItem{Integrated Firebase Authentication, Cloud Firestore, and real-time chat features with read receipts.}
-        \resumeItem{Built an AI-powered chatbot API connected with Google Gemini to intelligently generate schedules and suggest meetup opportunities based on user preferences and availability.}
-        \resumeItem{Implemented RAG system to provide contextual calendar recommendations and smart event planning assistance.}
-      \resumeItemListEnd
-
-    \resumeSubHeadingListEnd
 
 %-----------EXPERIENCE-----------
 \section{Experience}
@@ -183,34 +133,67 @@
         {ITRI}{Jun. 2025 -- Aug. 2025}
         {\textit{AI Image Recognition Intern, Electronics and Optoelectronics Research Laboratories}}{Hsinchu, Taiwan}
         \resumeItemListStart
-                    \resumeItem{Optimized a multi-task YOLO model for autonomous driving applications, achieving high-performance metrics including 99\% driving area accuracy, a 97\% detection recall rate (R), and a mean Average Precision (mAP@0.5) of 84\%.}
-        \resumeItem{Implemented image streaming and detection result transmission protocols via Ethernet using ROS to enable real-time data processing and analysis.}
-        \resumeItem{Optimized YOLO object detection models for performance and efficiency using advanced pruning techniques and successfully transplanted models to target hardware.}
-        \resumeItem{Supported research initiatives by reproducing and exploring other state-of-the-art (SOTA) models to benchmark and identify potential improvements.}
+            \resumeItem{Optimized multi-task YOLO model for autonomous driving, improving inference speed by 40\% while maintaining 99\% driving area accuracy, 97\% detection recall, and 84\% mAP@0.5}
+            \resumeItem{Implemented real-time image streaming and detection via ROS/Ethernet, processing 30 FPS with sub-50ms latency}
+            \resumeItem{Applied neural network pruning techniques, reducing model size by 35\% for edge deployment while preserving accuracy}
         \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+
+%-----------PROJECTS-----------
+\section{Research \& Projects}
+    \resumeSubHeadingListStart
+      \resumeSubheading
+      {Volleyball Performance Analysis System -- Published Research}{Nov. 2024 -- Sep. 2025}
+      {Python, OpenCV, PyTorch, YOLO | Advisor: Prof. Pei-Yi, Ding}{Co-author (60\% contribution )}
+      \resumeItemListStart
+        \resumeItem{Co-authored research paper on volleyball analytics achieving 94.49\% mAP@0.5 for action detection and 79.5\% ball tracking accuracy}
+        \resumeItem{Implemented VballNet (U-Net) for real-time ball tracking at 200 FPS with automated landing detection and court boundary analysis}
+        \resumeItem{Trained YOLOv11m on 24,806-image dataset to detect 5 volleyball actions, achieving 37.1\% improvement over YOLOv8}
+      \resumeItemListEnd
+
+      \resumeSubheading
+      {Ghote -- AI-Powered Learning Assistant Platform}{Sep. 2025 -- Present}
+      {Flutter, FastAPI, PostgreSQL, Firebase, Google Gemini API, Celery, Redis, RAG}{Team Lead (5 members)}
+      \resumeItemListStart
+        \resumeItem{Led 5-person team building AI study platform that auto-generates notes, quizzes, and flashcards, reducing study material creation time by 90\%}
+        \resumeItem{Architected full-stack solution with Flutter frontend, FastAPI backend, and async document parsing pipeline using Celery workers, designed to handle 1,000+ documents/day}
+        \resumeItem{Integrated Google Gemini API with RAG system for context-aware content generation, optimizing prompts to maintain free tier limits while ensuring high-quality output}
+        \resumeItem{Implemented Firebase Authentication, PostgreSQL database, Cloudflare R2 storage, and deployed on Render with CI/CD via GitHub Actions}
+      \resumeItemListEnd
+
+      \resumeSubheading
+      {Archon RWA Tokenization DApp}{Jun. 2025}
+      {React, TypeScript, Solidity, Hardhat, Ethers.js, Tailwind CSS}{Individual Project}
+      \resumeItemListStart
+        \resumeItem{Developed DeFi platform for Real-World Asset tokenization with role-based access control (ADMIN, VERIFIER, MINTER)}
+        \resumeItem{Implemented smart contracts for identity verification, asset lifecycle management, and dynamic ERC20 token creation}
+        \resumeItem{Built responsive frontend using React and TypeScript, integrating wallet connectivity with MetaMask and account switching}
+      \resumeItemListEnd
+
     \resumeSubHeadingListEnd
 
 %-----------SKILLS-----------
 \section{Technical Skills}
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
-     \textbf{Programming Languages}{: Python, Java, C++, C, JavaScript, TypeScript, Swift, Dart, PHP, Solidity, SQL, HTML/CSS, MATLAB} \\
-     \textbf{Frameworks \& Libraries}{: React, Node.js, Flutter, SwiftUI, PyTorch, OpenCV, NumPy, Pandas, Ethers.js, Hardhat} \\
-     \textbf{Tools \& Platforms}{: Git, Docker, Firebase, Google Cloud Platform (GCP), Jupyter Notebook, Linux/Windows/MacOS, MongoDB} \\
-     \textbf{Languages}{: English (Fluent), Mandarin (Native), Japanese (JLPT N3)}
+     \textbf{Programming Languages}{: Python, Java, C++, JavaScript/TypeScript, Swift, Dart, SQL} \\
+     \textbf{ML/AI}{: PyTorch, TensorFlow, OpenCV, scikit-learn, NumPy, Pandas, CreateML} \\
+     \textbf{Frameworks}{: React, Flutter, FastAPI, Node.js, SwiftUI, Celery} \\
+     \textbf{Tools}{: Git, Docker, Firebase, AWS, GCP, PostgreSQL, Redis, Linux, ROS} \\
+     \textbf{Languages}{: Mandarin (Native), English (Fluent TOEFL 110), Japanese (JLPT N3)}
     }}
  \end{itemize}
 
 %-----------EXTRACURRICULAR ACTIVITIES-----------
-\section{Extracurricular Activities}
-    \resumeSubHeadingListStart
-      \resumeSubheading
-        {National Taiwan Ocean University Tennis Team Member}{2022 - 2023}{}{Keelung, Taiwan}
-      \resumeSubheading
-        {Volleyball Department Team Captain}{2022 - present}{}{Keelung, Taiwan}
-      \resumeSubheading
-        {Hackathon Participant}{2022 - present}{}{} 
-    \resumeSubHeadingListEnd
+\section{Leadership \& Activities}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Volleyball Team Captain} (2022--present) $|$ 
+     \textbf{NTUFC Kronos Reading Club} (Sep.--Dec. 2024)  \\
+     \textbf{Hackathons} (2022--present)
+    }}
+ \end{itemize}
 
 %-------------------------------------------
 \end{document}
