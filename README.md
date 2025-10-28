@@ -2,9 +2,9 @@
 
 This is my personal website and portfolio, featuring my professional resume, projects, and contact information. The site is deployed using GitHub Pages.
 
-🌐 **Live Site**: [https://itsyoga.github.io](https://itsyoga.github.io) (根路徑 - 需要將 repository 重命名為 `itsyoga`)
+🌐 **Live Site**: [https://itsyoga.github.io](https://itsyoga.github.io)
 
-**注意**: 如果當前 URL 包含 repository 名稱，請在 GitHub 將 repository 重命名為 `itsyoga`（全小寫）
+**注意**: Repository 名稱必須完全匹配 GitHub 用戶名（大小寫敏感）
 
 ## Project Structure
 
