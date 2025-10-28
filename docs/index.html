@@ -5,316 +5,504 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YuJia Liang - Personal Website</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
             color: #333;
-            font-size: 11pt;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
         }
-        .header {
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
             text-align: center;
-            margin-bottom: 30px;
+            padding: 4rem 2rem;
+            color: white;
         }
-        .header h1 {
-            font-size: 28pt;
-            margin: 0 0 5px 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
         .contact-info {
-            margin: 10px 0;
-            font-size: 10pt;
-            line-height: 1.8;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 1rem;
         }
+
         .contact-info a {
-            color: #000;
-            text-decoration: underline;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s;
         }
+
         .contact-info a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Resume Download Section */
+        .resume-section {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        .resume-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .resume-box h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .resume-box p {
             color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .resume-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+            transform: translateY(-3px);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
         .section {
-            margin: 25px 0;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.6s ease-out;
         }
+
         .section-title {
-            text-transform: uppercase;
-            font-size: 16pt;
-            border-bottom: 2px solid #333;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-            font-weight: bold;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
         }
 
         .entry {
-            margin-bottom: 18px;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e0e0e0;
         }
+
+        .entry:last-child {
+            border-bottom: none;
+        }
+
         .entry-header {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 2px;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
         }
+
         .entry-header h3 {
+            font-size: 1.3rem;
+            color: #333;
             margin: 0;
-            font-size: 12pt;
-            font-weight: bold;
-            flex-grow: 1;
-            padding-right: 10px;
+            flex: 1;
         }
-        .entry-header .date {
-            color: #555;
-            font-style: italic;
-            font-size: 10pt;
+
+        .date {
+            color: #667eea;
+            font-weight: 600;
             white-space: nowrap;
-            flex-shrink: 0;
         }
-        .entry-subheader {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            font-size: 10pt;
-            color: #444;
-            margin-bottom: 5px;
-        }
-        .entry-subheader .details, .entry-subheader .location {
-            font-style: italic;
-        }
-        .entry-subheader .location {
-            text-align: right;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-        .entry-subheader .details {
-            flex-grow: 1;
-            padding-right: 10px;
+
+        .entry-details {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
         }
 
         .entry ul {
-            margin: 5px 0 5px 20px;
-            padding-left: 20px;
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
         }
+
         .entry li {
-            margin: 3px 0;
-            font-size: 10pt;
-            line-height: 1.5;
+            margin-bottom: 0.5rem;
+            color: #555;
         }
 
-        .relevant-courses {
-            margin: 10px 0 5px 0;
-            font-size: 10pt;
-        }
-        .relevant-courses strong {
-            font-weight: bold;
-            font-size: 10.5pt;
+        .entry li::marker {
+            color: #667eea;
         }
 
-        .skills-list {
-            margin: 0;
-            padding: 0;
-            list-style: none;
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
         }
+
         .skill-category {
-            margin-bottom: 8px;
-            font-size: 10pt;
-        }
-        .skill-category strong {
-            font-weight: bold;
-            display: inline-block;
-            width: 180px;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
         }
 
-        a {
-            color: #000;
-            text-decoration: underline;
+        .skill-category strong {
+            display: block;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
-        a:hover {
-            color: #666;
+
+        .skill-category span {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .resume-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>YuJia Liang</h1>
+    <nav>
+        <div class="container">
+            <h1>YuJia Liang</h1>
+            <ul>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>👋 Hello, I'm YuJia Liang</h1>
+        <p>Computer Science Student | AI Enthusiast | Full-Stack Developer</p>
         <div class="contact-info">
-            +886 965 160 695 |
-            <a href="mailto:ch993115@gmail.com">ch993115@gmail.com</a> |
-            <a href="https://www.linkedin.com/in/yu-jia-liang-77ab022a7">LinkedIn Profile</a> |
-            <a href="https://github.com/itsYoga">GitHub Profile</a> |
-            <a href="Resume.pdf" target="_blank">PDF Resume</a> |
-            Taipei, Taiwan
+            <a href="mailto:ch993115@gmail.com">📧 Email</a>
+            <a href="https://www.linkedin.com/in/yu-jia-liang-77ab022a7">💼 LinkedIn</a>
+            <a href="https://github.com/itsYoga">💻 GitHub</a>
+            <span>📍 Taipei, Taiwan</span>
         </div>
     </div>
 
-    <div class="section">
-        <h2 class="section-title">Education</h2>
-        <div class="entry">
-            <div class="entry-header">
-                <h3>National Taiwan Ocean University</h3>
-                <span class="date">Sep. 2022 – Present (EST. May 2026)</span>
-            </div>
-            <div class="entry-subheader">
-                <span class="details">B.S. in Computer Science and Engineering - GPA: 3.6/4.0</span>
-                <span class="location">Keelung, Taiwan</span>
-            </div>
-        </div>
-        <div class="relevant-courses">
-            <strong>Relevant Courses:</strong> Data Structures, Algorithms, Graph Theory Algorithms, Operating Systems, Computer Networks, Computer Organization, Digital Logic, Database Systems, Introduction to AI, Machine Learning, Generative AI, Information Security, Programming Design, iOS Development, Flutter Development, Linear Algebra, Discrete Mathematics, Probability Theory, Object-Oriented Programming
-        </div>
-    </div>
-
-    <div class="section">
-        <h2 class="section-title">Research & Projects</h2>
-        <div class="entry">
-            <div class="entry-header">
-                <h3>Volleyball Line Judging System</h3>
-                <span class="date">Nov. 2024 – present</span>
-            </div>
-            <div class="entry-subheader">
-                <span class="details">OpenCV, Python, PyTorch | Advisor: Prof. Pei-Yi, Ding | Team size: 3</span>
-            </div>
-            <ul>
-                <li>Designed and developed an automated line-judging system to make accurate in/out calls in volleyball.</li>
-                <li>Engineered a computer vision pipeline using OpenCV to capture and process real-time court imagery, identifying ball position relative to court boundaries to enhance officiating accuracy.</li>
-            </ul>
-        </div>
-        <div class="entry">
-            <div class="entry-header">
-                <h3>Archon RWA Tokenization DApp</h3>
-                <span class="date">2025</span>
-            </div>
-            <div class="entry-subheader">
-                <span class="details">React, TypeScript, Solidity, Hardhat, Ethers.js, Tailwind CSS | Team size: 1</span>
-            </div>
-            <ul>
-                <li>Developed a comprehensive DeFi platform for Real-World Asset (RWA) tokenization featuring role-based access control (ADMIN, VERIFIER, MINTER).</li>
-                <li>Implemented secure smart contracts for identity verification, asset lifecycle management, and dynamic ERC20 token creation, with automated deployment scripts.</li>
-                <li>Built a modern, responsive frontend using React and TypeScript, integrating real-time wallet connectivity with MetaMask and dynamic account switching.</li>
-            </ul>
-        </div>
-        <div class="entry">
-            <div class="entry-header">
-                <h3>Image Processing Project</h3>
-                <span class="date">2025</span>
-            </div>
-            <div class="entry-subheader">
-                <span class="details">Python, OpenCV, NumPy, scikit-image | Team size: 1</span>
-            </div>
-            <ul>
-                <li>Implemented a complete Image Signal Processing (ISP) pipeline and developed robust 3A algorithms (Auto Exposure, Auto Focus, Auto White Balance).</li>
-                <li>Engineered a suite of computer vision features, including edge detection, feature detection, image enhancement, noise reduction, and image segmentation.</li>
-            </ul>
-        </div>
-        <div class="entry">
-            <div class="entry-header">
-                <h3>ASL Hand Gesture Recognition App</h3>
-                <span class="date">Dec. 2024 – Feb. 2025</span>
-            </div>
-            <div class="entry-subheader">
-                <span class="details">SwiftUI, CreateML | Team size: 1</span>
-            </div>
-            <ul>
-                <li>Trained and deployed a custom machine learning model using CreateML to classify 28 distinct American Sign Language hand gestures (A-Z, Space, Delete) with high accuracy.</li>
-                <li>Integrated a real-time camera feed into a native SwiftUI iOS application, allowing users to construct sentences from recognized gestures.</li>
-                <li>Designed a clean, accessible, and user-friendly interface focused on improving communication for users.</li>
-                <li>WWDC2025 Submission</li>
-            </ul>
-        </div>
-
-        <div class="entry">
-            <div class="entry-header">
-                <h3>SyncUp - Social Calendar App</h3>
-                <span class="date">2025</span>
-            </div>
-            <div class="entry-subheader">
-                <span class="details">Flutter, Dart, Firebase, Google API, LLM API, RAG | Team size: 1</span>
-            </div>
-            <ul>
-                <li>Developed a modern social calendar app with real-time sharing and friend management using Flutter and Firebase.</li>
-                <li>Implemented location-based event suggestions and interactivity with Google Maps integration.</li>
-                <li>Integrated Firebase Authentication, Cloud Firestore, and real-time chat features with read receipts.</li>
-                <li>Built an AI-powered chatbot API connected with Google Gemini to intelligently generate schedules and suggest meetup opportunities based on user preferences and availability.</li>
-                <li>Implemented RAG (Retrieval-Augmented Generation) system to provide contextual calendar recommendations and smart event planning assistance.</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2 class="section-title">Experience</h2>
-        <div class="entry">
-            <div class="entry-header">
-                <h3>ITRI</h3>
-                <span class="date">Jun. 2025 – Aug. 2025</span>
-            </div>
-            <div class="entry-subheader">
-                <span class="details">AI Image Recognition Intern, Electronics and Optoelectronics Research Laboratories</span>
-                <span class="location">Hsinchu, Taiwan</span>
-            </div>
-            <ul>
-                <li>Optimized a multi-task YOLO model for autonomous driving applications, achieving high-performance metrics including 99% driving area accuracy, a 97% detection recall rate (R), and a mean Average Precision (mAP@0.5) of 84%.</li>
-                <li>Implemented image streaming and detection result transmission protocols via Ethernet to enable real-time data processing and analysis.</li>
-                <li>Optimized YOLO object detection models for performance and efficiency using advanced pruning techniques and successfully transplanted models to target hardware.</li>
-                <li>Supported research initiatives by reproducing and exploring other state-of-the-art (SOTA) models to benchmark and identify potential improvements.</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2 class="section-title">Technical Skills</h2>
-        <ul class="skills-list">
-            <li class="skill-category">
-                <strong>Programming Languages:</strong> Python, Java, C++, JavaScript/TypeScript, Swift, Dart, SQL
-            </li>
-            <li class="skill-category">
-                <strong>ML/AI:</strong> PyTorch, TensorFlow, OpenCV, scikit-learn, NumPy, Pandas, CreateML
-            </li>
-            <li class="skill-category">
-                <strong>Frameworks:</strong> React, Flutter, FastAPI, Node.js, SwiftUI, Celery
-            </li>
-            <li class="skill-category">
-                <strong>Tools:</strong> Git, Docker, Firebase, AWS, GCP, PostgreSQL, Redis, Linux, ROS, Linux/Unix/Windows/MacOS, Cursor, Figma, Jira, Canvas, Excel
-            </li>
-            <li class="skill-category">
-                <strong>Languages:</strong> English (Fluent), Mandarin (Native), Japanese (JLPT N3)
-            </li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2 class="section-title">Extracurricular Activities</h2>
-        <div class="entry">
-            <div class="entry-header">
-                <h3>National Taiwan Ocean University Tennis Team Member</h3>
-                <span class="date">2022 - 2023</span>
-            </div>
-            <div class="entry-subheader">
-                <span class="location">Keelung, Taiwan</span>
-            </div>
-        </div>
-        <div class="entry">
-            <div class="entry-header">
-                <h3>Volleyball Department Team Member</h3>
-                <span class="date">2022 - present</span>
-            </div>
-            <div class="entry-subheader">
-                <span class="location">Keelung, Taiwan</span>
-            </div>
-        </div>
-        <div class="entry">
-            <div class="entry-header">
-                <h3>Hackathon Participant</h3>
-                <span class="date">2022 - present</span>
-            </div>
-        </div>
-        <div class="entry">
-            <div class="entry-header">
-                <h3>NTUFC Kronos Quantitative Trading Reading Club</h3>
-                <span class="date">2025 - present</span>
+    <!-- Resume Download Section -->
+    <div class="resume-section" id="resume">
+        <div class="resume-box">
+            <h2>📄 My Resume</h2>
+            <p>View or download my resume in PDF format</p>
+            <div class="resume-buttons">
+                <a href="Resume_alt.pdf" target="_blank" class="btn-primary">📥 Download Resume (Alternative)</a>
+                <a href="Resume.pdf" target="_blank" class="btn-secondary">📄 View Full Resume</a>
             </div>
         </div>
     </div>
+
+    <div class="container">
+        <div class="content-grid">
+            <!-- Education -->
+            <div class="section" id="education">
+                <h2 class="section-title">🎓 Education</h2>
+                <div class="entry">
+                    <div class="entry-header">
+                        <h3>National Taiwan Ocean University</h3>
+                        <span class="date">Sep. 2022 – May 2026</span>
+                    </div>
+                    <div class="entry-details">
+                        B.S. in Computer Science and Engineering - GPA: 3.6/4.0 | Keelung, Taiwan
+                    </div>
+                    <p><strong>Relevant Courses:</strong> Data Structures, Algorithms, Graph Theory Algorithms, Operating Systems, Computer Networks, Computer Organization, Digital Logic, Database Systems, Introduction to AI, Machine Learning, Generative AI, Information Security, iOS Development, Flutter Development, Linear Algebra, Discrete Mathematics, Probability Theory</p>
+                </div>
+            </div>
+
+            <!-- Projects -->
+            <div class="section" id="projects">
+                <h2 class="section-title">🚀 Research & Projects</h2>
+                
+                <div class="entry">
+                    <div class="entry-header">
+                        <h3>Volleyball Line Judging System</h3>
+                        <span class="date">Nov. 2024 – present</span>
+                    </div>
+                    <div class="entry-details">OpenCV, Python, PyTorch | Advisor: Prof. Pei-Yi, Ding | Team: 3</div>
+                    <ul>
+                        <li>Designed and developed an automated line-judging system to make accurate in/out calls in volleyball</li>
+                        <li>Engineered a computer vision pipeline using OpenCV for real-time court imagery processing</li>
+                    </ul>
+                </div>
+
+                <div class="entry">
+                    <div class="entry-header">
+                        <h3>Archon RWA Tokenization DApp</h3>
+                        <span class="date">2025</span>
+                    </div>
+                    <div class="entry-details">React, TypeScript, Solidity, Hardhat, Ethers.js | Solo Project</div>
+                    <ul>
+                        <li>Developed a comprehensive DeFi platform for Real-World Asset tokenization with role-based access control</li>
+                        <li>Implemented secure smart contracts for identity verification and dynamic ERC20 token creation</li>
+                        <li>Built a modern, responsive frontend with MetaMask integration</li>
+                    </ul>
+                </div>
+
+                <div class="entry">
+                    <div class="entry-header">
+                        <h3>ASL Hand Gesture Recognition App</h3>
+                        <span class="date">Dec. 2024 – Feb. 2025</span>
+                    </div>
+                    <div class="entry-details">SwiftUI, CreateML | Solo Project</div>
+                    <ul>
+                        <li>Trained a custom ML model to classify 28 ASL hand gestures with high accuracy</li>
+                        <li>Built native iOS app with real-time camera integration</li>
+                        <li>WWDC 2025 Submission</li>
+                    </ul>
+                </div>
+
+                <div class="entry">
+                    <div class="entry-header">
+                        <h3>SyncUp - Social Calendar App</h3>
+                        <span class="date">2025</span>
+                    </div>
+                    <div class="entry-details">Flutter, Firebase, Google API, LLM API, RAG | Solo Project</div>
+                    <ul>
+                        <li>Developed a modern social calendar app with real-time sharing using Flutter and Firebase</li>
+                        <li>Integrated AI-powered chatbot with Google Gemini for smart scheduling</li>
+                        <li>Implemented RAG system for contextual calendar recommendations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Experience -->
+            <div class="section" id="experience">
+                <h2 class="section-title">💼 Experience</h2>
+                <div class="entry">
+                    <div class="entry-header">
+                        <h3>ITRI</h3>
+                        <span class="date">Jun. 2025 – Aug. 2025</span>
+                    </div>
+                    <div class="entry-details">AI Image Recognition Intern | Hsinchu, Taiwan</div>
+                    <ul>
+                        <li>Optimized multi-task YOLO model achieving 99% accuracy, 97% recall rate, and 84% mAP@0.5</li>
+                        <li>Implemented image streaming and detection protocols via Ethernet for real-time processing</li>
+                        <li>Optimized YOLO models using advanced pruning techniques and hardware transplantation</li>
+                        <li>Reproduced SOTA models for benchmarking and improvement identification</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="section" id="skills">
+                <h2 class="section-title">🛠️ Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <strong>Programming Languages</strong>
+                        <span>Python, Java, C++, JavaScript/TypeScript, Swift, Dart, SQL</span>
+                    </div>
+                    <div class="skill-category">
+                        <strong>ML/AI</strong>
+                        <span>PyTorch, TensorFlow, OpenCV, scikit-learn, NumPy, Pandas, CreateML</span>
+                    </div>
+                    <div class="skill-category">
+                        <strong>Frameworks</strong>
+                        <span>React, Flutter, FastAPI, Node.js, SwiftUI, Celery</span>
+                    </div>
+                    <div class="skill-category">
+                        <strong>Tools</strong>
+                        <span>Git, Docker, Firebase, AWS, GCP, PostgreSQL, Redis, Linux, ROS, Figma</span>
+                    </div>
+                    <div class="skill-category">
+                        <strong>Languages</strong>
+                        <span>English (Fluent), Mandarin (Native), Japanese (JLPT N3)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Extracurricular -->
+            <div class="section" id="extracurricular">
+                <h2 class="section-title">⚽ Extracurricular Activities</h2>
+                <div class="entry">
+                    <div class="entry-header">
+                        <h3>National Taiwan Ocean University Tennis Team</h3>
+                        <span class="date">2022 - 2023</span>
+                    </div>
+                </div>
+                <div class="entry">
+                    <div class="entry-header">
+                        <h3>Volleyball Department Team Member</h3>
+                        <span class="date">2022 - present</span>
+                    </div>
+                </div>
+                <div class="entry">
+                    <div class="entry-header">
+                        <h3>Hackathon Participant</h3>
+                        <span class="date">2022 - present</span>
+                    </div>
+                </div>
+                <div class="entry">
+                    <div class="entry-header">
+                        <h3>NTUFC Quantitative Trading Reading Club</h3>
+                        <span class="date">2025 - present</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 2rem; color: white;">
+        <p>© 2025 YuJia Liang. Made with ❤️ and modern web technologies.</p>
+    </footer>
 </body>
-</html> 
+</html>
