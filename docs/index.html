@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YuJia Liang - Personal Website</title>
+    <title>YuJia Liang</title>
     <style>
         * {
             margin: 0;
@@ -11,272 +11,371 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #000;
+            --secondary: #fff;
+            --accent: #ff642f;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: var(--secondary);
+            color: var(--primary);
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* Navigation */
         nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            position: sticky;
+            position: fixed;
             top: 0;
+            width: 100%;
+            background: var(--secondary);
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        nav .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
 
         nav h1 {
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
+            gap: 30px;
         }
 
         nav a {
+            color: var(--primary);
             text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: opacity 0.3s;
         }
 
         nav a:hover {
-            color: #667eea;
+            opacity: 0.6;
         }
 
         /* Hero Section */
         .hero {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-        }
-
-        .contact-info {
+            min-height: 100vh;
             display: flex;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            font-size: 1rem;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
         }
 
-        .contact-info a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            transition: all 0.3s;
+        .hero-content h1 {
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 300;
+            letter-spacing: -2px;
+            line-height: 0.9;
+            margin-bottom: 40px;
         }
 
-        .contact-info a:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
+        .hero-content h1 span {
+            display: block;
+            font-weight: 400;
         }
 
-        /* Resume Download Section */
-        .resume-section {
+        .hero-content p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
             max-width: 600px;
-            margin: 0 auto 3rem;
-            text-align: center;
-        }
-
-        .resume-box {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        .resume-box h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: #333;
-        }
-
-        .resume-box p {
-            color: #666;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .resume-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary, .btn-secondary {
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-        }
-
-        .btn-secondary {
-            background: #f0f0f0;
-            color: #333;
-        }
-
-        .btn-secondary:hover {
-            background: #e0e0e0;
-            transform: translateY(-3px);
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            opacity: 0.8;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.5;
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            display: block;
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* About Section */
+        section {
+            padding: 150px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 80px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
         .content-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 80px;
+            margin-bottom: 100px;
         }
 
-        .section {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            animation: fadeInUp 0.6s ease-out;
+        .content-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 400;
         }
 
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: #333;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 0.5rem;
+        .content-item p {
+            line-height: 1.8;
+            opacity: 0.8;
         }
 
-        .entry {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid #e0e0e0;
+        /* Resume Button */
+        .resume-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: var(--secondary);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            margin-top: 30px;
         }
 
-        .entry:last-child {
-            border-bottom: none;
+        .resume-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
         }
 
-        .entry-header {
+        .resume-btn span {
+            font-size: 1.2rem;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 80px;
+        }
+
+        .project-card {
+            border: 1px solid rgba(0,0,0,0.1);
+            padding: 40px;
+            transition: all 0.3s;
+            background: var(--secondary);
+        }
+
+        .project-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .project-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .project-card p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 20px;
+        }
+
+        .project-tags {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 0.5rem;
             flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
         }
 
-        .entry-header h3 {
-            font-size: 1.3rem;
-            color: #333;
-            margin: 0;
-            flex: 1;
+        .tag {
+            font-size: 0.75rem;
+            padding: 5px 15px;
+            background: rgba(0,0,0,0.05);
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .date {
-            color: #667eea;
-            font-weight: 600;
-            white-space: nowrap;
+        /* Experience */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
         }
 
-        .entry-details {
-            color: #666;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
+        .exp-item {
+            padding: 30px;
+            border-left: 2px solid var(--primary);
         }
 
-        .entry ul {
-            margin-left: 1.5rem;
-            margin-top: 0.5rem;
+        .exp-item h4 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 400;
         }
 
-        .entry li {
-            margin-bottom: 0.5rem;
-            color: #555;
+        .exp-item .company {
+            font-size: 1.1rem;
+            opacity: 0.7;
+            margin-bottom: 15px;
         }
 
-        .entry li::marker {
-            color: #667eea;
+        .exp-item .date {
+            font-size: 0.9rem;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
+        .exp-item ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .exp-item li {
+            padding: 8px 0;
+            opacity: 0.8;
+        }
+
+        .exp-item li::before {
+            content: '•';
+            margin-right: 10px;
+            opacity: 0.5;
+        }
+
+        /* Skills */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 50px;
         }
 
         .skill-category {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
+            padding: 30px;
+            border: 1px solid rgba(0,0,0,0.1);
         }
 
         .skill-category strong {
             display: block;
-            color: #667eea;
-            margin-bottom: 0.5rem;
             font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            opacity: 0.6;
         }
 
-        .skill-category span {
-            color: #555;
+        .skill-category p {
             font-size: 0.95rem;
+            line-height: 1.8;
+            opacity: 0.8;
+        }
+
+        /* Contact */
+        .contact-section {
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding-top: 100px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .contact-item a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+            padding: 20px 0;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .contact-item a:hover {
+            border-bottom-color: var(--primary);
+            opacity: 0.7;
+        }
+
+        .contact-item span {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.5;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px;
+            text-align: center;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .content-grid,
+            .experience-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 20px;
+            }
+
+            section {
+                padding: 80px 20px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Animations */
@@ -291,218 +390,234 @@
             }
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-
-            nav ul {
-                gap: 1rem;
-            }
-
-            .resume-buttons {
-                flex-direction: column;
-            }
-
-            .btn-primary, .btn-secondary {
-                width: 100%;
-            }
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <nav>
-        <div class="container">
-            <h1>YuJia Liang</h1>
-            <ul>
-                <li><a href="#resume">Resume</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-            </ul>
-        </div>
+        <h1>YuJia Liang</h1>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
 
-    <div class="hero">
-        <h1>👋 Hello, I'm YuJia Liang</h1>
-        <p>Computer Science Student | AI Enthusiast | Full-Stack Developer</p>
-        <div class="contact-info">
-            <a href="mailto:ch993115@gmail.com">📧 Email</a>
-            <a href="https://www.linkedin.com/in/yu-jia-liang-77ab022a7">💼 LinkedIn</a>
-            <a href="https://github.com/itsYoga">💻 GitHub</a>
-            <span>📍 Taipei, Taiwan</span>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>
+                <span>Computer</span>
+                <span>Science</span>
+                <span>Student</span>
+            </h1>
+            <p>
+                AI Enthusiast • Full-Stack Developer<br>
+                Building the Future of Technology
+            </p>
+            <a href="Resume_alt.pdf" target="_blank" class="resume-btn fade-in">
+                <span>↓</span> Download Resume
+            </a>
         </div>
-    </div>
+        <div class="scroll-indicator">Scroll</div>
+    </section>
 
-    <!-- Resume Download Section -->
-    <div class="resume-section" id="resume">
-        <div class="resume-box">
-            <h2>📄 My Resume</h2>
-            <p>View or download my resume in PDF format</p>
-            <div class="resume-buttons">
-                <a href="Resume_alt.pdf" target="_blank" class="btn-primary">📥 Download Resume (Alternative)</a>
-                <a href="Resume.pdf" target="_blank" class="btn-secondary">📄 View Full Resume</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-header">About</h2>
         <div class="content-grid">
-            <!-- Education -->
-            <div class="section" id="education">
-                <h2 class="section-title">🎓 Education</h2>
-                <div class="entry">
-                    <div class="entry-header">
-                        <h3>National Taiwan Ocean University</h3>
-                        <span class="date">Sep. 2022 – May 2026</span>
-                    </div>
-                    <div class="entry-details">
-                        B.S. in Computer Science and Engineering - GPA: 3.6/4.0 | Keelung, Taiwan
-                    </div>
-                    <p><strong>Relevant Courses:</strong> Data Structures, Algorithms, Graph Theory Algorithms, Operating Systems, Computer Networks, Computer Organization, Digital Logic, Database Systems, Introduction to AI, Machine Learning, Generative AI, Information Security, iOS Development, Flutter Development, Linear Algebra, Discrete Mathematics, Probability Theory</p>
+            <div class="content-item">
+                <h3>Education</h3>
+            </div>
+            <div class="content-item">
+                <p><strong>National Taiwan Ocean University</strong><br>
+                B.S. in Computer Science and Engineering<br>
+                GPA: 3.6/4.0 | Sep. 2022 – May 2026</p>
+                <p style="margin-top: 20px; font-size: 0.95rem; line-height: 1.8;">
+                    Focused on AI, Machine Learning, and Full-Stack Development. 
+                    Passionate about creating innovative solutions that bridge technology and real-world problems.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-header">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h4>Volleyball Line Judging System</h4>
+                <p>Automated line-judging using OpenCV and PyTorch for real-time court imagery processing.</p>
+                <div class="project-tags">
+                    <span class="tag">OpenCV</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">PyTorch</span>
                 </div>
             </div>
-
-            <!-- Projects -->
-            <div class="section" id="projects">
-                <h2 class="section-title">🚀 Research & Projects</h2>
-                
-                <div class="entry">
-                    <div class="entry-header">
-                        <h3>Volleyball Line Judging System</h3>
-                        <span class="date">Nov. 2024 – present</span>
-                    </div>
-                    <div class="entry-details">OpenCV, Python, PyTorch | Advisor: Prof. Pei-Yi, Ding | Team: 3</div>
-                    <ul>
-                        <li>Designed and developed an automated line-judging system to make accurate in/out calls in volleyball</li>
-                        <li>Engineered a computer vision pipeline using OpenCV for real-time court imagery processing</li>
-                    </ul>
-                </div>
-
-                <div class="entry">
-                    <div class="entry-header">
-                        <h3>Archon RWA Tokenization DApp</h3>
-                        <span class="date">2025</span>
-                    </div>
-                    <div class="entry-details">React, TypeScript, Solidity, Hardhat, Ethers.js | Solo Project</div>
-                    <ul>
-                        <li>Developed a comprehensive DeFi platform for Real-World Asset tokenization with role-based access control</li>
-                        <li>Implemented secure smart contracts for identity verification and dynamic ERC20 token creation</li>
-                        <li>Built a modern, responsive frontend with MetaMask integration</li>
-                    </ul>
-                </div>
-
-                <div class="entry">
-                    <div class="entry-header">
-                        <h3>ASL Hand Gesture Recognition App</h3>
-                        <span class="date">Dec. 2024 – Feb. 2025</span>
-                    </div>
-                    <div class="entry-details">SwiftUI, CreateML | Solo Project</div>
-                    <ul>
-                        <li>Trained a custom ML model to classify 28 ASL hand gestures with high accuracy</li>
-                        <li>Built native iOS app with real-time camera integration</li>
-                        <li>WWDC 2025 Submission</li>
-                    </ul>
-                </div>
-
-                <div class="entry">
-                    <div class="entry-header">
-                        <h3>SyncUp - Social Calendar App</h3>
-                        <span class="date">2025</span>
-                    </div>
-                    <div class="entry-details">Flutter, Firebase, Google API, LLM API, RAG | Solo Project</div>
-                    <ul>
-                        <li>Developed a modern social calendar app with real-time sharing using Flutter and Firebase</li>
-                        <li>Integrated AI-powered chatbot with Google Gemini for smart scheduling</li>
-                        <li>Implemented RAG system for contextual calendar recommendations</li>
-                    </ul>
+            <div class="project-card">
+                <h4>Archon RWA Tokenization DApp</h4>
+                <p>DeFi platform for Real-World Asset tokenization with role-based access control.</p>
+                <div class="project-tags">
+                    <span class="tag">React</span>
+                    <span class="tag">Solidity</span>
+                    <span class="tag">TypeScript</span>
                 </div>
             </div>
-
-            <!-- Experience -->
-            <div class="section" id="experience">
-                <h2 class="section-title">💼 Experience</h2>
-                <div class="entry">
-                    <div class="entry-header">
-                        <h3>ITRI</h3>
-                        <span class="date">Jun. 2025 – Aug. 2025</span>
-                    </div>
-                    <div class="entry-details">AI Image Recognition Intern | Hsinchu, Taiwan</div>
-                    <ul>
-                        <li>Optimized multi-task YOLO model achieving 99% accuracy, 97% recall rate, and 84% mAP@0.5</li>
-                        <li>Implemented image streaming and detection protocols via Ethernet for real-time processing</li>
-                        <li>Optimized YOLO models using advanced pruning techniques and hardware transplantation</li>
-                        <li>Reproduced SOTA models for benchmarking and improvement identification</li>
-                    </ul>
+            <div class="project-card">
+                <h4>ASL Hand Gesture Recognition</h4>
+                <p>iOS app with CreateML to classify 28 ASL hand gestures in real-time.</p>
+                <div class="project-tags">
+                    <span class="tag">SwiftUI</span>
+                    <span class="tag">CreateML</span>
+                    <span class="tag">iOS</span>
                 </div>
             </div>
-
-            <!-- Skills -->
-            <div class="section" id="skills">
-                <h2 class="section-title">🛠️ Technical Skills</h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <strong>Programming Languages</strong>
-                        <span>Python, Java, C++, JavaScript/TypeScript, Swift, Dart, SQL</span>
-                    </div>
-                    <div class="skill-category">
-                        <strong>ML/AI</strong>
-                        <span>PyTorch, TensorFlow, OpenCV, scikit-learn, NumPy, Pandas, CreateML</span>
-                    </div>
-                    <div class="skill-category">
-                        <strong>Frameworks</strong>
-                        <span>React, Flutter, FastAPI, Node.js, SwiftUI, Celery</span>
-                    </div>
-                    <div class="skill-category">
-                        <strong>Tools</strong>
-                        <span>Git, Docker, Firebase, AWS, GCP, PostgreSQL, Redis, Linux, ROS, Figma</span>
-                    </div>
-                    <div class="skill-category">
-                        <strong>Languages</strong>
-                        <span>English (Fluent), Mandarin (Native), Japanese (JLPT N3)</span>
-                    </div>
+            <div class="project-card">
+                <h4>SyncUp - Social Calendar</h4>
+                <p>Flutter app with Firebase, Google Maps, and AI-powered scheduling.</p>
+                <div class="project-tags">
+                    <span class="tag">Flutter</span>
+                    <span class="tag">Firebase</span>
+                    <span class="tag">RAG</span>
                 </div>
             </div>
-
-            <!-- Extracurricular -->
-            <div class="section" id="extracurricular">
-                <h2 class="section-title">⚽ Extracurricular Activities</h2>
-                <div class="entry">
-                    <div class="entry-header">
-                        <h3>National Taiwan Ocean University Tennis Team</h3>
-                        <span class="date">2022 - 2023</span>
-                    </div>
+            <div class="project-card">
+                <h4>Image Processing Project</h4>
+                <p>Complete ISP pipeline with 3A algorithms and computer vision features.</p>
+                <div class="project-tags">
+                    <span class="tag">OpenCV</span>
+                    <span class="tag">NumPy</span>
+                    <span class="tag">Python</span>
                 </div>
-                <div class="entry">
-                    <div class="entry-header">
-                        <h3>Volleyball Department Team Member</h3>
-                        <span class="date">2022 - present</span>
-                    </div>
-                </div>
-                <div class="entry">
-                    <div class="entry-header">
-                        <h3>Hackathon Participant</h3>
-                        <span class="date">2022 - present</span>
-                    </div>
-                </div>
-                <div class="entry">
-                    <div class="entry-header">
-                        <h3>NTUFC Quantitative Trading Reading Club</h3>
-                        <span class="date">2025 - present</span>
-                    </div>
+            </div>
+            <div class="project-card">
+                <h4>WWDC 2025 Submission</h4>
+                <p>Hand Gesture Recognition App submitted to Apple's WWDC conference.</p>
+                <div class="project-tags">
+                    <span class="tag">Swift</span>
+                    <span class="tag">ML</span>
+                    <span class="tag">WWDC</span>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <footer style="text-align: center; padding: 2rem; color: white;">
-        <p>© 2025 YuJia Liang. Made with ❤️ and modern web technologies.</p>
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="section-header">Experience</h2>
+        <div class="experience-grid">
+            <div class="exp-item">
+                <h4>AI Image Recognition Intern</h4>
+                <div class="company">ITRI</div>
+                <div class="date">Jun. 2025 – Aug. 2025</div>
+                <ul>
+                    <li>Optimized YOLO model achieving 99% accuracy</li>
+                    <li>99% driving area accuracy and 97% recall rate</li>
+                    <li>Implemented real-time image streaming protocols</li>
+                    <li>Model optimization using advanced pruning techniques</li>
+                </ul>
+            </div>
+            <div class="exp-item">
+                <h4>Full-Stack Developer</h4>
+                <div class="company">Freelance</div>
+                <div class="date">2023 – present</div>
+                <ul>
+                    <li>Built multiple web applications and mobile apps</li>
+                    <li>DeFi platform development</li>
+                    <li>AI-powered application integration</li>
+                    <li>Open source contributions</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-header">Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <strong>Languages</strong>
+                <p>Python, Java, C++, JavaScript/TypeScript, Swift, Dart, SQL</p>
+            </div>
+            <div class="skill-category">
+                <strong>AI/ML</strong>
+                <p>PyTorch, TensorFlow, OpenCV, scikit-learn, CreateML</p>
+            </div>
+            <div class="skill-category">
+                <strong>Frameworks</strong>
+                <p>React, Flutter, FastAPI, Node.js, SwiftUI</p>
+            </div>
+            <div class="skill-category">
+                <strong>Tools</strong>
+                <p>Git, Docker, Firebase, AWS, GCP, PostgreSQL, Linux</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-grid">
+            <div class="contact-item">
+                <span>Email</span>
+                <a href="mailto:ch993115@gmail.com">ch993115@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <span>LinkedIn</span>
+                <a href="https://www.linkedin.com/in/yu-jia-liang-77ab022a7" target="_blank">Connect</a>
+            </div>
+            <div class="contact-item">
+                <span>GitHub</span>
+                <a href="https://github.com/itsYoga" target="_blank">itsYoga</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 YuJia Liang • Taipei, Taiwan</p>
     </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, .exp-item, .skill-category').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
