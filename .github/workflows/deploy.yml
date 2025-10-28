@@ -34,6 +34,10 @@ jobs:
           cd docs
           npm ci
         
+      - name: Write version.json (pre-build)
+        run: |
+          cd docs
+          echo "{\"version\": \"$GITHUB_RUN_NUMBER-$GITHUB_SHA\"}" > public/version.json
       - name: Build project
         run: |
           cd docs
