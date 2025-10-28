@@ -4,9 +4,7 @@ This is my personal website and portfolio, featuring my professional resume, pro
 
 🌐 **Live Site**: [https://itsyoga.github.io/itsYoga/](https://itsyoga.github.io/itsYoga/)
 
-✅ **網站已成功部署！** 包含履歷、項目展示和聯繫信息。
-
-> **關於 URL 路徑**：GitHub Pages 對用戶頁面的大小寫處理會保留在 URL 中，這是正常行為。
+📝 要使用根 URL (`https://itsyoga.github.io/`)，請將 repository 重命名為 `itsyoga`（全小寫）
 
 ## Project Structure
 
