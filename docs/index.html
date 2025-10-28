@@ -760,12 +760,17 @@
             observer.observe(el);
         });
 
-        // Custom Cursor Follower (OFF+BRAND Style)
+        // Custom Cursor Follower (OFF+BRAND Style with lerp)
         const cursorFollower = document.getElementById('cursorFollower');
         let cursorX = 0;
         let cursorY = 0;
         let followerX = 0;
         let followerY = 0;
+
+        // Lerp function for smooth easing (from OFF+BRAND)
+        function lerp(start, end, factor) {
+            return start + (end - start) * factor;
+        }
 
         document.addEventListener('mousemove', (e) => {
             cursorX = e.clientX;
@@ -778,31 +783,39 @@
         });
 
         // Add hover effects for interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .resume-btn');
+        const interactiveElements = document.querySelectorAll('a, button, .resume-btn, nav a, .project-card');
         interactiveElements.forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursorFollower.classList.add('large');
+                el.style.transform = 'translateY(-2px)';
             });
             el.addEventListener('mouseleave', () => {
                 cursorFollower.classList.remove('large');
+                el.style.transform = 'translateY(0)';
             });
         });
 
-        // Smooth cursor animation
+        // Smooth cursor animation with lerp (OFF+BRAND style)
         function animateCursor() {
-            followerX += (cursorX - followerX) * 0.1;
-            followerY += (cursorY - followerY) * 0.1;
+            followerX = lerp(followerX, cursorX, 0.15);
+            followerY = lerp(followerY, cursorY, 0.15);
             cursorFollower.style.left = followerX + 'px';
             cursorFollower.style.top = followerY + 'px';
             requestAnimationFrame(animateCursor);
         }
         animateCursor();
 
-        // Enhanced 3D Sphere Interaction (OFF+BRAND Style)
+        // Enhanced 3D Sphere Interaction (OFF+BRAND Style with smooth lerp)
         const sphere = document.getElementById('sphere');
         const hero = document.querySelector('.hero');
         let mouseX = 0;
         let mouseY = 0;
+        let sphereX = 0;
+        let sphereY = 0;
+        let targetRotationX = 0;
+        let targetRotationY = 0;
+        let currentRotationX = 0;
+        let currentRotationY = 0;
         
         if (sphere && hero) {
             hero.addEventListener('mousemove', (e) => {
@@ -813,39 +826,39 @@
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
                 
-                mouseX = (x - centerX) * 0.15;
-                mouseY = (y - centerY) * 0.15;
-                const rotateX = (y - centerY) / 15;
-                const rotateY = (centerX - x) / 15;
-                
-                sphere.style.transform = `
-                    translate(-50%, -50%) 
-                    translate(${mouseX}px, ${mouseY}px) 
-                    rotateX(${rotateX}deg) 
-                    rotateY(${rotateY}deg) 
-                    scale(1.05)
-                `;
+                // Calculate target positions
+                mouseX = (x - centerX) * 0.2;
+                mouseY = (y - centerY) * 0.2;
+                targetRotationX = (y - centerY) / 12;
+                targetRotationY = (centerX - x) / 12;
             });
 
             hero.addEventListener('mouseleave', () => {
-                sphere.style.transform = 'translate(-50%, -50%) scale(1)';
+                mouseX = 0;
+                mouseY = 0;
+                targetRotationX = 0;
+                targetRotationY = 0;
             });
 
-            // Add parallax effect on scroll
-            let lastScrollY = 0;
-            window.addEventListener('scroll', () => {
-                const scrollY = window.scrollY;
-                const difference = scrollY - lastScrollY;
+            // Animate sphere with lerp (OFF+BRAND style)
+            function animateSphere() {
+                sphereX = lerp(sphereX, mouseX, 0.1);
+                sphereY = lerp(sphereY, mouseY, 0.1);
+                currentRotationX = lerp(currentRotationX, targetRotationX, 0.1);
+                currentRotationY = lerp(currentRotationY, targetRotationY, 0.1);
                 
                 sphere.style.transform = `
                     translate(-50%, -50%) 
-                    translate(${mouseX}px, ${mouseY - difference * 0.3}px) 
+                    translate(${sphereX}px, ${sphereY}px) 
+                    rotateX(${currentRotationX}deg) 
+                    rotateY(${currentRotationY}deg) 
                     scale(1.05)
                 `;
-                
-                lastScrollY = scrollY;
-            });
+                requestAnimationFrame(animateSphere);
+            }
+            animateSphere();
         }
+
     </script>
 </body>
 </html>
