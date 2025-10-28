@@ -32,9 +32,17 @@ export default class Resources extends EventEmitter {
     startLoading() {
         for (const asset of this.assets) {
             if (asset.type === "glbModel") {
-                this.loaders.gltfLoader.load(asset.path, (file) => {
-                    this.singleAssetLoaded(asset, file);
-                });
+                this.loaders.gltfLoader.load(
+                    asset.path,
+                    (file) => {
+                        this.singleAssetLoaded(asset, file);
+                    },
+                    undefined,
+                    (err) => {
+                        console.error("Failed to load GLB:", asset.path, err);
+                        this.singleAssetLoaded(asset, null);
+                    }
+                );
             } else if (asset.type === "videoTexture") {
                 this.video = {};
                 this.videoTexture = {};
@@ -45,7 +53,9 @@ export default class Resources extends EventEmitter {
                 this.video[asset.name].playsInline = true;
                 this.video[asset.name].autoplay = true;
                 this.video[asset.name].loop = true;
-                this.video[asset.name].play();
+                const tryPlay = () => this.video[asset.name].play().catch(() => {});
+                this.video[asset.name].addEventListener("canplay", tryPlay, { once: true });
+                tryPlay();
 
                 this.videoTexture[asset.name] = new THREE.VideoTexture(
                     this.video[asset.name]
