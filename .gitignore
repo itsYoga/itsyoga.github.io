@@ -6,11 +6,14 @@
 *.fls
 *.synctex.gz
 
-# Ignore PDF files in root (keep only in docs/ for website)
+# Ignore PDF files everywhere except docs/ (for GitHub Pages)
 *.pdf
 
 # Allow PDFs in docs/ folder for GitHub Pages
 !docs/*.pdf
+
+# Allow PDFs in resume/ folder (will be generated)
+!resume/*.pdf
 
 # macOS
 .DS_Store

@@ -14,11 +14,15 @@ This is my personal website and portfolio, featuring my professional resume, pro
 │   ├── index.html          # Main website page
 │   ├── Resume.pdf          # Resume PDF version
 │   └── Resume_alt.pdf      # Alternative resume version
-├── Resume.tex              # Main resume LaTeX source
-├── Resume_alt.tex          # Alternative resume LaTeX source
+├── resume/                  # Resume source files and compilation
+│   ├── Resume.tex          # Main resume LaTeX source
+│   ├── Resume_alt.tex     # Alternative resume LaTeX source
+│   ├── Makefile            # Auto-compilation commands
+│   ├── compile.sh          # Helper script
+│   ├── latexmkrc           # LaTeX configuration
+│   └── *.pdf               # Generated PDF files (gitignored)
 ├── README.md                # This file
-├── Makefile                 # Auto-compilation commands
-├── compile.sh              # Helper script
+├── RENAME_GUIDE.md         # Renaming guide
 └── .gitignore              # Git ignore rules
 ```
 
@@ -41,38 +45,38 @@ This is my personal website and portfolio, featuring my professional resume, pro
 ### Quick Compile
 ```bash
 # Compile and update docs/ folder
-make resume-alt
+cd resume && make resume-alt
 
 # Or using pdflatex directly
-pdflatex Resume_alt.tex && cp Resume_alt.pdf docs/
+cd resume && pdflatex Resume_alt.tex && cp Resume_alt.pdf ../docs/
 ```
 
 ### Auto-compile on Changes
 
 **Option 1: Using latexmk (Recommended)**
 ```bash
-latexmk -pdf -pvc Resume_alt.tex
+cd resume && latexmk -pdf -pvc Resume_alt.tex
 ```
 This watches for file changes and automatically recompiles.
 
 **Option 2: Using the helper script**
 ```bash
-./compile.sh
+cd resume && ./compile.sh
 ```
 
 **Option 3: Using Makefile**
 ```bash
 # Watch and auto-compile
-make watch
+cd resume && make watch
 
 # Or compile manually
-make resume-alt
+cd resume && make resume-alt
 ```
 
 ### Clean Build Artifacts
 ```bash
-make clean          # Remove all LaTeX temp files
-make clean-all      # Remove temp files and PDFs
+cd resume && make clean          # Remove all LaTeX temp files
+cd resume && make clean-all      # Remove temp files and PDFs
 ```
 
 ## Customization

@@ -16,8 +16,8 @@ latexmk -pdf -pvc Resume_alt.tex
 # After latexmk stops, copy PDF to docs folder
 if [ -f "Resume_alt.pdf" ]; then
     echo ""
-    echo -e "${GREEN}Copying Resume_alt.pdf to docs/ folder...${NC}"
-    cp Resume_alt.pdf docs/
+    echo -e "${GREEN}Copying Resume_alt.pdf to ../docs/ folder...${NC}"
+    cp Resume_alt.pdf ../docs/
     echo -e "${GREEN}Done!${NC}"
 fi
 

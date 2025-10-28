@@ -9,12 +9,12 @@ TEXFLAGS = -interaction=nonstopmode -synctex=1
 # Compile main resume
 resume:
 	$(TEX) $(TEXFLAGS) Resume.tex
-	cp Resume.pdf docs/ 2>/dev/null || true
+	cp Resume.pdf ../docs/ 2>/dev/null || true
 
 # Compile alternative resume
 resume-alt:
 	$(TEX) $(TEXFLAGS) Resume_alt.tex
-	cp Resume_alt.pdf docs/
+	cp Resume_alt.pdf ../docs/
 	$(MAKE) clean-temp
 
 # Watch for changes (using latexmk)
@@ -27,8 +27,8 @@ watch-docs:
 	@while inotifywait -e modify Resume_alt.tex 2>/dev/null || fswatch -1 Resume_alt.tex 2>/dev/null || true; do \
 		echo "Recompiling..."; \
 		pdflatex -interaction=nonstopmode Resume_alt.tex > /dev/null; \
-		cp Resume_alt.pdf docs/; \
-		echo "Updated! PDF copied to docs/"; \
+		cp Resume_alt.pdf ../docs/; \
+		echo "Updated! PDF copied to ../docs/"; \
 	done
 
 # Clean temporary files
@@ -41,7 +41,7 @@ clean: clean-temp
 
 # Clean docs folder PDFs too
 clean-all: clean
-	rm -f docs/*.pdf
+	rm -f ../docs/*.pdf
 
 # Default target
 .DEFAULT_GOAL := resume-alt
