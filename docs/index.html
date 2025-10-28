@@ -86,59 +86,93 @@
             left: 0;
             pointer-events: none;
             z-index: 0;
+            overflow: hidden;
         }
 
         .sphere {
             position: absolute;
-            width: 400px;
-            height: 400px;
+            width: 500px;
+            height: 500px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, 
-                rgba(255, 100, 47, 0.15) 0%,
-                rgba(0, 0, 0, 0.8) 70%,
-                rgba(0, 0, 0, 1) 100%);
+            background: 
+                radial-gradient(circle at 20% 30%, 
+                    rgba(255, 100, 47, 0.2) 0%,
+                    transparent 50%),
+                radial-gradient(circle at 80% 70%, 
+                    rgba(0, 0, 0, 0.3) 0%,
+                    transparent 50%),
+                linear-gradient(135deg, 
+                    rgba(0, 0, 0, 0.9) 0%,
+                    rgba(0, 0, 0, 0.95) 50%,
+                    rgba(0, 0, 0, 0.9) 100%);
             box-shadow: 
-                0 0 100px rgba(255, 100, 47, 0.3),
-                inset -50px -50px 100px rgba(0, 0, 0, 0.8),
-                inset 50px 50px 100px rgba(255, 100, 47, 0.1);
-            backdrop-filter: blur(20px);
-            transition: transform 0.1s ease-out;
-            animation: float 8s ease-in-out infinite;
+                0 0 150px rgba(255, 100, 47, 0.4),
+                inset -60px -60px 120px rgba(0, 0, 0, 0.9),
+                inset 60px 60px 120px rgba(255, 100, 47, 0.08);
+            backdrop-filter: blur(30px);
+            transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: float 10s ease-in-out infinite;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .sphere::before {
             content: '';
             position: absolute;
-            top: 20%;
-            left: 30%;
-            width: 120px;
-            height: 120px;
+            top: 15%;
+            left: 25%;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             background: radial-gradient(circle,
-                rgba(255, 255, 255, 0.8) 0%,
-                rgba(255, 100, 47, 0.4) 50%,
-                transparent 100%);
-            filter: blur(20px);
-            animation: shimmer 3s ease-in-out infinite;
+                rgba(255, 255, 255, 0.9) 0%,
+                rgba(255, 100, 47, 0.5) 40%,
+                transparent 70%);
+            filter: blur(25px);
+            animation: shimmer 3.5s ease-in-out infinite;
         }
 
         .sphere::after {
             content: '';
             position: absolute;
-            top: 50%;
-            right: 20%;
-            width: 100px;
-            height: 100px;
+            top: 55%;
+            right: 15%;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             background: radial-gradient(circle,
-                rgba(255, 255, 255, 0.6) 0%,
-                rgba(255, 100, 47, 0.3) 50%,
-                transparent 100%);
-            filter: blur(15px);
-            animation: shimmer 4s ease-in-out infinite 1.5s;
+                rgba(255, 255, 255, 0.7) 0%,
+                rgba(255, 100, 47, 0.4) 40%,
+                transparent 70%);
+            filter: blur(20px);
+            animation: shimmer 4.5s ease-in-out infinite 1.5s;
+        }
+
+        /* Cursor Follower */
+        .cursor-follower {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 100, 47, 0.6);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease;
+            mix-blend-mode: difference;
+            display: none;
+        }
+
+        .cursor-follower.active {
+            display: block;
+        }
+
+        .cursor-follower.large {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 100, 47, 0.3);
         }
 
         @keyframes float {
@@ -146,16 +180,18 @@
                 transform: translate(-50%, -50%) translateY(0px) rotate(0deg);
             }
             50% {
-                transform: translate(-50%, -50%) translateY(-20px) rotate(180deg);
+                transform: translate(-50%, -50%) translateY(-30px) rotate(180deg);
             }
         }
 
         @keyframes shimmer {
             0%, 100% {
-                opacity: 0.3;
+                opacity: 0.4;
+                transform: scale(1);
             }
             50% {
-                opacity: 0.8;
+                opacity: 1;
+                transform: scale(1.1);
             }
         }
 
@@ -494,6 +530,9 @@
     </style>
 </head>
 <body>
+    <!-- Cursor Follower -->
+    <div class="cursor-follower" id="cursorFollower"></div>
+
     <!-- Navigation -->
     <nav>
         <h1>YuJia Liang</h1>
@@ -721,9 +760,49 @@
             observer.observe(el);
         });
 
-        // 3D Sphere Interaction
+        // Custom Cursor Follower (OFF+BRAND Style)
+        const cursorFollower = document.getElementById('cursorFollower');
+        let cursorX = 0;
+        let cursorY = 0;
+        let followerX = 0;
+        let followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+            cursorFollower.classList.add('active');
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursorFollower.classList.remove('active');
+        });
+
+        // Add hover effects for interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .resume-btn');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorFollower.classList.add('large');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorFollower.classList.remove('large');
+            });
+        });
+
+        // Smooth cursor animation
+        function animateCursor() {
+            followerX += (cursorX - followerX) * 0.1;
+            followerY += (cursorY - followerY) * 0.1;
+            cursorFollower.style.left = followerX + 'px';
+            cursorFollower.style.top = followerY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Enhanced 3D Sphere Interaction (OFF+BRAND Style)
         const sphere = document.getElementById('sphere');
         const hero = document.querySelector('.hero');
+        let mouseX = 0;
+        let mouseY = 0;
         
         if (sphere && hero) {
             hero.addEventListener('mousemove', (e) => {
@@ -734,21 +813,37 @@
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
                 
-                const moveX = (x - centerX) * 0.1;
-                const moveY = (y - centerY) * 0.1;
-                const rotateX = (y - centerY) / 10;
-                const rotateY = (centerX - x) / 10;
+                mouseX = (x - centerX) * 0.15;
+                mouseY = (y - centerY) * 0.15;
+                const rotateX = (y - centerY) / 15;
+                const rotateY = (centerX - x) / 15;
                 
                 sphere.style.transform = `
                     translate(-50%, -50%) 
-                    translate(${moveX}px, ${moveY}px) 
+                    translate(${mouseX}px, ${mouseY}px) 
                     rotateX(${rotateX}deg) 
-                    rotateY(${rotateY}deg)
+                    rotateY(${rotateY}deg) 
+                    scale(1.05)
                 `;
             });
 
             hero.addEventListener('mouseleave', () => {
-                sphere.style.transform = 'translate(-50%, -50%)';
+                sphere.style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+
+            // Add parallax effect on scroll
+            let lastScrollY = 0;
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const difference = scrollY - lastScrollY;
+                
+                sphere.style.transform = `
+                    translate(-50%, -50%) 
+                    translate(${mouseX}px, ${mouseY - difference * 0.3}px) 
+                    scale(1.05)
+                `;
+                
+                lastScrollY = scrollY;
             });
         }
     </script>
