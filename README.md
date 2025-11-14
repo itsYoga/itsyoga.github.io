@@ -1,29 +1,29 @@
 # YuJia Liang - Personal Website
 
-個人網站項目，包含作品集、履歷和攝影作品展示。
+Personal website project featuring portfolio, resume, and photography showcase.
 
 **Live Website:** [https://itsyoga.github.io](https://itsyoga.github.io)
 
-## 項目結構
+## Project Structure
 
 ```
 itsyoga/
-├── website/              # Next.js 網站
-│   ├── app/              # Next.js App Router 頁面
-│   ├── components/       # React 組件
-│   ├── public/           # 靜態資源（包含履歷 PDF）
-│   └── package.json      # 項目依賴
-├── resume/               # 履歷文件
-│   └── YuJia_resume.pdf  # 履歷 PDF
-├── .github/              # GitHub Actions 配置
+├── website/              # Next.js website
+│   ├── app/              # Next.js App Router pages
+│   ├── components/       # React components
+│   ├── public/           # Static assets (including resume PDF)
+│   └── package.json      # Project dependencies
+├── resume/               # Resume files
+│   └── YuJia_resume.pdf  # Resume PDF
+├── .github/              # GitHub Actions configuration
 │   └── workflows/
-│       └── deploy.yml    # GitHub Pages 自動部署
-└── README.md             # 本文件
+│       └── deploy.yml    # GitHub Pages auto-deployment
+└── README.md             # This file
 ```
 
-## 快速開始
+## Quick Start
 
-### 本地開發
+### Local Development
 
 ```bash
 cd website
@@ -31,25 +31,25 @@ npm install
 npm run dev
 ```
 
-訪問 [http://localhost:3000](http://localhost:3000)
+Visit [http://localhost:3000](http://localhost:3000)
 
-### 構建
+### Build
 
 ```bash
 cd website
 npm run build
 ```
 
-## 部署
+## Deployment
 
-項目已配置 GitHub Actions 自動部署到 GitHub Pages：
+The project is configured with GitHub Actions for automatic deployment to GitHub Pages:
 
-- 推送到 `main` 分支會自動觸發部署
-- 部署配置在 `.github/workflows/deploy.yml`
-- 網站會自動構建並部署到 GitHub Pages
-- 網站地址：https://itsyoga.github.io
+- Pushing to `main` branch automatically triggers deployment
+- Deployment configuration is in `.github/workflows/deploy.yml`
+- The website is automatically built and deployed to GitHub Pages
+- Website URL: https://itsyoga.github.io
 
-## 技術棧
+## Tech Stack
 
 - **Framework:** Next.js 16 (App Router)
 - **Language:** TypeScript
@@ -58,22 +58,22 @@ npm run build
 - **Animations:** Framer Motion
 - **Icons:** Lucide React
 
-## 內容
+## Content
 
-網站包含以下內容：
+The website includes:
 
-- **個人介紹** - 關於我的背景和興趣
-- **技術項目** - 編程項目展示
-- **攝影作品** - 攝影作品集
-- **履歷下載** - PDF 履歷文件
-- **社交連結** - GitHub, LinkedIn, Instagram 等
+- **Personal Introduction** - Background and interests
+- **Technical Projects** - Programming project showcase
+- **Photography** - Photography portfolio
+- **Resume Download** - PDF resume file
+- **Social Links** - GitHub, LinkedIn, Instagram, etc.
 
-## 履歷
+## Resume
 
-履歷文件位於：
-- `resume/YuJia_resume.pdf` - 源文件
-- `website/public/YuJia_resume.pdf` - 網站使用的副本
+Resume files are located at:
+- `resume/YuJia_resume.pdf` - Source file
+- `website/public/YuJia_resume.pdf` - Copy used by website
 
-## 開發說明
+## Development Notes
 
-詳細的開發文檔請參考 `website/README.md`
+For detailed development documentation, please refer to `website/README.md`
