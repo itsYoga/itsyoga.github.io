@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import PhotoCollectionComponent from "@/components/PhotoCollection";
+import { photoCollections } from "@/data/photography";
 
 export default function Photography() {
   return (
@@ -39,21 +41,28 @@ export default function Photography() {
             </div>
           </Card>
 
-          {/* Photo Grid Placeholder */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-              >
-                <Card className="aspect-square bg-muted/50 flex items-center justify-center hover:bg-muted transition-colors cursor-pointer">
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+          {/* Photo Collections */}
+          {photoCollections.length > 0 ? (
+            <div>
+              {photoCollections.map((collection, index) => (
+                <PhotoCollectionComponent
+                  key={collection.id}
+                  collection={collection}
+                  index={index}
+                />
+              ))}
+            </div>
+          ) : (
+            <Card className="p-12 text-center">
+              <p className="text-muted-foreground mb-4">
+                No photos uploaded yet. Add your photo collections in the data file.
+              </p>
+              <p className="text-sm text-muted-foreground">
+                To add photos: Place them in <code className="bg-muted px-2 py-1 rounded">public/photography/[event-or-place-name]/</code> 
+                and update <code className="bg-muted px-2 py-1 rounded">data/photography.ts</code>
+              </p>
+            </Card>
+          )}
         </motion.div>
       </section>
     </div>
