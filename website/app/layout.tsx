@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} font-sans antialiased`}>
         <Navigation />
-        <main className="pt-16">
+        <main className="pt-16 md:pt-16">
           {children}
         </main>
       </body>

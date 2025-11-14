@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -15,6 +17,7 @@ const navItems = [
 
 export default function Navigation() {
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
@@ -23,7 +26,9 @@ export default function Navigation() {
           <Link href="/" className="text-xl font-bold">
             YuJia
           </Link>
-          <div className="flex items-center gap-1">
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
               return (
@@ -49,7 +54,54 @@ export default function Navigation() {
               );
             })}
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 text-foreground hover:text-foreground/80 transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden overflow-hidden border-t"
+            >
+              <div className="py-4 space-y-2">
+                {navItems.map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={cn(
+                        "block px-4 py-3 rounded-lg text-sm font-medium transition-colors",
+                        isActive
+                          ? "text-foreground bg-accent"
+                          : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );
