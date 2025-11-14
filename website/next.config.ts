@@ -18,7 +18,13 @@ const getBasePath = () => {
   }
   
   // 否則是項目頁面，使用倉庫名作為 basePath
-  if (repoName && repoName !== 'itsyoga') {
+  // 如果倉庫名是 'itsyoga'，使用 '/itsyoga'
+  if (repoName === 'itsyoga') {
+    return '/itsyoga';
+  }
+  
+  // 其他項目頁面
+  if (repoName) {
     return `/${repoName}`;
   }
   
