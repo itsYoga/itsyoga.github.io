@@ -3,15 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Home, Briefcase, FileText, Camera, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/", label: "Home", icon: Home },
-  { href: "/portfolio", label: "Portfolio", icon: Briefcase },
-  { href: "/resume", label: "Resume", icon: FileText },
-  { href: "/photography", label: "Photography", icon: Camera },
-  { href: "/hobbies", label: "Hobbies", icon: Heart },
+  { href: "/", label: "Home" },
+  { href: "/portfolio", label: "Portfolio" },
+  { href: "/resume", label: "Resume" },
+  { href: "/photography", label: "Photography" },
+  { href: "/hobbies", label: "Hobbies" },
 ];
 
 export default function Navigation() {
@@ -22,11 +21,10 @@ export default function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="text-xl font-bold">
-            YuJia Liang
+            YuJia
           </Link>
           <div className="flex items-center gap-1">
             {navItems.map((item) => {
-              const Icon = item.icon;
               const isActive = pathname === item.href;
               return (
                 <Link
@@ -46,10 +44,7 @@ export default function Navigation() {
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
                   )}
-                  <span className="relative flex items-center gap-2">
-                    <Icon className="w-4 h-4" />
-                    <span className="hidden sm:inline">{item.label}</span>
-                  </span>
+                  <span className="relative">{item.label}</span>
                 </Link>
               );
             })}
@@ -59,4 +54,3 @@ export default function Navigation() {
     </nav>
   );
 }
-
