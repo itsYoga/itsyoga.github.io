@@ -10,6 +10,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "YuJia Liang - Portfolio",
   description: "Computer Science Student | AI Enthusiast | Full-Stack Developer | Photographer. Passionate about technology, creativity, and capturing moments through code and photography.",
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon.png',
+  },
 };
 
 export default function RootLayout({
