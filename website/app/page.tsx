@@ -74,7 +74,7 @@ export default function Home() {
               <Github className="w-6 h-6" />
             </Link>
             <Link
-              href="https://www.linkedin.com/in/yu-jia-liang-77ab022a7"
+              href="https://www.linkedin.com/in/yujia-liang-77ab022a7/"
               target="_blank"
               className="text-muted-foreground hover:text-foreground transition-colors"
               aria-label="LinkedIn"
