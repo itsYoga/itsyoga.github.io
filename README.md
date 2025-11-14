@@ -2,6 +2,8 @@
 
 個人網站項目，包含作品集、履歷和攝影作品展示。
 
+**Live Website:** [https://itsyoga.github.io](https://itsyoga.github.io)
+
 ## 項目結構
 
 ```
@@ -45,6 +47,7 @@ npm run build
 - 推送到 `main` 分支會自動觸發部署
 - 部署配置在 `.github/workflows/deploy.yml`
 - 網站會自動構建並部署到 GitHub Pages
+- 網站地址：https://itsyoga.github.io
 
 ## 技術棧
 
