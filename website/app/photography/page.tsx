@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Camera, Instagram } from "lucide-react";
 import Link from "next/link";
 
 export default function Photography() {
@@ -16,8 +15,7 @@ export default function Photography() {
           transition={{ duration: 0.6 }}
           className="max-w-6xl mx-auto"
         >
-          <div className="flex items-center gap-3 mb-8">
-            <Camera className="w-6 h-6 text-primary" />
+          <div className="mb-8">
             <h1 className="text-4xl font-bold">Photography</h1>
           </div>
           
@@ -32,9 +30,8 @@ export default function Photography() {
                 on a photography project.
               </p>
               <div className="pt-4">
-                <Button asChild variant="outline" className="gap-2">
+                <Button asChild variant="outline">
                   <Link href="https://www.instagram.com/yogaliang0702/" target="_blank">
-                    <Instagram className="w-4 h-4" />
                     View on Instagram
                   </Link>
                 </Button>
@@ -52,8 +49,7 @@ export default function Photography() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
-                <Card className="aspect-square bg-muted/50 flex items-center justify-center hover:bg-muted transition-colors cursor-pointer group">
-                  <Camera className="w-12 h-12 text-muted-foreground/50 group-hover:text-primary transition-colors" />
+                <Card className="aspect-square bg-muted/50 flex items-center justify-center hover:bg-muted transition-colors cursor-pointer">
                 </Card>
               </motion.div>
             ))}
@@ -63,4 +59,3 @@ export default function Photography() {
     </div>
   );
 }
-

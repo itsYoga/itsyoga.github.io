@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Download, Mail, Github, Linkedin, Instagram, ArrowRight } from "lucide-react";
+import { Github, Linkedin, Instagram } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -46,15 +46,13 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-wrap justify-center gap-4 pt-4"
           >
-            <Button asChild size="lg" className="gap-2">
+            <Button asChild size="lg">
               <Link href="/resume">
-                <Download className="w-4 h-4" />
                 View Resume
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="gap-2">
+            <Button asChild variant="outline" size="lg">
               <a href="mailto:ch993115@gmail.com">
-                <Mail className="w-4 h-4" />
                 Contact Me
               </a>
             </Button>
@@ -125,7 +123,6 @@ export default function Home() {
                     <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
                       {item.title}
                     </h3>
-                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
                   </div>
                   <p className="text-muted-foreground">{item.description}</p>
                 </Link>

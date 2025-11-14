@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { Rocket } from "lucide-react";
 
 const projects = [
   {
@@ -47,8 +46,7 @@ export default function Portfolio() {
           transition={{ duration: 0.6 }}
           className="max-w-6xl mx-auto"
         >
-          <div className="flex items-center gap-3 mb-12">
-            <Rocket className="w-6 h-6 text-primary" />
+          <div className="mb-12">
             <h1 className="text-4xl font-bold">Portfolio</h1>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -87,4 +85,3 @@ export default function Portfolio() {
     </div>
   );
 }
-

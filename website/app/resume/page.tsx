@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Download, FileText, Code, Brain } from "lucide-react";
 
 const skills = [
   "Python", "JavaScript", "TypeScript", "React", "Next.js",
@@ -22,13 +21,9 @@ export default function Resume() {
           className="max-w-4xl mx-auto"
         >
           <div className="flex items-center justify-between mb-12">
-            <div className="flex items-center gap-3">
-              <FileText className="w-6 h-6 text-primary" />
-              <h1 className="text-4xl font-bold">Resume</h1>
-            </div>
-            <Button asChild size="lg" className="gap-2">
+            <h1 className="text-4xl font-bold">Resume</h1>
+            <Button asChild size="lg">
               <a href="/YuJia_resume.pdf" download>
-                <Download className="w-4 h-4" />
                 Download PDF
               </a>
             </Button>
@@ -36,10 +31,7 @@ export default function Resume() {
 
           {/* Education */}
           <Card className="p-8 mb-8">
-            <div className="flex items-center gap-3 mb-6">
-              <Brain className="w-6 h-6 text-primary" />
-              <h2 className="text-2xl font-bold">Education</h2>
-            </div>
+            <h2 className="text-2xl font-bold mb-6">Education</h2>
             <div className="space-y-4">
               <div>
                 <h3 className="text-xl font-semibold">National Taiwan Ocean University</h3>
@@ -51,10 +43,7 @@ export default function Resume() {
 
           {/* Technical Skills */}
           <Card className="p-8 mb-8">
-            <div className="flex items-center gap-3 mb-6">
-              <Code className="w-6 h-6 text-primary" />
-              <h2 className="text-2xl font-bold">Technical Skills</h2>
-            </div>
+            <h2 className="text-2xl font-bold mb-6">Technical Skills</h2>
             <div className="flex flex-wrap gap-3">
               {skills.map((skill, index) => (
                 <motion.div
@@ -88,4 +77,3 @@ export default function Resume() {
     </div>
   );
 }
-
