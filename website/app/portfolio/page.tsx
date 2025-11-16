@@ -5,14 +5,13 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Copy from "@/components/Copy";
 import { Github, ExternalLink, Code2 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 // Updated Data Structure with video placeholders
 const projects = [
   {
     id: "volleyball",
     title: "Volleyball Line Judging",
-    shortDesc: "Automated officiating with Computer Vision.",
     detailedDescription: "A high-precision system using YOLOv8 and OpenCV to detect ball impact points in real-time. It calculates trajectory to determine IN/OUT calls with 95% accuracy.",
     tech: ["Python", "OpenCV", "PyTorch", "YOLO"],
     github: "https://github.com/itsYoga/volleyball-line-judging",
@@ -23,7 +22,6 @@ const projects = [
   {
     id: "archon",
     title: "Archon RWA Tokenization",
-    shortDesc: "DeFi platform for Real-World Assets.",
     detailedDescription: "Bridging traditional finance and DeFi. Users can tokenize physical assets. Built with Solidity smart contracts for fractional ownership and a React frontend for seamless trading.",
     tech: ["React", "Solidity", "TypeScript", "Web3.js"],
     github: "https://github.com/itsYoga/archon-rwa",
@@ -34,7 +32,6 @@ const projects = [
   {
     id: "asl",
     title: "ASL Gesture Recognition",
-    shortDesc: "Real-time iOS sign language translator.",
     detailedDescription: "Leveraging Apple's CoreML and CreateML to translate American Sign Language hand gestures into text instantly on-device. Optimized for low latency.",
     tech: ["SwiftUI", "CreateML", "CoreML"],
     github: "https://github.com/itsYoga/asl-recognition",
@@ -45,7 +42,6 @@ const projects = [
   {
     id: "syncup",
     title: "SyncUp Social Calendar",
-    shortDesc: "AI-powered scheduling assistant.",
     detailedDescription: "A Flutter-based social organizer that uses RAG (Retrieval-Augmented Generation) to analyze friend group availabilities and suggest the perfect meeting time.",
     tech: ["Flutter", "Firebase", "LLM/RAG", "Dart"],
     github: "https://github.com/itsYoga/syncup",
@@ -91,16 +87,16 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
   const [isHovered, setIsHovered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Handle Mouse Enter: Play Video
+  // Handle Mouse Enter: Play Video and Scale Up
   const handleMouseEnter = () => {
     setIsHovered(true);
-    if (videoRef.current) {
+    if (videoRef.current && project.video) {
       videoRef.current.play().catch((e) => console.log("Video autoplay blocked", e));
       videoRef.current.currentTime = 0;
     }
   };
 
-  // Handle Mouse Leave: Pause Video
+  // Handle Mouse Leave: Pause Video and Scale Down
   const handleMouseLeave = () => {
     setIsHovered(false);
     if (videoRef.current) {
@@ -120,108 +116,78 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
       >
         <motion.div
           animate={{
-            scale: isHovered ? 1.03 : 1,
+            scale: isHovered ? 1.05 : 1,
           }}
           transition={{ duration: 0.4, ease: "easeOut" }}
           className="relative h-full w-full rounded-3xl overflow-hidden border bg-card shadow-xl group"
         >
-          {/* --- Background: Video & Gradient --- */}
+          {/* --- Background: Video (only shows on hover) & Gradient --- */}
           <div className="absolute inset-0 bg-muted/50 z-0">
-            {/* Placeholder Gradient if video fails or hasn't loaded */}
+            {/* Placeholder Gradient */}
             <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-30`} />
             
-            {/* Actual Video */}
-            <video
-              ref={videoRef}
-              muted
-              loop
-              playsInline
-              className="h-full w-full object-cover opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-              // Fallback image if you have thumbnails: poster="/path/to/image.jpg"
-            >
-              <source src={project.video} type="video/mp4" />
-            </video>
+            {/* Video (only visible on hover) */}
+            {project.video && (
+              <video
+                ref={videoRef}
+                muted
+                loop
+                playsInline
+                className={`h-full w-full object-cover transition-opacity duration-700 ${
+                  isHovered ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <source src={project.video} type="video/mp4" />
+              </video>
+            )}
           </div>
 
-          {/* --- Overlay Gradient (Darkens on hover for text readability) --- */}
-          <div className={`absolute inset-0 z-10 transition-all duration-500 bg-gradient-to-t 
-            ${isHovered ? "from-background via-background/90 to-transparent" : "from-background/90 via-transparent to-transparent"}`} 
-          />
+          {/* --- Overlay Gradient (for text readability) --- */}
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-background via-background/80 to-transparent" />
 
-          {/* --- Content Container --- */}
+          {/* --- Content Container (always visible) --- */}
           <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end">
             
-            {/* Header (Title) */}
-            <div className="mb-2">
-              {/* Icon Badge */}
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 backdrop-blur-sm">
-                <Code2 className="w-5 h-5" />
-              </div>
-              
-              <h3 className="text-3xl font-bold leading-tight tracking-tight mb-2">
-                {project.title}
-              </h3>
+            {/* Icon Badge */}
+            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 backdrop-blur-sm">
+              <Code2 className="w-5 h-5" />
+            </div>
+            
+            {/* Title */}
+            <h3 className="text-3xl font-bold leading-tight tracking-tight mb-4">
+              {project.title}
+            </h3>
+
+            {/* Detailed Description */}
+            <p className="text-base text-muted-foreground leading-relaxed mb-5">
+              {project.detailedDescription}
+            </p>
+            
+            {/* Tech Stack Badges */}
+            <div className="flex flex-wrap gap-2 mb-5">
+              {project.tech.map((t: string) => (
+                <span key={t} className="px-2.5 py-1 bg-accent/50 border border-border/50 rounded-md text-xs font-semibold backdrop-blur-md">
+                  {t}
+                </span>
+              ))}
             </div>
 
-            {/* Conditional Content: Switches between Short & Detailed */}
-            <div className="relative overflow-hidden">
-              <AnimatePresence mode="wait">
-                {!isHovered ? (
-                  // DEFAULT STATE
-                  <motion.div
-                    key="short"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <p className="text-lg text-muted-foreground font-medium">
-                      {project.shortDesc}
-                    </p>
-                  </motion.div>
-                ) : (
-                  // HOVER STATE
-                  <motion.div
-                    key="long"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.3 }}
-                    className="space-y-5"
-                  >
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                      {project.detailedDescription}
-                    </p>
-                    
-                    {/* Tech Stack Badges */}
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.map((t: string) => (
-                        <span key={t} className="px-2.5 py-1 bg-accent/50 border border-border/50 rounded-md text-xs font-semibold backdrop-blur-md">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex gap-3 pt-2">
-                      {project.github && (
-                        <Button size="sm" variant="default" className="gap-2 rounded-full" asChild>
-                          <a href={project.github} target="_blank" rel="noopener noreferrer">
-                            <Github className="w-4 h-4" /> Code
-                          </a>
-                        </Button>
-                      )}
-                      {project.demo && (
-                        <Button size="sm" variant="secondary" className="gap-2 rounded-full" asChild>
-                          <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="w-4 h-4" /> Live Demo
-                          </a>
-                        </Button>
-                      )}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+            {/* Action Buttons */}
+            <div className="flex gap-3">
+              {project.github && (
+                <Button size="sm" variant="default" className="gap-2 rounded-full" asChild>
+                  <a href={project.github} target="_blank" rel="noopener noreferrer">
+                    <Github className="w-4 h-4" /> Code
+                  </a>
+                </Button>
+              )}
+              {project.demo && (
+                <Button size="sm" variant="secondary" className="gap-2 rounded-full" asChild>
+                  <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="w-4 h-4" /> Live Demo
+                  </a>
+                </Button>
+              )}
             </div>
 
           </div>
