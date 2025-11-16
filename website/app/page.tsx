@@ -158,11 +158,11 @@ export default function Home() {
       </section>
 
       {/* Quick Links Section */}
-      <section className="px-4 pb-20 lg:py-24">
+      <section className="px-4 pb-20 pt-8">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-12 lg:mb-16">
+          <div className="mb-8">
             <Copy>
-              <h2 className="text-[clamp(32px,4vw,72px)] font-bold tracking-tight leading-[1.1] mb-4">
+              <h2 className="text-[clamp(32px,4vw,72px)] font-bold tracking-tight leading-[1.1]">
                 Explore
               </h2>
             </Copy>
