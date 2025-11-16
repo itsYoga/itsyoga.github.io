@@ -69,7 +69,7 @@ export default function Portfolio() {
   // We store the ID of the currently hovered project
   const [activeId, setActiveId] = useState<string | null>(null);
   
-  // Preload all videos when component mounts - create hidden video elements in DOM
+  // Aggressively preload all videos when component mounts
   useEffect(() => {
     const preloadContainer = document.createElement('div');
     preloadContainer.style.position = 'absolute';
@@ -78,6 +78,8 @@ export default function Portfolio() {
     preloadContainer.style.opacity = '0';
     preloadContainer.style.pointerEvents = 'none';
     preloadContainer.style.overflow = 'hidden';
+    preloadContainer.style.top = '-9999px';
+    preloadContainer.style.left = '-9999px';
     document.body.appendChild(preloadContainer);
 
     const preloadVideos = projects.map((project) => {
@@ -87,9 +89,23 @@ export default function Portfolio() {
       video.muted = true;
       video.playsInline = true;
       video.setAttribute('playsinline', '');
+      video.setAttribute('preload', 'auto');
       video.style.width = '1px';
       video.style.height = '1px';
+      
+      // Force browser to start downloading immediately
       video.load();
+      
+      // Try to play to force buffering (will fail silently due to autoplay policy)
+      video.play().catch(() => {
+        // Autoplay blocked, but video should still buffer
+      });
+      
+      // Ensure video continues buffering
+      video.addEventListener('progress', () => {
+        // Video is downloading
+      });
+      
       preloadContainer.appendChild(video);
       return video;
     });
