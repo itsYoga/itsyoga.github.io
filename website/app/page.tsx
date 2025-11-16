@@ -128,7 +128,7 @@ export default function Home() {
             duration: 0.8,
             delay: 2.4,
           }}
-          className="absolute left-4 right-4 bottom-[8vh] sm:bottom-[5vh] flex justify-center gap-6"
+          className="absolute left-4 right-4 top-[calc(72vh+240px)] sm:top-[calc(70vh+240px)] md:top-[calc(12.5vw+240px)] flex justify-center gap-6"
         >
           <Link
             href="https://github.com/itsYoga"
