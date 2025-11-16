@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { useState } from "react";
 import type { PhotoCollection } from "@/data/photography";
+import Copy from "@/components/Copy";
 
 interface PhotoCollectionProps {
   collection: PhotoCollection;
@@ -23,9 +24,13 @@ export default function PhotoCollectionComponent({ collection, index }: PhotoCol
       className="mb-16"
     >
       <Card className="mb-8 p-6 lg:p-8 rounded-2xl bg-card border-2">
-        <h2 className="text-[clamp(24px,3vw,48px)] font-bold mb-3 tracking-tight">{collection.title}</h2>
+        <Copy delay={index * 0.1}>
+          <h2 className="text-[clamp(24px,3vw,48px)] font-bold mb-3 tracking-tight">{collection.title}</h2>
+        </Copy>
         {collection.description && (
-          <p className="text-[clamp(16px,1.2vw,20px)] text-muted-foreground mb-4 leading-relaxed">{collection.description}</p>
+          <Copy delay={index * 0.1 + 0.1}>
+            <p className="text-[clamp(16px,1.2vw,20px)] text-muted-foreground mb-4 leading-relaxed">{collection.description}</p>
+          </Copy>
         )}
         <div className="flex flex-wrap gap-4 text-[clamp(14px,1vw,16px)] text-muted-foreground">
           {collection.date && <span>{collection.date}</span>}
