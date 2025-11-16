@@ -152,6 +152,61 @@ export default function Portfolio() {
 
 // --- 1. The Compact Card (Grid View) ---
 function CompactCard({ project }: { project: typeof projects[0] }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
+
+  // Load first frame as thumbnail
+  useEffect(() => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    if (!video || !canvas) return;
+
+    const handleLoadedMetadata = () => {
+      // Metadata loaded, seek to first frame
+      video.currentTime = 0.1;
+    };
+
+    const handleLoadedData = () => {
+      // Video data loaded, try to draw frame
+      if (video.videoWidth > 0 && video.videoHeight > 0) {
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          setThumbnailLoaded(true);
+        }
+      }
+    };
+
+    const handleSeeked = () => {
+      // Frame seeked, draw it
+      const ctx = canvas.getContext('2d');
+      if (ctx && video.videoWidth > 0 && video.videoHeight > 0) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        setThumbnailLoaded(true);
+      }
+    };
+
+    video.addEventListener('loadedmetadata', handleLoadedMetadata);
+    video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('seeked', handleSeeked);
+    
+    // Start loading video
+    video.preload = 'metadata';
+    video.muted = true;
+    video.load();
+
+    return () => {
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('seeked', handleSeeked);
+    };
+  }, []);
+
   return (
     <motion.div
       // layoutId is the magic key that connects this component to the ExpandedCard
@@ -159,8 +214,30 @@ function CompactCard({ project }: { project: typeof projects[0] }) {
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className="group relative w-full h-full rounded-3xl overflow-hidden border bg-card shadow-xl cursor-pointer"
     >
-      {/* Background Gradient Placeholder */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-30`} />
+      {/* Hidden video for thumbnail extraction */}
+      <video
+        ref={videoRef}
+        src={project.video}
+        className="absolute opacity-0 pointer-events-none"
+        preload="metadata"
+        muted
+        playsInline
+        style={{ width: '1px', height: '1px' }}
+      />
+      
+      {/* Canvas thumbnail - always render */}
+      <canvas
+        ref={canvasRef}
+        className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-300 ${
+          thumbnailLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{ objectFit: 'cover' }}
+      />
+      
+      {/* Fallback Gradient Placeholder */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-30 z-0 transition-opacity duration-300 ${
+        thumbnailLoaded ? 'opacity-0' : 'opacity-30'
+      }`} />
       
       <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-20">
         <motion.h3 
@@ -197,15 +274,29 @@ function ExpandedCard({
   const [isVideoLoading, setIsVideoLoading] = useState(true);
   const [hasVideoError, setHasVideoError] = useState(false);
 
-  // Auto-play video when card expands
+  // Auto-play video when card expands with preloading
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    const handleCanPlay = () => {
+    // Preload video for smooth playback
+    video.preload = 'auto';
+    video.load();
+
+    const handleCanPlayThrough = () => {
       setIsVideoLoading(false);
-      video.play().catch((e) => console.log("Video autoplay blocked", e));
+      // Video is ready, start playing smoothly
       video.currentTime = 0;
+      video.play().catch((e) => console.log("Video autoplay blocked", e));
+    };
+
+    const handleCanPlay = () => {
+      // Video can start playing, but may still buffer
+      if (video.readyState >= 3) { // HAVE_FUTURE_DATA
+        setIsVideoLoading(false);
+        video.currentTime = 0;
+        video.play().catch((e) => console.log("Video autoplay blocked", e));
+      }
     };
 
     const handleError = () => {
@@ -213,23 +304,24 @@ function ExpandedCard({
       setHasVideoError(true);
     };
 
-    const handleLoadStart = () => {
-      setIsVideoLoading(true);
+    const handleLoadedData = () => {
+      // Video metadata loaded, start buffering
+      video.currentTime = 0;
     };
 
+    video.addEventListener('canplaythrough', handleCanPlayThrough);
     video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('error', handleError);
-    video.addEventListener('loadstart', handleLoadStart);
-
-    // Start loading video
-    video.load();
+    video.addEventListener('loadeddata', handleLoadedData);
 
     return () => {
+      video.removeEventListener('canplaythrough', handleCanPlayThrough);
       video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('error', handleError);
-      video.removeEventListener('loadstart', handleLoadStart);
+      video.removeEventListener('loadeddata', handleLoadedData);
       if (video) {
         video.pause();
+        video.currentTime = 0;
       }
     };
   }, []);
@@ -257,7 +349,7 @@ function ExpandedCard({
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src={project.video} type={project.video.endsWith('.mov') ? 'video/quicktime' : 'video/mp4'} />
