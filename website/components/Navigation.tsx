@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/portfolio", label: "Portfolio" },
-  { href: "/resume", label: "Resume" },
+  { href: "/resume", label: "About" },
   { href: "/photography", label: "Photography" },
   { href: "/hobbies", label: "Hobbies" },
 ];
