@@ -247,21 +247,21 @@ export const photoCollections: PhotoCollection[] = [
   },
   {
     id: "california",
-    title: "California",
-    description: "California adventures",
+    title: "Sequoia National Park",
+    description: "Exploring Sequoia National Park",
     location: "California, US",
     photos: [
       {
-        src: "/photography/california/IMG_20240618_104921_850.webp",
-        alt: "California scenery"
+        src: "/photography/california/Sequoia National Park.webp",
+        alt: "Sequoia National Park scenery"
       },
       {
-        src: "/photography/california/IMG_20240619_195054_959.webp",
-        alt: "California landscape"
+        src: "/photography/california/Sequoia National Park2.webp",
+        alt: "Sequoia National Park landscape"
       },
       {
-        src: "/photography/california/IMG_20240619_195221_385.webp",
-        alt: "California view"
+        src: "/photography/california/Sequoia National Park3.webp",
+        alt: "Sequoia National Park view"
       },
     ]
   },
