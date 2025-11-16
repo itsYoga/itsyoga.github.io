@@ -16,7 +16,7 @@ const projects = [
     tech: ["Python", "PyTorch", "YOLOv11", "YOLOv8", "React", "FastAPI", "OpenCV", "Norfair"],
     github: "https://github.com/itsYoga/volleyball-line-judging",
     demo: null,
-    video: "/videos/volleyball-demo.mov",
+    video: "/videos/volleyball-demo.mp4",
     color: "from-orange-500/20 to-red-500/20",
   },
   {
@@ -308,43 +308,7 @@ function ExpandedCard({
   onMouseLeave?: () => void;
   onClose?: () => void;
 }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [hasVideoError, setHasVideoError] = useState(false);
-  const hasPlayedRef = useRef(false);
-
-  // Auto-play video when card expands - video should already be preloaded from CompactCard
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleError = () => {
-      setHasVideoError(true);
-    };
-
-    video.addEventListener('error', handleError);
-    
-    // Video is preloaded in CompactCard, so it should be ready quickly
-    // The onCanPlay handler on the video element will handle playback
-    // This useEffect just ensures video starts loading if needed
-    if (video.readyState >= 3) {
-      // Video already has enough data, play immediately
-      video.currentTime = 0;
-      video.play().catch(() => {});
-      hasPlayedRef.current = true;
-    } else {
-      // Start loading
-      video.load();
-    }
-
-    return () => {
-      video.removeEventListener('error', handleError);
-      if (video) {
-        video.pause();
-        video.currentTime = 0;
-      }
-      hasPlayedRef.current = false;
-    };
-  }, []);
 
   return (
     <motion.div
@@ -365,21 +329,13 @@ function ExpandedCard({
       {/* Top Half: Video Area */}
       <div className="relative h-[50%] min-h-[300px] md:min-h-[300px] w-full overflow-hidden bg-black">
         <video
-          ref={videoRef}
           loop
           muted
           playsInline
           preload="auto"
+          autoPlay
           className="absolute inset-0 w-full h-full object-cover"
-          onCanPlay={() => {
-            // Video is ready to play, start immediately if not already playing
-            const video = videoRef.current;
-            if (video && !hasPlayedRef.current && video.paused) {
-              video.currentTime = 0;
-              video.play().catch(() => {});
-              hasPlayedRef.current = true;
-            }
-          }}
+          onError={() => setHasVideoError(true)}
         >
           <source src={project.video} type={project.video.endsWith('.mov') ? 'video/quicktime' : 'video/mp4'} />
         </video>
