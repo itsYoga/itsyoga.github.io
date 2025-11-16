@@ -68,7 +68,7 @@ export default function Home() {
 
           {/* Subtitle Section */}
           <div className="overflow-hidden absolute left-4 right-4 top-[72vh] sm:top-[70vh] md:top-[12.5vw]">
-            <div className="flex flex-col items-center justify-center gap-2">
+            <div className="flex flex-col items-center justify-center">
               <motion.p
                 initial={{ y: 120 }}
                 animate={{ y: 0 }}
@@ -89,7 +89,7 @@ export default function Home() {
                   delay: 2.0,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="text-[clamp(20px,1.6vw,32px)] font-normal leading-[1.2] text-center"
+                className="text-[clamp(20px,1.6vw,32px)] font-normal leading-[1.2] text-center mt-1"
               >
                 Full-Stack Developer | Photographer
               </motion.p>
@@ -106,7 +106,7 @@ export default function Home() {
             delay: 2.2,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="absolute left-4 right-4 bottom-[15vh] sm:bottom-[10vh] flex flex-wrap justify-center gap-4"
+          className="absolute left-4 right-4 top-[calc(72vh+140px)] sm:top-[calc(70vh+140px)] md:top-[calc(12.5vw+140px)] flex flex-wrap justify-center gap-4"
         >
           <Button asChild size="lg" className="text-lg px-8 py-6 rounded-xl">
             <Link href="/resume">
