@@ -120,7 +120,7 @@ export default function About() {
                     <p className="text-sm text-muted-foreground mb-3">
                       AI Image Recognition Intern
                     </p>
-                    <ul className="text-base text-muted-foreground leading-relaxed space-y-2 list-disc list-inside">
+                    <ul className="text-base text-muted-foreground leading-relaxed space-y-2 list-disc list-outside ml-6">
                       <li>Optimized YOLO (You Only Look Once) object detection model achieving 99% accuracy</li>
                       <li>Developed and fine-tuned computer vision models for industrial image recognition applications</li>
                       <li>Implemented data preprocessing pipelines and model evaluation frameworks</li>

@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Copy from "@/components/Copy";
-import { Github, ExternalLink, Code2 } from "lucide-react";
+import { Github, ExternalLink, Code2, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Updated Data Structure with video placeholders
@@ -72,7 +72,7 @@ export default function Portfolio() {
             </Copy>
             <Copy delay={0.02} animateOnScroll={false}>
               <p className="text-lg text-muted-foreground max-w-2xl">
-                A collection of projects spanning Computer Vision, Blockchain, and Mobile Development. Hover over the cards to see them in action.
+                A collection of projects spanning Computer Vision, Blockchain, and Mobile Development. Tap or hover over the cards to see them in action.
               </p>
             </Copy>
           </div>
@@ -85,9 +85,10 @@ export default function Portfolio() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                // Important: On mouse enter, we set this specific ID as active
+                // Important: On mouse enter (desktop) or click (mobile), we set this specific ID as active
                 onMouseEnter={() => setActiveId(project.id)}
-                className="h-[400px]"
+                onClick={() => setActiveId(project.id)}
+                className="h-[350px] md:h-[400px] cursor-pointer"
               >
                 <CompactCard project={project} />
               </motion.div>
@@ -110,14 +111,23 @@ export default function Portfolio() {
                 />
                 
                 {/* The Expanded Card */}
-                <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
+                <div 
+                  className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none"
+                  onClick={() => setActiveId(null)}
+                >
                   <div 
                     // Re-enable pointer events for the card itself so we can click links
                     className="pointer-events-auto w-full h-full flex items-center justify-center p-4"
-                    // If mouse leaves the EXPANDED card area, we close it
+                    // If mouse leaves the entire overlay area, we close it (desktop)
                     onMouseLeave={() => setActiveId(null)}
+                    // Prevent closing when clicking inside the card
+                    onClick={(e) => e.stopPropagation()}
                   >
-                    <ExpandedCard project={projects.find(p => p.id === activeId)!} />
+                    <ExpandedCard 
+                      project={projects.find(p => p.id === activeId)!} 
+                      onMouseLeave={() => setActiveId(null)}
+                      onClose={() => setActiveId(null)}
+                    />
                   </div>
                 </div>
               </>
@@ -135,24 +145,25 @@ function CompactCard({ project }: { project: typeof projects[0] }) {
     <motion.div
       // layoutId is the magic key that connects this component to the ExpandedCard
       layoutId={`card-${project.id}`}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className="group relative w-full h-full rounded-3xl overflow-hidden border bg-card shadow-xl cursor-pointer"
     >
       {/* Background Gradient Placeholder */}
       <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-30`} />
       
-      <div className="absolute inset-0 p-8 flex flex-col justify-end z-20">
-        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 backdrop-blur-sm">
-          <Code2 className="w-5 h-5" />
+      <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-20">
+        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-3 md:mb-4 backdrop-blur-sm">
+          <Code2 className="w-4 h-4 md:w-5 md:h-5" />
         </div>
         <motion.h3 
           layoutId={`title-${project.id}`}
-          className="text-3xl font-bold leading-tight tracking-tight mb-2"
+          className="text-2xl md:text-3xl font-bold leading-tight tracking-tight mb-2"
         >
           {project.title}
         </motion.h3>
         <motion.p 
           layoutId={`desc-${project.id}`}
-          className="text-lg text-muted-foreground font-medium"
+          className="text-base md:text-lg text-muted-foreground font-medium"
         >
           {project.shortDesc}
         </motion.p>
@@ -165,7 +176,15 @@ function CompactCard({ project }: { project: typeof projects[0] }) {
 }
 
 // --- 2. The Expanded Card (Hover/Center View) ---
-function ExpandedCard({ project }: { project: typeof projects[0] }) {
+function ExpandedCard({ 
+  project,
+  onMouseLeave,
+  onClose
+}: { 
+  project: typeof projects[0];
+  onMouseLeave?: () => void;
+  onClose?: () => void;
+}) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Auto-play video when card expands
@@ -185,10 +204,21 @@ function ExpandedCard({ project }: { project: typeof projects[0] }) {
   return (
     <motion.div
       layoutId={`card-${project.id}`}
+      onMouseLeave={onMouseLeave}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className="w-full max-w-[90vw] md:max-w-[800px] h-auto max-h-[85vh] bg-card rounded-3xl shadow-2xl overflow-hidden border relative flex flex-col"
     >
+      {/* Close Button - Visible on mobile, hidden on desktop (hover handles it) */}
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 z-50 p-2 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 hover:bg-background transition-colors md:hidden"
+        aria-label="Close"
+      >
+        <X className="w-5 h-5" />
+      </button>
+      
       {/* Top Half: Video Area */}
-      <div className="relative h-[50%] min-h-[300px] w-full overflow-hidden bg-black">
+      <div className="relative h-[50%] min-h-[300px] md:min-h-[300px] w-full overflow-hidden bg-black">
         <video
           ref={videoRef}
           loop
@@ -208,14 +238,14 @@ function ExpandedCard({ project }: { project: typeof projects[0] }) {
       </div>
 
       {/* Bottom Half: Content */}
-      <div className="flex-1 p-8 flex flex-col justify-start relative bg-card">
+      <div className="flex-1 p-6 md:p-8 flex flex-col justify-start relative bg-card overflow-y-auto">
         <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 backdrop-blur-sm">
           <Code2 className="w-5 h-5" />
         </div>
         
         <motion.h3 
           layoutId={`title-${project.id}`}
-          className="text-3xl md:text-4xl font-bold mb-2"
+          className="text-2xl md:text-4xl font-bold mb-2"
         >
           {project.title}
         </motion.h3>
@@ -234,21 +264,21 @@ function ExpandedCard({ project }: { project: typeof projects[0] }) {
           transition={{ delay: 0.1, duration: 0.3 }}
           className="space-y-5"
         >
-          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+          <p className="text-sm md:text-lg text-muted-foreground leading-relaxed mb-4 md:mb-6">
             {project.detailedDescription}
           </p>
 
           {/* Tech Stack */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mb-4 md:mb-6">
             {project.tech.map((t) => (
-              <span key={t} className="px-2.5 py-1 bg-accent/50 border border-border/50 rounded-md text-xs font-semibold backdrop-blur-md">
+              <span key={t} className="px-2.5 md:px-3 py-1 bg-accent/50 border border-border/50 rounded-md text-xs font-semibold backdrop-blur-md">
                 {t}
               </span>
             ))}
           </div>
 
           {/* Buttons */}
-          <div className="flex gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row gap-3 pt-2">
             {project.github && (
               <Button size="sm" variant="default" className="gap-2 rounded-full" asChild>
                 <a href={project.github} target="_blank" rel="noopener noreferrer">

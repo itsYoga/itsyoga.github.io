@@ -19,7 +19,7 @@ export default function Home() {
         {/* 1. Title Animation - Only moves up slightly now (-160px) */}
         <motion.div
           initial={{ scale: 0.5, y: 0 }} 
-          animate={{ scale: 1, y: -160 }} // <--- CHANGED: smaller movement keeps it central
+          animate={{ scale: 1, y: -120 }} // Smaller movement on mobile, adjusted for better mobile experience
           transition={{
             duration: 1.4,
             ease: [0.22, 1, 0.36, 1],
