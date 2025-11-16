@@ -68,6 +68,44 @@ const projects = [
 export default function Portfolio() {
   // We store the ID of the currently hovered project
   const [activeId, setActiveId] = useState<string | null>(null);
+  
+  // Preload all videos when component mounts - create hidden video elements in DOM
+  useEffect(() => {
+    const preloadContainer = document.createElement('div');
+    preloadContainer.style.position = 'absolute';
+    preloadContainer.style.width = '1px';
+    preloadContainer.style.height = '1px';
+    preloadContainer.style.opacity = '0';
+    preloadContainer.style.pointerEvents = 'none';
+    preloadContainer.style.overflow = 'hidden';
+    document.body.appendChild(preloadContainer);
+
+    const preloadVideos = projects.map((project) => {
+      const video = document.createElement('video');
+      video.src = project.video;
+      video.preload = 'auto';
+      video.muted = true;
+      video.playsInline = true;
+      video.setAttribute('playsinline', '');
+      video.style.width = '1px';
+      video.style.height = '1px';
+      video.load();
+      preloadContainer.appendChild(video);
+      return video;
+    });
+
+    // Cleanup on unmount
+    return () => {
+      preloadVideos.forEach((video) => {
+        video.pause();
+        video.src = '';
+        video.load();
+      });
+      if (preloadContainer.parentNode) {
+        preloadContainer.parentNode.removeChild(preloadContainer);
+      }
+    };
+  }, []);
 
   return (
     <main className="min-h-screen bg-background">
@@ -214,12 +252,12 @@ function CompactCard({ project }: { project: typeof projects[0] }) {
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className="group relative w-full h-full rounded-3xl overflow-hidden border bg-card shadow-xl cursor-pointer"
     >
-      {/* Hidden video for thumbnail extraction */}
+      {/* Hidden video for thumbnail extraction - also helps with preloading */}
       <video
         ref={videoRef}
         src={project.video}
         className="absolute opacity-0 pointer-events-none"
-        preload="metadata"
+        preload="auto"
         muted
         playsInline
         style={{ width: '1px', height: '1px' }}
