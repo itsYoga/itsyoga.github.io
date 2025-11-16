@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Copy from "@/components/Copy";
-import { Download, GraduationCap, Code2, FileText, ExternalLink, User, MapPin, Mail } from "lucide-react";
+import { Download, FileText, ExternalLink } from "lucide-react";
 
 const skills = [
   "Python", "JavaScript", "TypeScript", "React", "Next.js",
@@ -48,12 +48,7 @@ export default function Resume() {
             <div className="lg:col-span-2 h-full">
               <Card className="h-full p-6 md:p-8 rounded-3xl border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
                 <Copy delay={0.3}>
-                  <div className="flex items-center gap-3 mb-8">
-                    <div className="p-3 bg-primary/10 rounded-xl text-primary">
-                      <GraduationCap className="w-6 h-6" />
-                    </div>
-                    <h2 className="text-2xl font-bold tracking-tight">Education</h2>
-                  </div>
+                  <h2 className="text-2xl font-bold tracking-tight mb-8">Education</h2>
                 </Copy>
                 <div className="space-y-8">
                   <Copy delay={0.4}>
@@ -85,12 +80,7 @@ export default function Resume() {
             <div className="lg:col-span-1 h-full">
               <Card className="h-full p-6 md:p-8 rounded-3xl border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
                 <Copy delay={0.5}>
-                  <div className="flex items-center gap-3 mb-8">
-                    <div className="p-3 bg-primary/10 rounded-xl text-primary">
-                      <Code2 className="w-6 h-6" />
-                    </div>
-                    <h2 className="text-2xl font-bold tracking-tight">Tech Stack</h2>
-                  </div>
+                  <h2 className="text-2xl font-bold tracking-tight mb-8">Tech Stack</h2>
                 </Copy>
                 <div className="flex flex-wrap gap-2">
                   {skills.map((skill, index) => (
@@ -109,12 +99,7 @@ export default function Resume() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="p-6 md:p-8 rounded-3xl border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
               <Copy delay={0.6}>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 bg-primary/10 rounded-xl text-primary">
-                    <User className="w-6 h-6" />
-                  </div>
-                  <h2 className="text-2xl font-bold tracking-tight">About</h2>
-                </div>
+                <h2 className="text-2xl font-bold tracking-tight mb-6">About</h2>
               </Copy>
               <Copy delay={0.7}>
                 <p className="text-muted-foreground leading-relaxed mb-4">
@@ -130,26 +115,19 @@ export default function Resume() {
 
             <Card className="p-6 md:p-8 rounded-3xl border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
               <Copy delay={0.6}>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 bg-primary/10 rounded-xl text-primary">
-                    <MapPin className="w-6 h-6" />
-                  </div>
-                  <h2 className="text-2xl font-bold tracking-tight">Contact</h2>
-                </div>
+                <h2 className="text-2xl font-bold tracking-tight mb-6">Contact</h2>
               </Copy>
               <div className="space-y-4">
                 <Copy delay={0.7}>
                   <a 
                     href="mailto:ch993115@gmail.com" 
-                    className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    <Mail className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                    <span>ch993115@gmail.com</span>
+                    ch993115@gmail.com
                   </a>
                 </Copy>
                 <Copy delay={0.8}>
-                  <div className="flex items-center gap-3 text-muted-foreground">
-                    <MapPin className="w-5 h-5" />
+                  <div className="text-muted-foreground">
                     <span>Taiwan</span>
                   </div>
                 </Copy>
@@ -160,12 +138,7 @@ export default function Resume() {
           {/* --- Resume Preview Section --- */}
           <div>
             <Copy delay={0.8}>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-primary/10 rounded-xl text-primary">
-                  <FileText className="w-6 h-6" />
-                </div>
-                <h2 className="text-2xl font-bold tracking-tight">Resume Preview</h2>
-              </div>
+              <h2 className="text-2xl font-bold tracking-tight mb-6">Resume Preview</h2>
             </Copy>
             <Card className="overflow-hidden rounded-3xl border bg-card shadow-sm">
               <div className="border-b bg-muted/50 p-4 flex items-center justify-between">
