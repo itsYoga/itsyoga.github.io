@@ -100,13 +100,45 @@ export default function Resume() {
             </div>
           </div>
 
-          {/* --- Personal Info Section --- */}
+          {/* --- Experience Section --- */}
           <div>
             <Card className="p-6 md:p-8 rounded-3xl border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
               <Copy delay={0.6}>
+                <h2 className="text-2xl font-bold tracking-tight mb-8">Experience</h2>
+              </Copy>
+              <div className="space-y-6">
+                <Copy delay={0.7}>
+                  <div className="pb-4">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+                      <h3 className="text-xl font-semibold">
+                        AI Image Recognition Intern @ ITRI
+                      </h3>
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary text-secondary-foreground whitespace-nowrap">
+                        Summer 2024
+                      </span>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Industrial Technology Research Institute (ITRI), Taiwan
+                    </p>
+                    <ul className="text-base text-muted-foreground leading-relaxed space-y-2 list-disc list-inside">
+                      <li>Optimized YOLO (You Only Look Once) object detection model achieving 99% accuracy</li>
+                      <li>Developed and fine-tuned computer vision models for industrial image recognition applications</li>
+                      <li>Implemented data preprocessing pipelines and model evaluation frameworks</li>
+                      <li>Collaborated with research team on deploying models for real-world production environments</li>
+                    </ul>
+                  </div>
+                </Copy>
+              </div>
+            </Card>
+          </div>
+
+          {/* --- Personal Info Section --- */}
+          <div>
+            <Card className="p-6 md:p-8 rounded-3xl border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
+              <Copy delay={0.8}>
                 <h2 className="text-2xl font-bold tracking-tight mb-6">About</h2>
               </Copy>
-              <Copy delay={0.7}>
+              <Copy delay={0.9}>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   I'm a Computer Science student passionate about AI, full-stack development, and creative problem-solving. 
                   I enjoy building projects that combine technical skills with real-world applications.
@@ -121,7 +153,7 @@ export default function Resume() {
 
           {/* --- Resume Preview Section --- */}
           <div>
-            <Copy delay={0.8}>
+            <Copy delay={1.0}>
               <h2 className="text-2xl font-bold tracking-tight mb-6">Resume Preview</h2>
             </Copy>
             <Card className="overflow-hidden rounded-3xl border bg-card shadow-sm">
