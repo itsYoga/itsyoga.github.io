@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Github, Linkedin, Instagram } from "lucide-react";
@@ -9,72 +10,191 @@ export default function Home() {
   return (
     <main>
       {/* Hero Section - Inspired by jazminwong */}
-      <section className="pt-4 lg:pb-24 min-h-screen relative px-4">
-        <div className="flex flex-col items-center justify-center min-h-[80vh] text-center">
-          <div className="overflow-hidden mb-6">
-            <Copy animateOnScroll={false} delay={0.2}>
-              <h1 className="text-[clamp(48px,12vw,180px)] font-bold tracking-tight leading-[1.1]">
-                YuJia
-              </h1>
-            </Copy>
-          </div>
+      <section className="pt-4 lg:pb-24 h-screen relative px-4">
+        <div className="px-4">
+          <h1 className="hidden">YuJia Liang</h1>
 
-          <div className="overflow-hidden mb-8">
-            <Copy animateOnScroll={false} delay={0.4}>
-              <p className="text-[clamp(20px,2vw,40px)] font-semibold leading-[1.2]">
-                Computer Science Student & AI Enthusiast
-              </p>
-            </Copy>
-          </div>
+          {/* Main Title Animation */}
+          <motion.div
+            initial={{
+              scale: 0.25,
+              top: "50%",
+              y: "-50%",
+            }}
+            animate={{
+              scale: 1,
+              top: "0px",
+              y: "16px",
+            }}
+            transition={{
+              duration: 1.6,
+              ease: [0.22, 1, 0.36, 1],
+              scale: {
+                duration: 1,
+                delay: 0.8,
+                ease: [0.22, 1, 0.36, 1],
+              },
+              top: {
+                duration: 1.5,
+                delay: 1.5,
+                ease: [0.22, 1, 0.36, 1],
+              },
+              y: {
+                duration: 1.5,
+                delay: 1.5,
+                ease: [0.22, 1, 0.36, 1],
+              },
+            }}
+            className="absolute flex flex-col items-center justify-center sm:flex-row sm:gap-8 sm:justify-between left-4 right-4 origin-center will-change-transform"
+          >
+            {/* YuJia */}
+            <div className="overflow-hidden -mb-3 sm:mb-0">
+              <motion.div
+                initial={{ y: 200 }}
+                animate={{ y: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: 0.2,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="w-full pointer-events-none mb-6"
+              >
+                <h1 className="text-[clamp(48px,12vw,180px)] font-bold tracking-tight leading-[1.1]">
+                  YuJia
+                </h1>
+              </motion.div>
+            </div>
 
-          <div className="overflow-hidden mb-12">
-            <Copy animateOnScroll={false} delay={0.6}>
-              <p className="text-[clamp(18px,1.6vw,32px)] font-normal text-muted-foreground leading-[1.2] max-w-3xl">
-                Full-Stack Developer | Photographer
-              </p>
-            </Copy>
-          </div>
+            {/* Liang */}
+            <div className="overflow-hidden">
+              <motion.div
+                initial={{ y: 200 }}
+                animate={{ y: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: 0.225,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="w-full pointer-events-none mb-6"
+              >
+                <h1 className="text-[clamp(48px,12vw,180px)] font-bold tracking-tight leading-[1.1]">
+                  Liang
+                </h1>
+              </motion.div>
+            </div>
+          </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <Button asChild size="lg" className="text-lg px-8 py-6 rounded-xl">
-              <Link href="/resume">
-                View Resume
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6 rounded-xl">
-              <a href="mailto:ch993115@gmail.com">
-                Contact Me
-              </a>
-            </Button>
-          </div>
+          {/* Subtitle Section */}
+          <div className="overflow-hidden absolute left-4 right-4 top-[72vh] sm:top-[70vh] md:top-[12.5vw]">
+            <div className="flex flex-col gap-0.5 md:gap-0 md:flex-row justify-between items-center relative">
+              <div className="overflow-hidden">
+                <motion.p
+                  initial={{ y: 120 }}
+                  animate={{ y: 0 }}
+                  transition={{
+                    duration: 1.5,
+                    delay: 1.9,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="text-[clamp(20px,1.6vw,32px)] font-semibold leading-[1.2] text-center md:text-left"
+                >
+                  Computer Science Student & AI Enthusiast
+                </motion.p>
+              </div>
 
-          <div className="flex justify-center gap-6">
-            <Link
-              href="https://github.com/itsYoga"
-              target="_blank"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="GitHub"
-            >
-              <Github className="w-7 h-7" />
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/yujia-liang-77ab022a7/"
-              target="_blank"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-7 h-7" />
-            </Link>
-            <Link
-              href="https://www.instagram.com/yogaliang0702/"
-              target="_blank"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Instagram"
-            >
-              <Instagram className="w-7 h-7" />
-            </Link>
+              <div className="hidden md:block overflow-hidden absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
+                <motion.div
+                  initial={{ y: 120 }}
+                  animate={{ y: 0 }}
+                  transition={{
+                    duration: 1.5,
+                    delay: 1.7,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="w-[clamp(28px,2vw,48px)] h-[clamp(28px,2vw,48px)] relative group"
+                >
+                  <div className="w-full h-full rounded-full bg-primary/20 group-hover:bg-primary/40 transition-colors flex items-center justify-center">
+                    <span className="text-[clamp(14px,1vw,20px)]">✨</span>
+                  </div>
+                </motion.div>
+              </div>
+
+              <div className="overflow-hidden">
+                <motion.p
+                  initial={{ y: 120 }}
+                  animate={{ y: 0 }}
+                  transition={{
+                    duration: 1.5,
+                    delay: 1.9,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="text-[clamp(20px,1.6vw,32px)] font-normal leading-[1.2] text-center md:text-left"
+                >
+                  Full-Stack Developer | Photographer
+                </motion.p>
+              </div>
+            </div>
           </div>
         </div>
+
+        {/* Action Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.8,
+            delay: 2.2,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="absolute left-4 right-4 bottom-[15vh] sm:bottom-[10vh] flex flex-wrap justify-center gap-4"
+        >
+          <Button asChild size="lg" className="text-lg px-8 py-6 rounded-xl">
+            <Link href="/resume">
+              View Resume
+            </Link>
+          </Button>
+          <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6 rounded-xl">
+            <a href="mailto:ch993115@gmail.com">
+              Contact Me
+            </a>
+          </Button>
+        </motion.div>
+
+        {/* Social Links */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 0.8,
+            delay: 2.4,
+          }}
+          className="absolute left-4 right-4 bottom-[8vh] sm:bottom-[5vh] flex justify-center gap-6"
+        >
+          <Link
+            href="https://github.com/itsYoga"
+            target="_blank"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="GitHub"
+          >
+            <Github className="w-7 h-7" />
+          </Link>
+          <Link
+            href="https://www.linkedin.com/in/yujia-liang-77ab022a7/"
+            target="_blank"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="w-7 h-7" />
+          </Link>
+          <Link
+            href="https://www.instagram.com/yogaliang0702/"
+            target="_blank"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Instagram"
+          >
+            <Instagram className="w-7 h-7" />
+          </Link>
+        </motion.div>
       </section>
 
       {/* Quick Links Section */}
