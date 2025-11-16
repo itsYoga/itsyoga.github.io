@@ -40,12 +40,7 @@ export default function Photography() {
     <main className="min-h-screen pt-32 pb-20 px-4 md:px-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <Copy>
             <p className="text-sm tracking-widest text-muted-foreground uppercase mb-4">
               Photography
@@ -62,7 +57,7 @@ export default function Photography() {
               during my travels and everyday adventures.
             </p>
           </Copy>
-        </motion.div>
+        </div>
 
         {/* Masonry Grid */}
         {photos.length > 0 ? (
