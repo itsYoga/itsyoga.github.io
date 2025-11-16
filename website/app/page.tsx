@@ -45,10 +45,10 @@ export default function Home() {
                 ease: [0.22, 1, 0.36, 1],
               },
             }}
-            className="absolute flex flex-col items-center justify-center sm:flex-row sm:gap-8 sm:justify-between left-4 right-4 origin-center will-change-transform"
+            className="absolute flex items-center justify-center left-4 right-4 origin-center will-change-transform"
           >
-            {/* YuJia */}
-            <div className="overflow-hidden -mb-3 sm:mb-0">
+            {/* YuJia Liang - Combined */}
+            <div className="overflow-hidden">
               <motion.div
                 initial={{ y: 200 }}
                 animate={{ y: 0 }}
@@ -57,28 +57,10 @@ export default function Home() {
                   delay: 0.2,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="w-full pointer-events-none mb-6"
+                className="w-full pointer-events-none text-center"
               >
                 <h1 className="text-[clamp(48px,12vw,180px)] font-bold tracking-tight leading-[1.1]">
-                  YuJia
-                </h1>
-              </motion.div>
-            </div>
-
-            {/* Liang */}
-            <div className="overflow-hidden">
-              <motion.div
-                initial={{ y: 200 }}
-                animate={{ y: 0 }}
-                transition={{
-                  duration: 1,
-                  delay: 0.225,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="w-full pointer-events-none mb-6"
-              >
-                <h1 className="text-[clamp(48px,12vw,180px)] font-bold tracking-tight leading-[1.1]">
-                  Liang
+                  YuJia Liang
                 </h1>
               </motion.div>
             </div>
@@ -100,23 +82,6 @@ export default function Home() {
                 >
                   Computer Science Student & AI Enthusiast
                 </motion.p>
-              </div>
-
-              <div className="hidden md:block overflow-hidden absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
-                <motion.div
-                  initial={{ y: 120 }}
-                  animate={{ y: 0 }}
-                  transition={{
-                    duration: 1.5,
-                    delay: 1.7,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="w-[clamp(28px,2vw,48px)] h-[clamp(28px,2vw,48px)] relative group"
-                >
-                  <div className="w-full h-full rounded-full bg-primary/20 group-hover:bg-primary/40 transition-colors flex items-center justify-center">
-                    <span className="text-[clamp(14px,1vw,20px)]">✨</span>
-                  </div>
-                </motion.div>
               </div>
 
               <div className="overflow-hidden">
