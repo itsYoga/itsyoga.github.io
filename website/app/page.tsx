@@ -45,9 +45,9 @@ export default function Home() {
           
           {/* Subtitle */}
           <motion.div
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1, delay: 1.8, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ y: "100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 2.0, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden text-center space-y-2"
           >
             <p className="text-[clamp(1.2rem,2vw,2rem)] font-medium text-foreground/90">
@@ -62,7 +62,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 2.1 }}
+            transition={{ duration: 0.8, delay: 3.0 }}
             className="flex justify-center gap-6 pt-4"
           >
             {[
@@ -91,7 +91,7 @@ export default function Home() {
         animate={{ y: 0, scale: 1 }}
         transition={{
           duration: 1,
-          delay: 2.5,
+          delay: 3.5,
           ease: [0.22, 1, 0.36, 1],
         }}
         className="fixed bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 pl-1 py-1 pr-6 rounded-full bg-accent shadow-2xl cursor-pointer group z-50 transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
