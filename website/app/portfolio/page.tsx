@@ -72,7 +72,7 @@ export default function Portfolio() {
             </Copy>
             <Copy delay={0.02} animateOnScroll={false}>
               <p className="text-lg text-muted-foreground max-w-2xl">
-                A collection of projects spanning Computer Vision, Blockchain, and Mobile Development. Tap or hover over the cards to see them in action.
+                A showcase of my recent work and creative projects. Tap or hover over the cards to explore.
               </p>
             </Copy>
           </div>
