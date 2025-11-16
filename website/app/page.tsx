@@ -17,34 +17,32 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-screen w-full overflow-hidden flex flex-col items-center justify-center px-4">
         
-        {/* 1. The Title Animation (Preserved but stabilized) */}
+        {/* 1. Title Animation - Only moves up slightly now (-160px) */}
         <motion.div
-          initial={{ scale: 0.25, y: 0 }} 
-          animate={{ scale: 1, y: "-35vh" }} // Moves up cleanly
+          initial={{ scale: 0.5, y: 0 }} 
+          animate={{ scale: 1, y: -160 }} // <--- CHANGED: smaller movement keeps it central
           transition={{
             duration: 1.4,
             ease: [0.22, 1, 0.36, 1],
             scale: { duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] },
             y: { duration: 1.2, delay: 1.2, ease: [0.22, 1, 0.36, 1] },
           }}
-          className="absolute z-20 flex items-center justify-center"
+          className="absolute z-20 flex items-center justify-center origin-center"
         >
           <div className="overflow-hidden">
             <motion.h1
               initial={{ y: 200 }}
               animate={{ y: 0 }}
               transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[clamp(3rem,12vw,10rem)] font-bold tracking-tighter leading-none text-center whitespace-nowrap"
+              className="text-[clamp(3.5rem,12vw,11rem)] font-bold tracking-tighter leading-none text-center whitespace-nowrap"
             >
               YuJia Liang
             </motion.h1>
           </div>
         </motion.div>
 
-        {/* 2. The Content (Subtitle, Buttons, Socials) 
-            We use absolute positioning at the bottom half to separate it from the title animation 
-        */}
-        <div className="absolute bottom-12 w-full max-w-3xl px-4 flex flex-col items-center gap-8 z-10">
+        {/* 2. Content - Now positioned in the center, just below the title */}
+        <div className="absolute top-1/2 w-full max-w-3xl px-4 flex flex-col items-center gap-6 pt-12 z-10">
           
           {/* Subtitle */}
           <div className="overflow-hidden text-center space-y-2">
@@ -71,12 +69,12 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 2.1 }}
-            className="flex flex-wrap justify-center gap-4"
+            className="flex flex-wrap justify-center gap-4 pt-4"
           >
-            <Button asChild size="lg" className="h-12 px-8 text-base rounded-full shadow-lg hover:shadow-xl transition-all">
+            <Button asChild size="lg" className="h-11 px-8 text-base rounded-full shadow-lg transition-all hover:scale-105">
               <Link href="/resume">View Resume</Link>
             </Button>
-            <Button asChild variant="secondary" size="lg" className="h-12 px-8 text-base rounded-full border bg-background/50 backdrop-blur-sm hover:bg-accent/50">
+            <Button asChild variant="secondary" size="lg" className="h-11 px-8 text-base rounded-full border bg-background/50 backdrop-blur-sm hover:bg-accent/50 transition-all hover:scale-105">
               <a href="mailto:ch993115@gmail.com">Contact Me</a>
             </Button>
           </motion.div>
