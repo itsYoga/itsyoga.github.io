@@ -69,7 +69,8 @@ export default function Photography() {
                   }}
                   onHoverStart={() => setHoveredIndex(index)}
                   onHoverEnd={() => setHoveredIndex(null)}
-                    className="break-inside-avoid mb-4 relative group cursor-pointer overflow-hidden rounded-xl bg-card border-2 border-transparent hover:border-primary/30 active:border-primary/50 transition-all"
+                  onTouchStart={() => setHoveredIndex(index)}
+                  className="break-inside-avoid mb-4 relative group cursor-pointer overflow-hidden rounded-xl bg-card border-2 border-transparent hover:border-primary/30 active:border-primary/50 transition-all touch-manipulation"
                   onClick={() => setSelectedImage(index)}
                   style={{ willChange: 'transform' }}
                 >
@@ -85,12 +86,12 @@ export default function Photography() {
                     />
                   </div>
                   
-                  {/* Overlay */}
+                  {/* Overlay - Show on hover (desktop) or always visible on mobile for better UX */}
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-4 md:p-6"
+                    className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-4 md:p-6 md:opacity-0 md:group-hover:opacity-100"
                   >
                     <motion.div
                       initial={{ y: 20 }}
@@ -189,17 +190,18 @@ export default function Photography() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.8, y: 20 }}
               transition={{ ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-6xl max-h-[85vh] flex flex-col"
+              className="max-w-6xl max-h-[90vh] md:max-h-[85vh] flex flex-col w-full"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative w-full max-h-[75vh] flex items-center justify-center">
+              <div className="relative w-full max-h-[70vh] md:max-h-[75vh] flex items-center justify-center px-2">
                 <Image
                   src={photos[selectedImage].url}
                   alt={photos[selectedImage].title}
                   width={1200}
                   height={800}
-                  className="w-full h-auto max-h-[75vh] object-contain"
-                  sizes="90vw"
+                  className="w-full h-auto max-h-[70vh] md:max-h-[75vh] object-contain"
+                  sizes="(max-width: 768px) 95vw, 90vw"
+                  priority={selectedImage === 0}
                 />
               </div>
               <motion.div

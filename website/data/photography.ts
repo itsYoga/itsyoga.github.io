@@ -19,17 +19,17 @@ export interface PhotoCollection {
 export const photoCollections: PhotoCollection[] = [
   {
     id: "keelung",
-    title: "Zhengbin Harbor",
-    description: "Colorful harbor views at Zhengbin Fishing Harbor",
+    title: "Keelung",
+    description: "Scenes from Keelung, Taiwan",
     location: "Keelung, Taiwan",
     photos: [
       {
         src: "/photography/keelung/DSCF1160.JPG",
-        alt: "Zhengbin Harbor waterfront"
+        alt: "Keelung scenery"
       },
       {
         src: "/photography/keelung/DSCF1163.JPG",
-        alt: "Zhengbin Harbor colorful buildings"
+        alt: "Keelung view"
       },
       {
         src: "/photography/keelung/DSCF1183.JPG",
@@ -37,27 +37,7 @@ export const photoCollections: PhotoCollection[] = [
       },
       {
         src: "/photography/keelung/DSCF1652.JPG",
-        alt: "Zhengbin Harbor scenic view"
-      },
-    ]
-  },
-  {
-    id: "concert",
-    title: "Concerts",
-    description: "Live music performances",
-    location: "Various locations",
-    photos: [
-      {
-        src: "/photography/concert/aimyon.jpg",
-        alt: "Aimyon concert performance"
-      },
-      {
-        src: "/photography/concert/gracie_abrams.jpg",
-        alt: "Gracie Abrams concert"
-      },
-      {
-        src: "/photography/concert/gracie_abrams2.jpg",
-        alt: "Gracie Abrams concert performance"
+        alt: "Keelung landscape"
       },
     ]
   },
@@ -120,10 +100,6 @@ export const photoCollections: PhotoCollection[] = [
     location: "Various locations",
     photos: [
       {
-        src: "/photography/me/04bd1c25-0486-4241-acee-eb4d437f71c6.jpeg",
-        alt: "Personal photo"
-      },
-      {
         src: "/photography/me/1724085988099.jpg",
         alt: "Personal moment"
       },
@@ -136,24 +112,12 @@ export const photoCollections: PhotoCollection[] = [
         alt: "Personal photo"
       },
       {
-        src: "/photography/me/1747577189638.jpg",
-        alt: "Personal moment"
-      },
-      {
         src: "/photography/me/1749613149427.jpg",
         alt: "Personal memory"
       },
       {
-        src: "/photography/me/1749805710516.jpg",
-        alt: "Personal photo"
-      },
-      {
         src: "/photography/me/DSCF0462.JPG",
         alt: "Personal photo"
-      },
-      {
-        src: "/photography/me/Screenshot_20220702-144339_Gallery.jpg",
-        alt: "Personal screenshot"
       },
     ]
   },
@@ -185,10 +149,6 @@ export const photoCollections: PhotoCollection[] = [
       },
       {
         src: "/photography/ntou/IMG_5787.jpg",
-        alt: "NTOU campus"
-      },
-      {
-        src: "/photography/ntou/received_1762153534291220.jpeg",
         alt: "NTOU campus"
       },
     ]
@@ -294,6 +254,50 @@ export const photoCollections: PhotoCollection[] = [
       {
         src: "/photography/tokyo/IMG_20230826_164637_713.webp",
         alt: "Tokyo city view"
+      },
+    ]
+  },
+  {
+    id: "volleyball",
+    title: "Volleyball",
+    description: "Volleyball matches and moments",
+    location: "Various locations",
+    photos: [
+      {
+        src: "/photography/volleyball/1747577189638.jpg",
+        alt: "Volleyball match"
+      },
+      {
+        src: "/photography/volleyball/1749805710516.jpg",
+        alt: "Volleyball action"
+      },
+      {
+        src: "/photography/volleyball/received_1762153534291220.jpeg",
+        alt: "Volleyball moment"
+      },
+    ]
+  },
+  {
+    id: "music",
+    title: "Music",
+    description: "Music-related moments and live concert performances",
+    location: "Various locations",
+    photos: [
+      {
+        src: "/photography/music/04bd1c25-0486-4241-acee-eb4d437f71c6.jpeg",
+        alt: "Music moment"
+      },
+      {
+        src: "/photography/concert/aimyon.jpg",
+        alt: "Aimyon concert performance"
+      },
+      {
+        src: "/photography/concert/gracie_abrams.jpg",
+        alt: "Gracie Abrams concert"
+      },
+      {
+        src: "/photography/concert/gracie_abrams2.jpg",
+        alt: "Gracie Abrams concert performance"
       },
     ]
   },

@@ -404,7 +404,7 @@ function ExpandedCard({
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             {project.github && (
-              <Button size="sm" variant="default" className="gap-2 rounded-full" asChild>
+              <Button size="sm" variant="default" className="gap-2 rounded-full bg-foreground text-background hover:bg-foreground/90" asChild>
                 <a href={project.github} target="_blank" rel="noopener noreferrer">
                   <Github className="w-4 h-4" /> Code
                 </a>

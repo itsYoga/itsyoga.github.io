@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Github, Linkedin, Instagram, Mail, Code, FileText, Camera, User } from "lucide-react";
+import { Github, Linkedin, Instagram, Mail } from "lucide-react";
 import Copy from "@/components/Copy";
 
 export default function Home() {
@@ -107,78 +107,6 @@ export default function Home() {
         </div>
       </motion.a>
 
-      {/* Explore / Bento Grid Section */}
-      <section className="px-4 pb-24 pt-12 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
-            <Copy animateOnScroll={false} delay={0}>
-              <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-bold tracking-tight leading-[1.1] pb-1">
-                Explore
-              </h2>
-            </Copy>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-            {[
-              { 
-                href: "/portfolio", 
-                title: "Portfolio", 
-                description: "My technical projects, coding work, and case studies.",
-                icon: "Code",
-                color: "group-hover:text-blue-500"
-              },
-              { 
-                href: "/resume", 
-                title: "Resume", 
-                description: "Professional experience, education, and skills overview.",
-                icon: "FileText",
-                color: "group-hover:text-green-500"
-              },
-              { 
-                href: "/photography", 
-                title: "Photography", 
-                description: "A collection of moments captured through my lens.",
-                icon: "Camera",
-                color: "group-hover:text-purple-500"
-              },
-              { 
-                href: "/hobbies", 
-                title: "About Me", 
-                description: "Personal interests, hobbies, and what drives me.",
-                icon: "User",
-                color: "group-hover:text-orange-500"
-              },
-            ].map((item, index) => {
-              const iconMap: Record<string, typeof Code> = {
-                Code,
-                FileText,
-                Camera,
-                User,
-              };
-              const IconComponent = iconMap[item.icon];
-              
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="group relative overflow-hidden rounded-3xl border bg-card/30 p-6 md:p-8 transition-all hover:bg-card hover:shadow-2xl hover:border-primary/20 active:bg-card active:border-primary/30"
-                >
-                  <Copy delay={index * 0.1}>
-                    <div className="flex justify-between items-start mb-4">
-                      <div className={`p-3 rounded-2xl bg-accent/50 ${item.color} transition-colors`}>
-                        <IconComponent size={28} />
-                      </div>
-                    </div>
-                    
-                    <h3 className="text-xl md:text-2xl font-bold mb-2">{item.title}</h3>
-                    <p className="text-muted-foreground text-base md:text-lg leading-relaxed">{item.description}</p>
-                  </Copy>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
     </main>
   );
 }
