@@ -100,8 +100,8 @@ export default function Resume() {
             </div>
           </div>
 
-          {/* --- Personal Info Section (Optional - can add more personal details) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* --- Personal Info Section --- */}
+          <div>
             <Card className="p-6 md:p-8 rounded-3xl border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
               <Copy delay={0.6}>
                 <h2 className="text-2xl font-bold tracking-tight mb-6">About</h2>
@@ -116,27 +116,6 @@ export default function Resume() {
                   to expand my knowledge and skills.
                 </p>
               </Copy>
-            </Card>
-
-            <Card className="p-6 md:p-8 rounded-3xl border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
-              <Copy delay={0.6}>
-                <h2 className="text-2xl font-bold tracking-tight mb-6">Contact</h2>
-              </Copy>
-              <div className="space-y-4">
-                <Copy delay={0.7}>
-                  <a 
-                    href="mailto:ch993115@gmail.com" 
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    ch993115@gmail.com
-                  </a>
-                </Copy>
-                <Copy delay={0.8}>
-                  <div className="text-muted-foreground">
-                    <span>Taiwan</span>
-                  </div>
-                </Copy>
-              </div>
             </Card>
           </div>
 
