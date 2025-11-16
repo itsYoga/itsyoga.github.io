@@ -52,7 +52,7 @@ export default function Resume() {
                 </Copy>
                 <div className="space-y-8">
                   <Copy delay={0.4}>
-                    <div className="relative pl-6 border-l-2 border-muted pb-2">
+                    <div className="relative pl-6 border-l-2 border-muted pb-6">
                       {/* Timeline Dot */}
                       <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background" />
                       
@@ -64,12 +64,25 @@ export default function Resume() {
                           Sep. 2022 – May 2026
                         </span>
                       </div>
-                      <p className="text-base font-medium text-foreground/80 mb-2">
+                      <p className="text-base font-medium text-foreground/80">
                         B.S. in Computer Science and Engineering
                       </p>
-                      <p className="text-sm text-muted-foreground">
-                        GPA: 3.6/4.0
-                      </p>
+                    </div>
+                  </Copy>
+                  
+                  <Copy delay={0.5}>
+                    <div className="relative pl-6 border-l-2 border-muted pb-2">
+                      {/* Timeline Dot */}
+                      <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background" />
+                      
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+                        <h3 className="text-xl font-semibold">
+                          Cotter High School
+                        </h3>
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary text-secondary-foreground whitespace-nowrap">
+                          Winona, MN
+                        </span>
+                      </div>
                     </div>
                   </Copy>
                 </div>
