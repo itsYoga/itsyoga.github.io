@@ -32,8 +32,8 @@ export default function Hobbies() {
       <section className="px-4 pb-20 lg:py-24">
         <div className="max-w-5xl mx-auto">
           <div className="mb-12 lg:mb-16">
-            <Copy>
-              <h1 className="text-[clamp(32px,4vw,72px)] font-bold tracking-tight leading-[1.1]">
+            <Copy animateOnScroll={false} delay={0}>
+              <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1] pb-1">
                 Hobbies & Interests
               </h1>
             </Copy>

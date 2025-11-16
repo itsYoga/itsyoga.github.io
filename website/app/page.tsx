@@ -44,24 +44,19 @@ export default function Home() {
         <div className="absolute top-1/2 w-full max-w-3xl px-4 flex flex-col items-center gap-6 pt-12 z-10">
           
           {/* Subtitle */}
-          <div className="overflow-hidden text-center space-y-2">
-            <motion.p
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 1, delay: 1.8, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[clamp(1.2rem,2vw,2rem)] font-medium text-foreground/90"
-            >
+          <motion.div
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            transition={{ duration: 1, delay: 1.8, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden text-center space-y-2"
+          >
+            <p className="text-[clamp(1.2rem,2vw,2rem)] font-medium text-foreground/90">
               Computer Science Student & AI Enthusiast
-            </motion.p>
-            <motion.p
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 1, delay: 1.9, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[clamp(1rem,1.5vw,1.5rem)] text-muted-foreground"
-            >
+            </p>
+            <p className="text-[clamp(1rem,1.5vw,1.5rem)] text-muted-foreground">
               Full-Stack Developer | Photographer
-            </motion.p>
-          </div>
+            </p>
+          </motion.div>
 
           {/* Social Links */}
           <motion.div
@@ -116,8 +111,8 @@ export default function Home() {
       <section className="px-4 pb-24 pt-12 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
-            <Copy>
-              <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-bold tracking-tight">
+            <Copy animateOnScroll={false} delay={0}>
+              <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-bold tracking-tight leading-[1.1] pb-1">
                 Explore
               </h2>
             </Copy>

@@ -60,9 +60,9 @@ export default function Copy({
             const animationProps = {
               yPercent: 0,
               opacity: 1,
-              duration: 1,
-              stagger: 0.1,
-              ease: "power4.out",
+              duration: 0.4,
+              stagger: 0.02,
+              ease: "power2.out",
               delay: delay,
             };
 
