@@ -201,7 +201,7 @@ export default function About() {
                       </span>
                     </div>
                     <p className="text-xs md:text-sm text-muted-foreground">
-                      Winona, MN
+                      Winona, MN, US
                     </p>
                   </div>
                 </Copy>
