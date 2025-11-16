@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Copy from "@/components/Copy";
 import { 
-  FileText, ExternalLink, Download, Code, Globe, Monitor, Smartphone, Brain
+  FileText, ExternalLink, Download, Code, Code2, Globe, Monitor, Smartphone, Brain
 } from "lucide-react";
 import { 
-  SiPython, SiCplusplus, SiJavascript, SiSwift, SiDart, SiPostgresql,
+  SiPython, SiCplusplus, SiJavascript, SiTypescript, SiSwift, SiDart, SiPostgresql,
   SiPytorch, SiTensorflow, SiOpencv, SiScikitlearn, SiNumpy, SiPandas,
-  SiReact, SiFlutter, SiFastapi, SiNodedotjs, SiCelery,
+  SiReact, SiNextdotjs, SiFlutter, SiFastapi, SiNodedotjs, SiCelery,
   SiGit, SiDocker, SiFirebase, SiAmazon, SiGooglecloud, SiRedis, SiLinux, SiApple, SiRos,
-  SiFigma, SiOpenai, SiGoogle
+  SiFigma, SiOpenai, SiGoogle, SiSupabase
 } from "react-icons/si";
 import { DiJava } from "react-icons/di";
 
@@ -22,7 +22,8 @@ const getSkillIcon = (name: string) => {
     "Python": SiPython,
     "Java": DiJava,
     "C++": SiCplusplus,
-    "JavaScript/TypeScript": SiJavascript,
+    "JavaScript": SiJavascript,
+    "TypeScript": SiTypescript,
     "Swift": SiSwift,
     "Dart": SiDart,
     "SQL": SiPostgresql,
@@ -36,6 +37,7 @@ const getSkillIcon = (name: string) => {
     "CreateML": Brain, // No icon available, use Brain
     // Frameworks
     "React": SiReact,
+    "Next.js": SiNextdotjs,
     "Flutter": SiFlutter,
     "FastAPI": SiFastapi,
     "Node.js": SiNodedotjs,
@@ -45,6 +47,7 @@ const getSkillIcon = (name: string) => {
     "Git": SiGit,
     "Docker": SiDocker,
     "Firebase": SiFirebase,
+    "Supabase": SiSupabase,
     "AWS": SiAmazon,
     "GCP": SiGooglecloud,
     "PostgreSQL": SiPostgresql,
@@ -55,9 +58,9 @@ const getSkillIcon = (name: string) => {
     "ROS": SiRos,
     // AI Tools
     "Figma": SiFigma,
-    "Cursor": Code, // No official icon, use Code
+    "Cursor": Code2, // AI code editor - using Code2 icon
     "Gemini": SiGoogle,
-    "Claude": SiOpenai, // Anthropic Claude - using OpenAI icon as placeholder
+    "Claude": Brain, // Anthropic Claude - using Brain icon for AI assistant
     "ChatGPT": SiOpenai,
     "GitHub Copilot": SiGit,
     // Languages
@@ -68,6 +71,50 @@ const getSkillIcon = (name: string) => {
   return iconMap[name] || Code;
 };
 
+// Helper function to get URL for each skill
+const getSkillUrl = (name: string): string | null => {
+  const urlMap: Record<string, string> = {
+    // Programming Languages
+    "Python": "https://www.python.org/",
+    "Java": "https://www.java.com/",
+    "C++": "https://isocpp.org/",
+    "JavaScript": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    "TypeScript": "https://www.typescriptlang.org/",
+    "Swift": "https://www.swift.org/",
+    "Dart": "https://dart.dev/",
+    "SQL": "https://www.postgresql.org/docs/",
+    // Frameworks
+    "React": "https://react.dev/",
+    "Next.js": "https://nextjs.org/",
+    "Flutter": "https://flutter.dev/",
+    "FastAPI": "https://fastapi.tiangolo.com/",
+    "Node.js": "https://nodejs.org/",
+    "SwiftUI": "https://developer.apple.com/xcode/swiftui/",
+    "Celery": "https://docs.celeryq.dev/",
+    // Tools
+    "Git": "https://git-scm.com/",
+    "Docker": "https://www.docker.com/",
+    "Firebase": "https://firebase.google.com/",
+    "Supabase": "https://supabase.com/",
+    "AWS": "https://aws.amazon.com/",
+    "GCP": "https://cloud.google.com/",
+    "PostgreSQL": "https://www.postgresql.org/",
+    "Redis": "https://redis.io/",
+    "Linux": "https://www.linux.org/",
+    "Windows": "https://www.microsoft.com/windows",
+    "macOS": "https://www.apple.com/macos/",
+    "ROS": "https://www.ros.org/",
+    // AI Tools
+    "Figma": "https://www.figma.com/",
+    "Cursor": "https://cursor.sh/",
+    "Gemini": "https://deepmind.google/technologies/gemini/",
+    "Claude": "https://www.anthropic.com/claude",
+    "ChatGPT": "https://chat.openai.com/",
+    "GitHub Copilot": "https://github.com/features/copilot",
+  };
+  return urlMap[name] || null;
+};
+
 // Skill categories
 const skillCategories = [
   {
@@ -76,7 +123,8 @@ const skillCategories = [
       "Python",
       "Java",
       "C++",
-      "JavaScript/TypeScript",
+      "JavaScript",
+      "TypeScript",
       "Swift",
       "Dart",
       "SQL",
@@ -98,6 +146,7 @@ const skillCategories = [
     title: "Frameworks",
     skills: [
       "React",
+      "Next.js",
       "Flutter",
       "FastAPI",
       "Node.js",
@@ -111,6 +160,7 @@ const skillCategories = [
       "Git",
       "Docker",
       "Firebase",
+      "Supabase",
       "AWS",
       "GCP",
       "PostgreSQL",
@@ -226,15 +276,36 @@ export default function About() {
                         <div className="flex flex-wrap gap-2.5">
                           {category.skills.map((skill, skillIndex) => {
                             const SkillIcon = getSkillIcon(skill);
+                            const skillUrl = getSkillUrl(skill);
+                            const content = (
+                              <>
+                                <SkillIcon className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0" />
+                                <Copy delay={0.5 + (categoryIndex * 0.1) + (skillIndex * 0.02)}>
+                                  <span className="text-foreground/90 whitespace-nowrap">{skill}</span>
+                                </Copy>
+                              </>
+                            );
+                            
+                            if (skillUrl) {
+                              return (
+                                <a
+                                  key={skill}
+                                  href={skillUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-2 px-3 py-2 bg-background border rounded-lg text-sm font-medium hover:border-primary hover:text-primary hover:bg-accent/30 cursor-pointer transition-all duration-300 group"
+                                >
+                                  {content}
+                                </a>
+                              );
+                            }
+                            
                             return (
                               <div 
                                 key={skill}
                                 className="inline-flex items-center gap-2 px-3 py-2 bg-background border rounded-lg text-sm font-medium hover:border-primary hover:text-primary hover:bg-accent/30 cursor-default transition-all duration-300 group"
                               >
-                                <SkillIcon className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0" />
-                                <Copy delay={0.5 + (categoryIndex * 0.1) + (skillIndex * 0.02)}>
-                                  <span className="text-foreground/90 whitespace-nowrap">{skill}</span>
-                                </Copy>
+                                {content}
                               </div>
                             );
                           })}
