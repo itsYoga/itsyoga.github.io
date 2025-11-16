@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Copy from "@/components/Copy";
-import { Github, ExternalLink, Code2, X } from "lucide-react";
+import { Github, ExternalLink, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Updated Data Structure with video placeholders
@@ -16,7 +16,7 @@ const projects = [
     tech: ["Python", "OpenCV", "PyTorch", "YOLO"],
     github: "https://github.com/itsYoga/volleyball-line-judging",
     demo: null,
-    video: "/videos/volleyball-demo.mp4",
+    video: "/videos/volleyball-demo.mov",
     color: "from-orange-500/20 to-red-500/20",
   },
   {
@@ -51,6 +51,17 @@ const projects = [
     demo: null,
     video: "/videos/syncup-demo.mp4",
     color: "from-purple-500/20 to-pink-500/20",
+  },
+  {
+    id: "ghote",
+    title: "Ghote",
+    shortDesc: "AI-powered learning assistant with knowledge extraction.",
+    detailedDescription: "An AI-powered learning assistant that extracts key knowledge from your materials, organizes it, and helps you master it via active recall. Features AI knowledge extraction from PDFs/DOCX/notes generating summaries, MCQs, Q&A, and flashcards. Includes project-based organization, fast search with filters, spaced-repetition flashcards, Firebase authentication, and a modern dark theme with glass morphism design.",
+    tech: ["Flutter", "Firebase", "Dart", "AI/ML", "Google Sign-In"],
+    github: "https://github.com/ghote-app/ghote",
+    demo: null,
+    video: "/videos/ghote-demo.mp4",
+    color: "from-green-500/20 to-emerald-500/20",
   },
 ];
 
@@ -152,9 +163,6 @@ function CompactCard({ project }: { project: typeof projects[0] }) {
       <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-30`} />
       
       <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-20">
-        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-3 md:mb-4 backdrop-blur-sm">
-          <Code2 className="w-4 h-4 md:w-5 md:h-5" />
-        </div>
         <motion.h3 
           layoutId={`title-${project.id}`}
           className="text-2xl md:text-3xl font-bold leading-tight tracking-tight mb-2"
@@ -227,7 +235,7 @@ function ExpandedCard({
           preload="none"
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src={project.video} type="video/mp4" />
+          <source src={project.video} type={project.video.endsWith('.mov') ? 'video/quicktime' : 'video/mp4'} />
         </video>
         
         {/* Fallback Gradient if video fails */}
@@ -239,10 +247,6 @@ function ExpandedCard({
 
       {/* Bottom Half: Content */}
       <div className="flex-1 p-6 md:p-8 flex flex-col justify-start relative bg-card overflow-y-auto">
-        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 backdrop-blur-sm">
-          <Code2 className="w-5 h-5" />
-        </div>
-        
         <motion.h3 
           layoutId={`title-${project.id}`}
           className="text-2xl md:text-4xl font-bold mb-2"
