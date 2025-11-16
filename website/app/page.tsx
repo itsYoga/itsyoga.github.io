@@ -1,9 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Github, Linkedin, Instagram, ArrowUpRight, Camera, Code, User, FileText } from "lucide-react";
+import { Github, Linkedin, Instagram, Mail, Code, FileText, Camera, User } from "lucide-react";
 import Copy from "@/components/Copy";
 
 export default function Home() {
@@ -64,26 +63,11 @@ export default function Home() {
             </motion.p>
           </div>
 
-          {/* Action Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2.1 }}
-            className="flex flex-wrap justify-center gap-4 pt-4"
-          >
-            <Button asChild size="lg" className="h-11 px-8 text-base rounded-full shadow-lg transition-all hover:scale-105">
-              <Link href="/resume">View Resume</Link>
-            </Button>
-            <Button asChild variant="secondary" size="lg" className="h-11 px-8 text-base rounded-full border bg-background/50 backdrop-blur-sm hover:bg-accent/50 transition-all hover:scale-105">
-              <a href="mailto:ch993115@gmail.com">Contact Me</a>
-            </Button>
-          </motion.div>
-
           {/* Social Links */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 2.3 }}
+            transition={{ duration: 0.8, delay: 2.1 }}
             className="flex justify-center gap-6 pt-4"
           >
             {[
@@ -105,6 +89,29 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Fixed Contact Button - Inspired by jazminwong */}
+      <motion.a
+        href="mailto:ch993115@gmail.com"
+        initial={{ y: 200, scale: 0.8 }}
+        animate={{ y: 0, scale: 1 }}
+        transition={{
+          duration: 1,
+          delay: 2.5,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className="fixed bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 pl-1 py-1 pr-6 rounded-full bg-accent shadow-2xl cursor-pointer group z-50 transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
+      >
+        <div className="h-14 w-14 relative rounded-full bg-background flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <Mail className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
+        </div>
+        <div className="overflow-hidden h-8">
+          <div className="flex flex-col transition-transform duration-300 ease-[cubic-bezier(0.64,0.57,0.67,1.53)] group-hover:-translate-y-1/2">
+            <span className="text-xl font-semibold">Contact</span>
+            <span className="text-xl font-semibold">Contact</span>
+          </div>
+        </div>
+      </motion.a>
+
       {/* Explore / Bento Grid Section */}
       <section className="px-4 pb-24 pt-12 relative z-10">
         <div className="max-w-6xl mx-auto">
@@ -122,49 +129,58 @@ export default function Home() {
                 href: "/portfolio", 
                 title: "Portfolio", 
                 description: "My technical projects, coding work, and case studies.",
-                icon: Code,
+                icon: "Code",
                 color: "group-hover:text-blue-500"
               },
               { 
                 href: "/resume", 
                 title: "Resume", 
                 description: "Professional experience, education, and skills overview.",
-                icon: FileText,
+                icon: "FileText",
                 color: "group-hover:text-green-500"
               },
               { 
                 href: "/photography", 
                 title: "Photography", 
                 description: "A collection of moments captured through my lens.",
-                icon: Camera,
+                icon: "Camera",
                 color: "group-hover:text-purple-500"
               },
               { 
                 href: "/hobbies", 
                 title: "About Me", 
                 description: "Personal interests, hobbies, and what drives me.",
-                icon: User,
+                icon: "User",
                 color: "group-hover:text-orange-500"
               },
-            ].map((item, index) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="group relative overflow-hidden rounded-3xl border bg-card/30 p-8 transition-all hover:bg-card hover:shadow-2xl hover:border-primary/20"
-              >
-                <Copy delay={index * 0.1}>
-                  <div className="flex justify-between items-start mb-4">
-                    <div className={`p-3 rounded-2xl bg-accent/50 ${item.color} transition-colors`}>
-                      <item.icon size={28} />
+            ].map((item, index) => {
+              const iconMap: Record<string, typeof Code> = {
+                Code,
+                FileText,
+                Camera,
+                User,
+              };
+              const IconComponent = iconMap[item.icon];
+              
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="group relative overflow-hidden rounded-3xl border bg-card/30 p-8 transition-all hover:bg-card hover:shadow-2xl hover:border-primary/20"
+                >
+                  <Copy delay={index * 0.1}>
+                    <div className="flex justify-between items-start mb-4">
+                      <div className={`p-3 rounded-2xl bg-accent/50 ${item.color} transition-colors`}>
+                        <IconComponent size={28} />
+                      </div>
                     </div>
-                    <ArrowUpRight className="opacity-0 -translate-y-2 translate-x-2 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300 text-muted-foreground" />
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground text-lg leading-relaxed">{item.description}</p>
-                </Copy>
-              </Link>
-            ))}
+                    
+                    <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
+                    <p className="text-muted-foreground text-lg leading-relaxed">{item.description}</p>
+                  </Copy>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
