@@ -10,10 +10,10 @@ import { motion, AnimatePresence } from "framer-motion";
 const projects = [
   {
     id: "volleyball",
-    title: "Volleyball Line Judging",
-    shortDesc: "Automated officiating with Computer Vision.",
-    detailedDescription: "A high-precision system using YOLOv8 and OpenCV to detect ball impact points in real-time. It calculates trajectory to determine IN/OUT calls with 95% accuracy.",
-    tech: ["Python", "OpenCV", "PyTorch", "YOLO"],
+    title: "Volleyball Match Analysis System",
+    shortDesc: "AI-powered volleyball match analysis with ball tracking and action recognition.",
+    detailedDescription: "A comprehensive deep learning system for volleyball match analysis that integrates multiple AI models. Features ball tracking using VballNet (U-Net architecture) to track ball trajectory and landing points, action recognition with YOLOv11m to identify five key actions (serve, spike, block, receive, set), and player tracking using YOLOv8 combined with Norfair for multi-object tracking. Includes a full-stack web application with React frontend and FastAPI backend, supporting video upload, analysis processing, interactive playback, and data visualization.",
+    tech: ["Python", "PyTorch", "YOLOv11", "YOLOv8", "React", "FastAPI", "OpenCV", "Norfair"],
     github: "https://github.com/itsYoga/volleyball-line-judging",
     demo: null,
     video: "/videos/volleyball-demo.mov",
@@ -194,17 +194,42 @@ function ExpandedCard({
   onClose?: () => void;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoLoading, setIsVideoLoading] = useState(true);
+  const [hasVideoError, setHasVideoError] = useState(false);
 
   // Auto-play video when card expands
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch((e) => console.log("Video autoplay blocked", e));
-      videoRef.current.currentTime = 0;
-    }
-    
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleCanPlay = () => {
+      setIsVideoLoading(false);
+      video.play().catch((e) => console.log("Video autoplay blocked", e));
+      video.currentTime = 0;
+    };
+
+    const handleError = () => {
+      setIsVideoLoading(false);
+      setHasVideoError(true);
+    };
+
+    const handleLoadStart = () => {
+      setIsVideoLoading(true);
+    };
+
+    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('error', handleError);
+    video.addEventListener('loadstart', handleLoadStart);
+
+    // Start loading video
+    video.load();
+
     return () => {
-      if (videoRef.current) {
-        videoRef.current.pause();
+      video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('error', handleError);
+      video.removeEventListener('loadstart', handleLoadStart);
+      if (video) {
+        video.pause();
       }
     };
   }, []);
@@ -232,14 +257,26 @@ function ExpandedCard({
           loop
           muted
           playsInline
-          preload="none"
+          preload="metadata"
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src={project.video} type={project.video.endsWith('.mov') ? 'video/quicktime' : 'video/mp4'} />
         </video>
         
+        {/* Loading indicator */}
+        {isVideoLoading && !hasVideoError && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+              <p className="text-sm text-muted-foreground">Loading video...</p>
+            </div>
+          </div>
+        )}
+        
         {/* Fallback Gradient if video fails */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-50`} />
+        {hasVideoError && (
+          <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-50`} />
+        )}
         
         {/* Gradient Overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
