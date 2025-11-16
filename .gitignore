@@ -6,10 +6,13 @@
 *.fls
 *.synctex.gz
 
-# PDF files - allow only in website/public/ and resume/
+# PDF files - allow only in website/public/
 *.pdf
 !website/public/*.pdf
-!resume/*.pdf
+
+# Local folders (not tracked)
+photography/
+resume/
 
 # Dependencies
 node_modules/

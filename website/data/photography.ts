@@ -18,14 +18,14 @@ export interface PhotoCollection {
 
 export const photoCollections: PhotoCollection[] = [
   {
-    id: "ntou",
-    title: "NTOU",
-    description: "Photos from National Taiwan Ocean University",
+    id: "keelung",
+    title: "Zhengbin Harbor",
+    description: "Colorful harbor views at Zhengbin Fishing Harbor",
     location: "Keelung, Taiwan",
     photos: [
       {
-        src: "/photography/ntou/DSCF1183.JPG",
-        alt: "NTOU campus photo"
+        src: "/photography/keelung/DSCF1183.JPG",
+        alt: "Zhengbin Harbor waterfront with colorful buildings and fishing boats"
       },
     ]
   },
