@@ -44,7 +44,7 @@ export default function Resume() {
                 </Copy>
                 <div className="space-y-8">
                   <Copy delay={0.4}>
-                    <div className="relative pl-8 border-l-2 border-primary/30 pb-6">
+                    <div className="pb-6">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
                         <h3 className="text-xl font-semibold">
                           National Taiwan Ocean University
@@ -60,7 +60,7 @@ export default function Resume() {
                   </Copy>
                   
                   <Copy delay={0.5}>
-                    <div className="relative pl-8 border-l-2 border-primary/30 pb-2">
+                    <div className="pb-2">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
                         <h3 className="text-xl font-semibold">
                           Cotter High School
