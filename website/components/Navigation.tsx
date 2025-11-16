@@ -23,7 +23,7 @@ export default function Navigation() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-xl font-bold">
+          <Link href="/" className="text-[clamp(20px,2vw,28px)] font-bold">
             YuJia
           </Link>
           
@@ -36,7 +36,7 @@ export default function Navigation() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "relative px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+                    "relative px-4 py-2 rounded-xl text-[clamp(14px,1.2vw,16px)] font-semibold transition-colors",
                     isActive
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
@@ -88,7 +88,7 @@ export default function Navigation() {
                       href={item.href}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={cn(
-                        "block px-4 py-3 rounded-lg text-sm font-medium transition-colors",
+                        "block px-4 py-3 rounded-xl text-[clamp(16px,1.2vw,18px)] font-semibold transition-colors",
                         isActive
                           ? "text-foreground bg-accent"
                           : "text-muted-foreground hover:text-foreground hover:bg-accent/50"

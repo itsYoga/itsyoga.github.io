@@ -38,39 +38,47 @@ const projects = [
 
 export default function Portfolio() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-      <section className="container mx-auto px-4 py-20">
+    <main>
+      <section className="px-4 pb-20 lg:py-24">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-6xl mx-auto"
         >
-          <div className="mb-12">
-            <h1 className="text-4xl font-bold">Portfolio</h1>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="mb-12 lg:mb-16"
+          >
+            <h1 className="text-[clamp(32px,4vw,72px)] font-bold tracking-tight leading-[1.1]">
+              Portfolio
+            </h1>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, index) => (
               <motion.div
                 key={project.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1, ease: [0.64, 0.57, 0.67, 1.53] }}
                 className={project.span}
               >
-                <Card className="h-full p-6 hover:shadow-lg transition-shadow group">
-                  <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                <Card className="h-full p-6 lg:p-8 rounded-2xl hover:shadow-xl transition-all group bg-card border-2 border-transparent hover:border-primary/30">
+                  <h3 className="text-[clamp(20px,2vw,32px)] font-bold mb-3 group-hover:text-primary transition-colors leading-tight">
                     {project.title}
                   </h3>
-                  <p className="text-muted-foreground mb-4 text-sm">
+                  <p className="text-[clamp(14px,1.2vw,18px)] text-muted-foreground mb-6 leading-relaxed">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.split(" • ").map((tech) => (
                       <span
                         key={tech}
-                        className="text-xs px-2 py-1 bg-muted rounded-md"
+                        className="text-[clamp(12px,1vw,14px)] px-3 py-1.5 bg-accent rounded-lg font-semibold"
                       >
                         {tech}
                       </span>
@@ -82,6 +90,6 @@ export default function Portfolio() {
           </div>
         </motion.div>
       </section>
-    </div>
+    </main>
   );
 }

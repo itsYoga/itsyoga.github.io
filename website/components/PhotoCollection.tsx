@@ -22,16 +22,16 @@ export default function PhotoCollectionComponent({ collection, index }: PhotoCol
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="mb-16"
     >
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-2">{collection.title}</h2>
+      <Card className="mb-8 p-6 lg:p-8 rounded-2xl bg-card border-2">
+        <h2 className="text-[clamp(24px,3vw,48px)] font-bold mb-3 tracking-tight">{collection.title}</h2>
         {collection.description && (
-          <p className="text-muted-foreground mb-2">{collection.description}</p>
+          <p className="text-[clamp(16px,1.2vw,20px)] text-muted-foreground mb-4 leading-relaxed">{collection.description}</p>
         )}
-        <div className="flex gap-4 text-sm text-muted-foreground">
-          {collection.date && <span>Date: {collection.date}</span>}
-          {collection.location && <span>Location: {collection.location}</span>}
+        <div className="flex flex-wrap gap-4 text-[clamp(14px,1vw,16px)] text-muted-foreground">
+          {collection.date && <span>{collection.date}</span>}
+          {collection.location && <span>• {collection.location}</span>}
         </div>
-      </div>
+      </Card>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {collection.photos.map((photo, photoIndex) => (
@@ -41,19 +41,17 @@ export default function PhotoCollectionComponent({ collection, index }: PhotoCol
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.3, delay: photoIndex * 0.05 }}
-            className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group"
+            className="relative aspect-square overflow-hidden rounded-xl cursor-pointer group bg-card border-2 border-transparent hover:border-primary/30 hover:shadow-xl transition-all"
             onClick={() => setSelectedPhoto(photo.src)}
           >
-            <Card className="h-full p-0 overflow-hidden hover:shadow-lg transition-shadow">
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
-            </Card>
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
           </motion.div>
         ))}
       </div>

@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-xs: 480px;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    @apply box-border;
+  }
+
+  * {
+    @apply m-0 p-0 box-border;
+  }
+
+  html {
+    @apply font-sans;
+  }
+
+  ::-webkit-scrollbar {
+    @apply hidden;
+  }
+}
+
+#card-0 .card-inner {
+  @apply bg-[#ffbed6] text-[#4B0018];
+}
+
+#card-1 .card-inner {
+  @apply bg-[#BAD6DA] text-[#1A4A4A];
+}
+
+#card-2 .card-inner {
+  @apply bg-[#A5C572] text-[#3D7337];
+}
+
+#card-3 .card-inner {
+  @apply bg-[#F4E89B] text-[#EF4A74];
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.blink-animation {
+  animation: blink 1s infinite;
+}
