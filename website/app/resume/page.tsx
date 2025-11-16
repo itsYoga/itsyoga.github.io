@@ -72,6 +72,9 @@ export default function Resume() {
                           Sep. 2019 – May 2021
                         </span>
                       </div>
+                      <p className="text-sm text-muted-foreground">
+                        Winona, MN
+                      </p>
                     </div>
                   </Copy>
                 </div>
