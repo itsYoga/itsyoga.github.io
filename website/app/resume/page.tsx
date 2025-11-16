@@ -44,7 +44,7 @@ export default function Resume() {
                 </Copy>
                 <div className="space-y-8">
                   <Copy delay={0.4}>
-                    <div className="relative pl-6 border-l-2 border-muted pb-6">
+                    <div className="relative pl-8 border-l-2 border-muted pb-6">
                       {/* Timeline Dot */}
                       <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background" />
                       
@@ -63,7 +63,7 @@ export default function Resume() {
                   </Copy>
                   
                   <Copy delay={0.5}>
-                    <div className="relative pl-6 border-l-2 border-muted pb-2">
+                    <div className="relative pl-8 border-l-2 border-muted pb-2">
                       {/* Timeline Dot */}
                       <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background" />
                       
