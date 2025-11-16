@@ -53,8 +53,11 @@ export default function Resume() {
                           Sep. 2022 – May 2026
                         </span>
                       </div>
-                      <p className="text-base font-medium text-foreground/80">
+                      <p className="text-base font-medium text-foreground/80 mb-1">
                         B.S. in Computer Science and Engineering
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Keelung, Taiwan
                       </p>
                     </div>
                   </Copy>
@@ -66,7 +69,7 @@ export default function Resume() {
                           Cotter High School
                         </h3>
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary text-secondary-foreground whitespace-nowrap">
-                          Winona, MN
+                          Sep. 2019 – May 2021
                         </span>
                       </div>
                     </div>
