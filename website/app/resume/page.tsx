@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Copy from "@/components/Copy";
-import { Download, FileText, ExternalLink } from "lucide-react";
+import { FileText, ExternalLink } from "lucide-react";
 
 const skills = [
   "Python", "JavaScript", "TypeScript", "React", "Next.js",
@@ -18,7 +18,7 @@ export default function Resume() {
         <div className="max-w-6xl mx-auto space-y-8">
           
           {/* --- Header Section --- */}
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-4 border-b">
+          <div className="pb-4 border-b">
             <div className="space-y-2">
               <Copy>
                 <h1 className="text-4xl md:text-6xl font-bold tracking-tighter">
@@ -31,14 +31,6 @@ export default function Resume() {
                 </p>
               </Copy>
             </div>
-            <Copy delay={0.2}>
-              <Button asChild size="lg" className="rounded-full gap-2 shadow-lg hover:shadow-xl transition-all">
-                <a href="/YuJia_resume.pdf" download>
-                  <Download className="w-4 h-4" />
-                  Download Resume
-                </a>
-              </Button>
-            </Copy>
           </div>
 
           {/* --- Content Grid --- */}
