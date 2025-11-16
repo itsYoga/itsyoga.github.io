@@ -195,8 +195,8 @@ function CompactCard({ project }: { project: typeof projects[0] }) {
     video.addEventListener('loadeddata', handleLoadedData);
     video.addEventListener('seeked', handleSeeked);
     
-    // Start loading video
-    video.preload = 'metadata';
+    // Preload entire video for smooth playback on hover
+    video.preload = 'auto';
     video.muted = true;
     video.load();
 
@@ -271,58 +271,40 @@ function ExpandedCard({
   onClose?: () => void;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isVideoLoading, setIsVideoLoading] = useState(true);
   const [hasVideoError, setHasVideoError] = useState(false);
+  const hasPlayedRef = useRef(false);
 
-  // Auto-play video when card expands with preloading
+  // Auto-play video when card expands - video should already be preloaded from CompactCard
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Preload video for smooth playback
-    video.preload = 'auto';
-    video.load();
-
-    const handleCanPlayThrough = () => {
-      setIsVideoLoading(false);
-      // Video is ready, start playing smoothly
-      video.currentTime = 0;
-      video.play().catch((e) => console.log("Video autoplay blocked", e));
-    };
-
-    const handleCanPlay = () => {
-      // Video can start playing, but may still buffer
-      if (video.readyState >= 3) { // HAVE_FUTURE_DATA
-        setIsVideoLoading(false);
-        video.currentTime = 0;
-        video.play().catch((e) => console.log("Video autoplay blocked", e));
-      }
-    };
-
     const handleError = () => {
-      setIsVideoLoading(false);
       setHasVideoError(true);
     };
 
-    const handleLoadedData = () => {
-      // Video metadata loaded, start buffering
-      video.currentTime = 0;
-    };
-
-    video.addEventListener('canplaythrough', handleCanPlayThrough);
-    video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('error', handleError);
-    video.addEventListener('loadeddata', handleLoadedData);
+    
+    // Video is preloaded in CompactCard, so it should be ready quickly
+    // The onCanPlay handler on the video element will handle playback
+    // This useEffect just ensures video starts loading if needed
+    if (video.readyState >= 3) {
+      // Video already has enough data, play immediately
+      video.currentTime = 0;
+      video.play().catch(() => {});
+      hasPlayedRef.current = true;
+    } else {
+      // Start loading
+      video.load();
+    }
 
     return () => {
-      video.removeEventListener('canplaythrough', handleCanPlayThrough);
-      video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('error', handleError);
-      video.removeEventListener('loadeddata', handleLoadedData);
       if (video) {
         video.pause();
         video.currentTime = 0;
       }
+      hasPlayedRef.current = false;
     };
   }, []);
 
@@ -351,19 +333,18 @@ function ExpandedCard({
           playsInline
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
+          onCanPlay={() => {
+            // Video is ready to play, start immediately if not already playing
+            const video = videoRef.current;
+            if (video && !hasPlayedRef.current && video.paused) {
+              video.currentTime = 0;
+              video.play().catch(() => {});
+              hasPlayedRef.current = true;
+            }
+          }}
         >
           <source src={project.video} type={project.video.endsWith('.mov') ? 'video/quicktime' : 'video/mp4'} />
         </video>
-        
-        {/* Loading indicator */}
-        {isVideoLoading && !hasVideoError && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-              <p className="text-sm text-muted-foreground">Loading video...</p>
-            </div>
-          </div>
-        )}
         
         {/* Fallback Gradient if video fails */}
         {hasVideoError && (
