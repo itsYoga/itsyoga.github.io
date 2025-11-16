@@ -42,7 +42,7 @@ export default function Hobbies() {
           <div className="space-y-6">
             {hobbies.map((hobby, index) => (
               <div key={hobby.title}>
-                <Card className="p-8 lg:p-10 rounded-2xl hover:shadow-xl transition-all group bg-card border-2 border-transparent hover:border-primary/30">
+                <Card className="p-6 md:p-8 lg:p-10 rounded-2xl hover:shadow-xl transition-all group bg-card border-2 border-transparent hover:border-primary/30 active:border-primary/50">
                   <div>
                     <Copy delay={index * 0.1}>
                       <h3 className="text-[clamp(24px,2.5vw,40px)] font-bold mb-4 group-hover:text-primary transition-colors">
@@ -61,7 +61,7 @@ export default function Hobbies() {
           </div>
 
           <div className="mt-12">
-            <Card className="p-8 lg:p-12 text-center rounded-2xl bg-card border-2">
+            <Card className="p-6 md:p-8 lg:p-12 text-center rounded-2xl bg-card border-2">
               <Copy>
                 <p className="text-[clamp(18px,1.6vw,24px)] text-muted-foreground mb-4 leading-relaxed">
                   When I'm not coding or behind a camera, you'll find me exploring new technologies, 

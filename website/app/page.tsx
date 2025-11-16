@@ -161,7 +161,7 @@ export default function Home() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="group relative overflow-hidden rounded-3xl border bg-card/30 p-8 transition-all hover:bg-card hover:shadow-2xl hover:border-primary/20"
+                  className="group relative overflow-hidden rounded-3xl border bg-card/30 p-6 md:p-8 transition-all hover:bg-card hover:shadow-2xl hover:border-primary/20 active:bg-card active:border-primary/30"
                 >
                   <Copy delay={index * 0.1}>
                     <div className="flex justify-between items-start mb-4">
@@ -170,8 +170,8 @@ export default function Home() {
                       </div>
                     </div>
                     
-                    <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
-                    <p className="text-muted-foreground text-lg leading-relaxed">{item.description}</p>
+                    <h3 className="text-xl md:text-2xl font-bold mb-2">{item.title}</h3>
+                    <p className="text-muted-foreground text-base md:text-lg leading-relaxed">{item.description}</p>
                   </Copy>
                 </Link>
               );

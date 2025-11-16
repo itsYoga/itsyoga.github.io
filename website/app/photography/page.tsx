@@ -69,7 +69,7 @@ export default function Photography() {
                   }}
                   onHoverStart={() => setHoveredIndex(index)}
                   onHoverEnd={() => setHoveredIndex(null)}
-                  className="break-inside-avoid mb-4 relative group cursor-pointer overflow-hidden rounded-xl bg-card border-2 border-transparent hover:border-primary/30 transition-all"
+                    className="break-inside-avoid mb-4 relative group cursor-pointer overflow-hidden rounded-xl bg-card border-2 border-transparent hover:border-primary/30 active:border-primary/50 transition-all"
                   onClick={() => setSelectedImage(index)}
                   style={{ willChange: 'transform' }}
                 >
@@ -90,7 +90,7 @@ export default function Photography() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6"
+                    className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-4 md:p-6"
                   >
                     <motion.div
                       initial={{ y: 20 }}
@@ -98,8 +98,8 @@ export default function Photography() {
                       transition={{ duration: 0.3 }}
                       className="transform"
                     >
-                      <h3 className="text-white mb-1 text-lg font-semibold">{photo.title}</h3>
-                      <p className="text-sm text-gray-300 mb-1">{photo.category}</p>
+                      <h3 className="text-white mb-1 text-base md:text-lg font-semibold">{photo.title}</h3>
+                      <p className="text-xs md:text-sm text-gray-300 mb-1">{photo.category}</p>
                       {photo.location && (
                         <p className="text-xs text-gray-400">{photo.location}</p>
                       )}
@@ -147,7 +147,7 @@ export default function Photography() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               whileHover={{ scale: 1.1 }}
-              className="absolute top-6 right-6 p-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-colors z-50 rounded-xl"
+              className="absolute top-4 right-4 md:top-6 md:right-6 p-2 md:p-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 active:bg-white/30 transition-colors z-50 rounded-xl touch-manipulation"
               onClick={(e) => {
                 e.stopPropagation();
                 setSelectedImage(null);
@@ -160,7 +160,7 @@ export default function Photography() {
             {photos.length > 1 && (
               <>
                 <button
-                  className="absolute left-6 top-1/2 -translate-y-1/2 p-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-colors rounded-xl"
+                  className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 active:bg-white/30 transition-colors rounded-xl touch-manipulation"
                   onClick={(e) => {
                     e.stopPropagation();
                     setSelectedImage((prev) =>
@@ -171,7 +171,7 @@ export default function Photography() {
                   <ChevronLeft size={24} />
                 </button>
                 <button
-                  className="absolute right-6 top-1/2 -translate-y-1/2 p-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-colors rounded-xl"
+                  className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 active:bg-white/30 transition-colors rounded-xl touch-manipulation"
                   onClick={(e) => {
                     e.stopPropagation();
                     setSelectedImage((prev) =>
@@ -206,10 +206,10 @@ export default function Photography() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="mt-6 text-center bg-black/50 backdrop-blur-sm p-6 border border-white/10 rounded-xl"
+                className="mt-4 md:mt-6 text-center bg-black/50 backdrop-blur-sm p-4 md:p-6 border border-white/10 rounded-xl"
               >
-                <h3 className="text-white mb-2 text-xl font-semibold">{photos[selectedImage].title}</h3>
-                <p className="text-gray-300 text-sm mb-1">
+                <h3 className="text-white mb-2 text-lg md:text-xl font-semibold">{photos[selectedImage].title}</h3>
+                <p className="text-gray-300 text-xs md:text-sm mb-1">
                   {photos[selectedImage].category}
                 </p>
                 {photos[selectedImage].location && (
