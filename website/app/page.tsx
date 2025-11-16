@@ -28,12 +28,12 @@ export default function Home() {
           }}
           className="absolute z-20 flex items-center justify-center origin-center"
         >
-          <div className="overflow-hidden">
+          <div className="overflow-visible">
             <motion.h1
               initial={{ y: 200 }}
               animate={{ y: 0 }}
               transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[clamp(3.5rem,12vw,11rem)] font-bold tracking-tighter leading-none text-center whitespace-nowrap"
+              className="text-[clamp(3.5rem,12vw,11rem)] font-bold tracking-tighter leading-[1.1] text-center whitespace-nowrap pb-1"
             >
               YuJia Liang
             </motion.h1>
