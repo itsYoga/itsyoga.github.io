@@ -68,36 +68,31 @@ export default function Home() {
 
           {/* Subtitle Section */}
           <div className="overflow-hidden absolute left-4 right-4 top-[72vh] sm:top-[70vh] md:top-[12.5vw]">
-            <div className="flex flex-col gap-0.5 md:gap-0 md:flex-row justify-between items-center relative">
-              <div className="overflow-hidden">
-                <motion.p
-                  initial={{ y: 120 }}
-                  animate={{ y: 0 }}
-                  transition={{
-                    duration: 1.5,
-                    delay: 1.9,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="text-[clamp(20px,1.6vw,32px)] font-semibold leading-[1.2] text-center md:text-left"
-                >
-                  Computer Science Student & AI Enthusiast
-                </motion.p>
-              </div>
-
-              <div className="overflow-hidden">
-                <motion.p
-                  initial={{ y: 120 }}
-                  animate={{ y: 0 }}
-                  transition={{
-                    duration: 1.5,
-                    delay: 1.9,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="text-[clamp(20px,1.6vw,32px)] font-normal leading-[1.2] text-center md:text-left"
-                >
-                  Full-Stack Developer | Photographer
-                </motion.p>
-              </div>
+            <div className="flex flex-col items-center justify-center gap-2">
+              <motion.p
+                initial={{ y: 120 }}
+                animate={{ y: 0 }}
+                transition={{
+                  duration: 1.5,
+                  delay: 1.9,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="text-[clamp(20px,1.6vw,32px)] font-semibold leading-[1.2] text-center"
+              >
+                Computer Science Student & AI Enthusiast
+              </motion.p>
+              <motion.p
+                initial={{ y: 120 }}
+                animate={{ y: 0 }}
+                transition={{
+                  duration: 1.5,
+                  delay: 2.0,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="text-[clamp(20px,1.6vw,32px)] font-normal leading-[1.2] text-center"
+              >
+                Full-Stack Developer | Photographer
+              </motion.p>
             </div>
           </div>
         </div>
