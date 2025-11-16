@@ -159,6 +159,14 @@ export default function Resume() {
 
           {/* --- Resume Preview Section --- */}
           <div>
+            <Copy delay={0.8}>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 bg-primary/10 rounded-xl text-primary">
+                  <FileText className="w-6 h-6" />
+                </div>
+                <h2 className="text-2xl font-bold tracking-tight">Resume Preview</h2>
+              </div>
+            </Copy>
             <Card className="overflow-hidden rounded-3xl border bg-card shadow-sm">
               <div className="border-b bg-muted/50 p-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -177,15 +185,14 @@ export default function Resume() {
                 </Button>
               </div>
               
-              <Copy delay={0.8}>
-                <div className="bg-muted/20 aspect-[8.5/11] w-full relative">
-                  <iframe
-                    src="/YuJia_resume.pdf"
-                    className="w-full h-full absolute inset-0"
-                    title="Resume Preview"
-                  />
-                </div>
-              </Copy>
+              <div className="bg-muted/20 w-full" style={{ minHeight: '600px', height: '80vh', maxHeight: '900px' }}>
+                <iframe
+                  src="/YuJia_resume.pdf#toolbar=0"
+                  className="w-full h-full"
+                  style={{ minHeight: '600px' }}
+                  title="Resume Preview"
+                />
+              </div>
             </Card>
           </div>
         </div>
