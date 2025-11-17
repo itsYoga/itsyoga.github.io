@@ -87,7 +87,7 @@ export default function Home() {
       </section>
 
       {/* Modern Tech Stack Section */}
-      <section className="px-4">
+      <section className="px-4 -mt-16 lg:-mt-24">
         <ModernTechStack />
       </section>
 

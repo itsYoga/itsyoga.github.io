@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { startViewTransition } from "@/lib/view-transitions";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -22,22 +21,17 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLinkClick = (href: string, e: React.MouseEvent) => {
-    // Only prevent default and use transition if not already on this page
     if (pathname === href) {
+      // If already on the same page, scroll to top for Home
+      if (href === "/") {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
       return;
     }
     
     e.preventDefault();
-    
-    // Use View Transitions API if available
-    if (typeof document !== 'undefined' && 'startViewTransition' in document) {
-      (document as any).startViewTransition(() => {
-        router.push(href);
-      });
-    } else {
-      // Fallback for browsers without support
-      router.push(href);
-    }
+    router.push(href);
   };
 
   return (

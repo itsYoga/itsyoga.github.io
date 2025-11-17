@@ -9,7 +9,7 @@ import ScrollText from "./ScrollText";
  */
 export default function ModernTechStack() {
   return (
-    <ScrollText className="flex flex-col justify-center items-center h-[500px] lg:h-[800px] py-24">
+    <ScrollText className="flex flex-col justify-center items-center h-[500px] lg:h-[800px] py-8 lg:py-16">
       <ul className="flex flex-col justify-center items-center">
         {/* MODERN */}
         <li className="text-[clamp(48px,14vw,250px)] font-bold tracking-tight leading-[0.85] overflow-hidden flex">
