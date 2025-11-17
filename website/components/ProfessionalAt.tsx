@@ -1,0 +1,159 @@
+"use client";
+
+import MouseFollow from "./MouseFollow";
+import Copy from "./Copy";
+import Link from "next/link";
+import { 
+  SiReact, SiNextdotjs, SiTypescript, SiPython, SiPytorch, 
+  SiTailwindcss, SiSupabase, SiFigma, SiFramer, SiFlutter,
+  SiFirebase, SiDocker
+} from "react-icons/si";
+
+// Tech stack items with their icons and links
+const techStack = [
+  // First row (3 items)
+  {
+    name: "React",
+    href: "https://react.dev/",
+    Icon: SiReact,
+    size: 90,
+  },
+  {
+    name: "Next.js",
+    href: "https://nextjs.org/",
+    Icon: SiNextdotjs,
+    size: 150,
+  },
+  {
+    name: "TypeScript",
+    href: "https://www.typescriptlang.org/",
+    Icon: SiTypescript,
+    size: 70,
+  },
+  // Second row (7 items)
+  {
+    name: "Python",
+    href: "https://www.python.org/",
+    Icon: SiPython,
+    size: 80,
+  },
+  {
+    name: "PyTorch",
+    href: "https://pytorch.org/",
+    Icon: SiPytorch,
+    size: 80,
+  },
+  {
+    name: "Tailwind CSS",
+    href: "https://tailwindcss.com/",
+    Icon: SiTailwindcss,
+    size: 70,
+  },
+  {
+    name: "Framer Motion",
+    href: "https://www.framer.com/motion/",
+    Icon: SiFramer,
+    size: 50,
+  },
+  {
+    name: "Flutter",
+    href: "https://flutter.dev/",
+    Icon: SiFlutter,
+    size: 50,
+  },
+  {
+    name: "Supabase",
+    href: "https://supabase.com/",
+    Icon: SiSupabase,
+    size: 50,
+  },
+  {
+    name: "Figma",
+    href: "https://www.figma.com/",
+    Icon: SiFigma,
+    size: 60,
+  },
+];
+
+export default function ProfessionalAt() {
+  const firstRow = techStack.slice(0, 3);
+  const secondRow = techStack.slice(3);
+
+  return (
+    <section className="pb-24 px-4 lg:px-8">
+      <Copy delay={0.1}>
+        <h4 className="font-semibold uppercase mb-4 text-foreground">
+          Professional at
+        </h4>
+      </Copy>
+      
+      <MouseFollow className="relative">
+        {/* Desktop Grid - 2 rows */}
+        <div className="hidden lg:grid grid-rows-2">
+          {/* First row - 3 columns */}
+          <div className="grid grid-cols-3 border-b border-border h-[clamp(200px,20vw,400px)]">
+            {firstRow.map((tech) => (
+              <Link
+                key={tech.name}
+                href={tech.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="grid-item flex items-center justify-center border-r border-border last:border-r-0 group cursor-pointer bg-background transition-colors duration-300"
+                aria-label={`Visit ${tech.name} website`}
+              >
+                <tech.Icon 
+                  className="z-10 transition-all duration-300 text-foreground"
+                  style={{ width: tech.size, height: tech.size }}
+                />
+              </Link>
+            ))}
+          </div>
+          
+          {/* Second row - 7 columns */}
+          <div className="grid grid-cols-7 h-[clamp(200px,15vw,400px)]">
+            {secondRow.map((tech, index) => (
+              <Link
+                key={tech.name}
+                href={tech.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`grid-item flex items-center justify-center border-r border-border ${index === secondRow.length - 1 ? 'border-r-0' : ''} group cursor-pointer bg-background transition-colors duration-300`}
+                aria-label={`Visit ${tech.name} website`}
+              >
+                <tech.Icon 
+                  className="z-10 transition-all duration-300 text-foreground"
+                  style={{ width: tech.size, height: tech.size }}
+                />
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile Grid - 2 columns */}
+        <div className="grid grid-cols-2 lg:hidden">
+          {techStack.map((tech, index) => {
+            const isLastRow = index >= techStack.length - 2;
+            const isRightColumn = index % 2 === 1;
+            
+            return (
+              <Link
+                key={tech.name}
+                href={tech.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`grid-item flex items-center justify-center border-r border-b border-border ${isRightColumn ? 'border-r-0' : ''} ${isLastRow ? 'border-b-0' : ''} group cursor-pointer h-[clamp(200px,20vw,400px)] bg-background transition-colors duration-300`}
+                aria-label={`Visit ${tech.name} website`}
+              >
+                <tech.Icon 
+                  className="z-10 transition-all duration-300 text-foreground"
+                  style={{ width: tech.size * 0.8, height: tech.size * 0.8 }}
+                />
+              </Link>
+            );
+          })}
+        </div>
+      </MouseFollow>
+    </section>
+  );
+}
+

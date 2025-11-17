@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Github, Linkedin, Instagram, Mail } from "lucide-react";
 import Copy from "@/components/Copy";
+import ModernTechStack from "@/components/ModernTechStack";
+import ProfessionalAt from "@/components/ProfessionalAt";
 
 export default function Home() {
   return (
@@ -83,6 +85,14 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* Modern Tech Stack Section */}
+      <section className="px-4">
+        <ModernTechStack />
+      </section>
+
+      {/* Professional At Section */}
+      <ProfessionalAt />
 
       {/* Fixed Contact Button - Inspired by jazminwong */}
       <motion.a

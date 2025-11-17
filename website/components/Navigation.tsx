@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { startViewTransition } from "@/lib/view-transitions";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -17,7 +18,27 @@ const navItems = [
 
 export default function Navigation() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleLinkClick = (href: string, e: React.MouseEvent) => {
+    // Only prevent default and use transition if not already on this page
+    if (pathname === href) {
+      return;
+    }
+    
+    e.preventDefault();
+    
+    // Use View Transitions API if available
+    if (typeof document !== 'undefined' && 'startViewTransition' in document) {
+      (document as any).startViewTransition(() => {
+        router.push(href);
+      });
+    } else {
+      // Fallback for browsers without support
+      router.push(href);
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
@@ -35,6 +56,7 @@ export default function Navigation() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  onClick={(e) => handleLinkClick(item.href, e)}
                   className={cn(
                     "relative px-4 py-2 rounded-xl text-[clamp(14px,1.2vw,16px)] font-semibold transition-colors",
                     isActive
@@ -86,7 +108,10 @@ export default function Navigation() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={(e) => {
+                        setIsMobileMenuOpen(false);
+                        handleLinkClick(item.href, e);
+                      }}
                       className={cn(
                         "block px-4 py-3 rounded-xl text-[clamp(16px,1.2vw,18px)] font-semibold transition-colors",
                         isActive

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Copy from "@/components/Copy";
+import ClipReveal from "@/components/ClipReveal";
 import { Github, ExternalLink, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -145,18 +146,19 @@ export default function Portfolio() {
           {/* The Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                // Important: On mouse enter (desktop) or click (mobile), we set this specific ID as active
-                onMouseEnter={() => setActiveId(project.id)}
-                onClick={() => setActiveId(project.id)}
-                className="h-[350px] md:h-[400px] cursor-pointer"
-              >
-                <CompactCard project={project} />
-              </motion.div>
+              <ClipReveal key={project.id} direction="bottom" duration={0.6}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  // Important: On mouse enter (desktop) or click (mobile), we set this specific ID as active
+                  onMouseEnter={() => setActiveId(project.id)}
+                  onClick={() => setActiveId(project.id)}
+                  className="h-[350px] md:h-[400px] cursor-pointer"
+                >
+                  <CompactCard project={project} />
+                </motion.div>
+              </ClipReveal>
             ))}
           </div>
 

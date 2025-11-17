@@ -217,16 +217,16 @@ export default function About() {
           {/* --- Education Section --- */}
           <div>
             <Card className="p-6 md:p-8 rounded-3xl border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
-              <Copy delay={0.3}>
+            <Copy delay={0.3}>
                 <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-6 md:mb-8">Education</h2>
-              </Copy>
+            </Copy>
               <div className="space-y-8">
-                <Copy delay={0.4}>
+              <Copy delay={0.4}>
                   <div className="pb-6">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
                       <h3 className="text-lg md:text-xl font-semibold break-words">
                         National Taiwan Ocean University
-                      </h3>
+                    </h3>
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary text-secondary-foreground whitespace-nowrap shrink-0">
                         Sep. 2022 – May 2026
                       </span>
@@ -255,7 +255,7 @@ export default function About() {
                     </p>
                   </div>
                 </Copy>
-              </div>
+                </div>
             </Card>
           </div>
 
@@ -265,14 +265,14 @@ export default function About() {
               <Copy delay={0.5}>
                 <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-6 md:mb-8">Skills</h2>
               </Copy>
-              <div className="space-y-8">
+                <div className="space-y-8">
                 {skillCategories.map((category, categoryIndex) => {
                   return (
                     <Copy key={category.title} delay={0.5 + (categoryIndex * 0.1)}>
                       <div className="pb-6 border-b last:border-b-0 last:pb-0">
                         <div className="mb-4">
                           <h3 className="text-lg md:text-xl font-semibold text-foreground">{category.title}</h3>
-                        </div>
+                      </div>
                         <div className="flex flex-wrap gap-2.5">
                           {category.skills.map((skill, skillIndex) => {
                             const SkillIcon = getSkillIcon(skill);
@@ -282,7 +282,7 @@ export default function About() {
                                 <SkillIcon className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0" />
                                 <Copy delay={0.5 + (categoryIndex * 0.1) + (skillIndex * 0.02)}>
                                   <span className="text-foreground/90 whitespace-nowrap">{skill}</span>
-                                </Copy>
+                  </Copy>
                               </>
                             );
                             
@@ -309,14 +309,14 @@ export default function About() {
                               </div>
                             );
                           })}
-                        </div>
                       </div>
-                    </Copy>
+                    </div>
+                  </Copy>
                   );
                 })}
-              </div>
-            </Card>
-          </div>
+                </div>
+              </Card>
+            </div>
 
           {/* --- Experience Section --- */}
           <div>
@@ -334,7 +334,7 @@ export default function About() {
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary text-secondary-foreground whitespace-nowrap shrink-0">
                         Summer 2025
                       </span>
-                    </div>
+                      </div>
                     <p className="text-xs md:text-sm text-muted-foreground mb-3">
                       AI Image Recognition Intern
                     </p>
@@ -347,8 +347,8 @@ export default function About() {
                   </div>
                 </Copy>
               </div>
-            </Card>
-          </div>
+              </Card>
+            </div>
 
           {/* --- Personal Info Section --- */}
           <div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+import ViewTransitionSetup from "@/components/ViewTransitionSetup";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${playfair_display.variable} font-sans antialiased font-semibold`}>
+        <ViewTransitionSetup />
         <Navigation />
         <main className="pt-16 md:pt-16">
           {children}
