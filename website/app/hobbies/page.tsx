@@ -28,12 +28,8 @@ const hobbies = [
     ],
   },
   {
-    title: "Guitar",
-    description: "Playing guitar is my way of expressing creativity and relaxing. I enjoy learning new songs and experimenting with different styles.",
-  },
-  {
     title: "Music",
-    description: "Music is a huge part of my life. I listen to a wide variety of genres, love discovering new artists and songs, and enjoy attending live concerts.",
+    description: "Music is a huge part of my life. I play guitar as a way of expressing creativity and relaxing, enjoy learning new songs and experimenting with different styles. I also listen to a wide variety of genres, love discovering new artists and songs, and enjoy attending live concerts.",
     link: "https://open.spotify.com/user/21t6mkxonp73ou4n3ahjddbkq?si=78805a09a5b0464a",
     linkText: "Check out my Spotify",
     photos: [
@@ -142,7 +138,7 @@ export default function Hobbies() {
               <Copy>
                 <p className="text-base md:text-lg lg:text-[clamp(18px,1.6vw,24px)] text-muted-foreground mb-3 md:mb-4 leading-relaxed">
                   When I'm not coding, you'll find me exploring underwater depths, playing volleyball with friends, 
-                  strumming my guitar, or capturing moments through my camera lens.
+                  enjoying music and playing guitar, or capturing moments through my camera lens.
                 </p>
               </Copy>
               <Copy delay={0.1}>
