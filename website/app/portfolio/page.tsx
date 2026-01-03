@@ -7,6 +7,31 @@ import ClipReveal from "@/components/ClipReveal";
 import { Github, ExternalLink, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Custom hook for intersection observer (lazy loading)
+function useIntersectionObserver(options?: IntersectionObserverInit) {
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        setHasLoaded(true);
+        observer.disconnect(); // Stop observing once visible
+      }
+    }, { threshold: 0.1, rootMargin: '100px', ...options });
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isVisible, hasLoaded };
+}
+
 // Updated Data Structure with video placeholders
 const projects = [
   {
@@ -55,12 +80,12 @@ const projects = [
   },
   {
     id: "ghote",
-    title: "Ghote",
-    shortDesc: "AI-powered learning assistant with knowledge extraction.",
-    detailedDescription: "An AI-powered learning assistant that extracts key knowledge from your materials, organizes it, and helps you master it via active recall. Features AI knowledge extraction from PDFs/DOCX/notes generating summaries, MCQs, Q&A, and flashcards. Includes project-based organization, fast search with filters, spaced-repetition flashcards, Firebase authentication, and a modern dark theme with glass morphism design.",
-    tech: ["Flutter", "Firebase", "Dart", "AI/ML", "Google Sign-In"],
-    github: "https://github.com/ghote-app/ghote",
-    demo: null,
+    title: "Ghote Notes",
+    shortDesc: "Local-first, AI-powered note-taking app for macOS.",
+    detailedDescription: "A privacy-focused note-taking app built with Tauri 2.0 (Rust) and React 19. Features vault-based storage with Obsidian-compatible markdown files, Google Gemini AI integration for writing assistance, and a rich Lexical editor with slash commands, KaTeX math, and Mermaid diagrams. Includes an interactive D3.js knowledge graph with wiki-style [[links]], local RAG (Retrieval-Augmented Generation) using Transformers.js for semantic search, real-time collaboration via PartyKit/Yjs, cloud sync with Supabase using 'Local Wins' conflict resolution, and internationalization supporting 4 languages.",
+    tech: ["Tauri", "React 19", "TypeScript", "Rust", "Lexical", "D3.js", "Supabase", "PartyKit", "Transformers.js"],
+    github: "https://github.com/itsYoga/Ghote",
+    demo: "https://ghote.dev",
     video: "/videos/ghote-demo.mp4",
     color: "from-green-500/20 to-emerald-500/20",
   },
@@ -69,60 +94,6 @@ const projects = [
 export default function Portfolio() {
   // We store the ID of the currently hovered project
   const [activeId, setActiveId] = useState<string | null>(null);
-  
-  // Aggressively preload all videos when component mounts
-  useEffect(() => {
-    const preloadContainer = document.createElement('div');
-    preloadContainer.style.position = 'absolute';
-    preloadContainer.style.width = '1px';
-    preloadContainer.style.height = '1px';
-    preloadContainer.style.opacity = '0';
-    preloadContainer.style.pointerEvents = 'none';
-    preloadContainer.style.overflow = 'hidden';
-    preloadContainer.style.top = '-9999px';
-    preloadContainer.style.left = '-9999px';
-    document.body.appendChild(preloadContainer);
-
-    const preloadVideos = projects.map((project) => {
-      const video = document.createElement('video');
-      video.src = project.video;
-      video.preload = 'auto';
-      video.muted = true;
-      video.playsInline = true;
-      video.setAttribute('playsinline', '');
-      video.setAttribute('preload', 'auto');
-      video.style.width = '1px';
-      video.style.height = '1px';
-      
-      // Force browser to start downloading immediately
-      video.load();
-      
-      // Try to play to force buffering (will fail silently due to autoplay policy)
-      video.play().catch(() => {
-        // Autoplay blocked, but video should still buffer
-      });
-      
-      // Ensure video continues buffering
-      video.addEventListener('progress', () => {
-        // Video is downloading
-      });
-      
-      preloadContainer.appendChild(video);
-      return video;
-    });
-
-    // Cleanup on unmount
-    return () => {
-      preloadVideos.forEach((video) => {
-        video.pause();
-        video.src = '';
-        video.load();
-      });
-      if (preloadContainer.parentNode) {
-        preloadContainer.parentNode.removeChild(preloadContainer);
-      }
-    };
-  }, []);
 
   return (
     <main className="min-h-screen bg-background">
@@ -211,77 +182,67 @@ function CompactCard({ project }: { project: typeof projects[0] }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
+  const { ref: observerRef, hasLoaded: isVisible } = useIntersectionObserver();
 
-  // Load first frame as thumbnail
+  // Load first frame as thumbnail - only when card is visible
   useEffect(() => {
+    if (!isVisible) return; // Don't load until visible
+
     const video = videoRef.current;
     const canvas = canvasRef.current;
     if (!video || !canvas) return;
 
-    const handleLoadedMetadata = () => {
-      // Metadata loaded, seek to first frame
-      video.currentTime = 0.1;
-    };
-
-    const handleLoadedData = () => {
-      // Video data loaded, try to draw frame
-      if (video.videoWidth > 0 && video.videoHeight > 0) {
-        const ctx = canvas.getContext('2d');
-        if (ctx) {
-          canvas.width = video.videoWidth;
-          canvas.height = video.videoHeight;
-          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-          setThumbnailLoaded(true);
-        }
-      }
-    };
-
     const handleSeeked = () => {
-      // Frame seeked, draw it
       const ctx = canvas.getContext('2d');
       if (ctx && video.videoWidth > 0 && video.videoHeight > 0) {
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         setThumbnailLoaded(true);
+        // Clean up video after thumbnail is captured
+        video.src = '';
+        video.load();
       }
     };
 
-    video.addEventListener('loadedmetadata', handleLoadedMetadata);
+    const handleLoadedData = () => {
+      video.currentTime = 0.1;
+    };
+
     video.addEventListener('loadeddata', handleLoadedData);
     video.addEventListener('seeked', handleSeeked);
-    
-    // Preload entire video for smooth playback on hover
-    video.preload = 'auto';
+
+    // Only load metadata, not the full video
+    video.preload = 'metadata';
     video.muted = true;
-    video.load();
+    video.src = project.video;
 
     return () => {
-      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
       video.removeEventListener('loadeddata', handleLoadedData);
       video.removeEventListener('seeked', handleSeeked);
     };
-  }, []);
+  }, [isVisible, project.video]);
 
   return (
     <motion.div
-      // layoutId is the magic key that connects this component to the ExpandedCard
+      ref={observerRef}
       layoutId={`card-${project.id}`}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className="group relative w-full h-full rounded-3xl overflow-hidden border bg-card shadow-xl cursor-pointer"
     >
-      {/* Hidden video for thumbnail extraction - also helps with preloading */}
-      <video
-        ref={videoRef}
-        src={project.video}
-        className="absolute opacity-0 pointer-events-none"
-        preload="auto"
-        muted
-        playsInline
-        style={{ width: '1px', height: '1px' }}
-      />
-      
-      {/* Canvas thumbnail - always render */}
+      {/* Hidden video for thumbnail extraction - loads only when visible */}
+      {isVisible && (
+        <video
+          ref={videoRef}
+          className="absolute opacity-0 pointer-events-none"
+          preload="metadata"
+          muted
+          playsInline
+          style={{ width: '1px', height: '1px' }}
+        />
+      )}
+
+      {/* Canvas thumbnail */}
       <canvas
         ref={canvasRef}
         className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-300 ${
@@ -289,27 +250,27 @@ function CompactCard({ project }: { project: typeof projects[0] }) {
         }`}
         style={{ objectFit: 'cover' }}
       />
-      
+
       {/* Fallback Gradient Placeholder */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-30 z-0 transition-opacity duration-300 ${
+      <div className={`absolute inset-0 bg-gradient-to-br ${project.color} z-0 transition-opacity duration-300 ${
         thumbnailLoaded ? 'opacity-0' : 'opacity-30'
       }`} />
-      
+
       <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-20">
-        <motion.h3 
+        <motion.h3
           layoutId={`title-${project.id}`}
           className="text-2xl md:text-3xl font-bold leading-tight tracking-tight mb-2"
         >
           {project.title}
         </motion.h3>
-        <motion.p 
+        <motion.p
           layoutId={`desc-${project.id}`}
           className="text-base md:text-lg text-muted-foreground font-medium"
         >
           {project.shortDesc}
         </motion.p>
       </div>
-      
+
       {/* Overlay Gradient */}
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
     </motion.div>
@@ -317,16 +278,32 @@ function CompactCard({ project }: { project: typeof projects[0] }) {
 }
 
 // --- 2. The Expanded Card (Hover/Center View) ---
-function ExpandedCard({ 
+function ExpandedCard({
   project,
   onMouseLeave,
   onClose
-}: { 
+}: {
   project: typeof projects[0];
   onMouseLeave?: () => void;
   onClose?: () => void;
 }) {
   const [hasVideoError, setHasVideoError] = useState(false);
+  const [isVideoLoading, setIsVideoLoading] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Start playing when video is ready
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleCanPlay = () => {
+      setIsVideoLoading(false);
+      video.play().catch(() => {});
+    };
+
+    video.addEventListener('canplay', handleCanPlay);
+    return () => video.removeEventListener('canplay', handleCanPlay);
+  }, []);
 
   return (
     <motion.div
@@ -343,26 +320,33 @@ function ExpandedCard({
       >
         <X className="w-5 h-5" />
       </button>
-      
+
       {/* Top Half: Video Area */}
       <div className="relative h-[50%] min-h-[300px] md:min-h-[300px] w-full overflow-hidden bg-black">
+        {/* Loading indicator */}
+        {isVideoLoading && (
+          <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-30 flex items-center justify-center`}>
+            <div className="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+          </div>
+        )}
+
         <video
+          ref={videoRef}
           loop
           muted
           playsInline
-          preload="auto"
-          autoPlay
-          className="absolute inset-0 w-full h-full object-cover"
+          preload="metadata"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isVideoLoading ? 'opacity-0' : 'opacity-100'}`}
           onError={() => setHasVideoError(true)}
         >
           <source src={project.video} type={project.video.endsWith('.mov') ? 'video/quicktime' : 'video/mp4'} />
         </video>
-        
+
         {/* Fallback Gradient if video fails */}
         {hasVideoError && (
           <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-50`} />
         )}
-        
+
         {/* Gradient Overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
       </div>
