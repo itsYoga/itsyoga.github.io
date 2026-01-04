@@ -15,7 +15,7 @@ const playfair_display = Playfair_Display({
   variable: "--font-playfair",
 });
 
-const siteUrl = "https://itsyoga.github.io";
+const siteUrl = "https://yujialiang.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
