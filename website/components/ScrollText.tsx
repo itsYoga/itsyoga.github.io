@@ -20,21 +20,25 @@ interface ScrollTextProps {
  * Creates a slot machine-like scrolling text effect where letters scroll up on scroll
  * Each letter should have a duplicate span positioned at bottom-full for the scroll effect
  */
-export default function ScrollText({ 
-  children, 
+export default function ScrollText({
+  children,
   className = "",
-  start = "40% 95%",
-  end = "100% 80%",
-  scrub = 1 
+  start = "top 80%",
+  end = "center center",
+  scrub = 1
 }: ScrollTextProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     if (!containerRef.current) return;
 
+    // Set initial state - letters hidden (scrolled up)
+    gsap.set(".letter", { yPercent: -100 });
+
+    // Animate letters into view
     gsap.to(".letter", {
-      yPercent: 100,
-      ease: "power1.inOut",
+      yPercent: 0,
+      ease: "power1.out",
       scrollTrigger: {
         trigger: containerRef.current,
         start: start,
@@ -42,7 +46,7 @@ export default function ScrollText({
         scrub: scrub,
       },
       stagger: {
-        each: 0.05,
+        each: 0.03,
         from: "random",
       },
     });

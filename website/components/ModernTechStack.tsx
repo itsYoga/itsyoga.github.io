@@ -16,26 +16,26 @@ export default function ModernTechStack() {
           {["M", "O", "D", "E", "R", "N"].map((letter, index) => (
             <span key={index} className="letter relative inline-block">
               <span>{letter}</span>
-              <span className="absolute bottom-full left-0">{letter}</span>
+              <span className="absolute top-full left-0">{letter}</span>
             </span>
           ))}
         </li>
-        
+
         {/* TECH STACK */}
         <li className="text-[clamp(48px,14vw,250px)] font-bold tracking-tight leading-[0.9] lg:leading-[0.85] overflow-hidden flex">
           {["T", "E", "C", "H"].map((letter, index) => (
-            <span 
-              key={index} 
+            <span
+              key={index}
               className={`letter relative inline-block ${index === 3 ? "mr-[clamp(16px,4.5vw,72px)]" : ""}`}
             >
               <span>{letter}</span>
-              <span className="absolute bottom-full left-0">{letter}</span>
+              <span className="absolute top-full left-0">{letter}</span>
             </span>
           ))}
           {["S", "T", "A", "C", "K"].map((letter, index) => (
             <span key={index} className="letter relative inline-block">
               <span>{letter}</span>
-              <span className="absolute bottom-full left-0">{letter}</span>
+              <span className="absolute top-full left-0">{letter}</span>
             </span>
           ))}
         </li>
