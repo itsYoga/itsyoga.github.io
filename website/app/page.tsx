@@ -97,20 +97,25 @@ export default function Home() {
       {/* Fixed Contact Button */}
       <motion.a
         href="mailto:ch993115@gmail.com"
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        initial={{ y: 200, scale: 0.8 }}
+        animate={{ y: 0, scale: 1 }}
         transition={{
-          duration: 0.8,
+          duration: 1,
           delay: 2.5,
           ease: [0.22, 1, 0.36, 1],
         }}
-        className="fixed bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 p-1.5 pr-5 rounded-full bg-accent shadow-2xl cursor-pointer group z-50 transition-all duration-300 hover:bg-primary hover:text-primary-foreground active:scale-95 touch-manipulation"
+        className="fixed bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 md:gap-3 pl-1 py-1 pr-4 md:pr-6 rounded-full bg-accent shadow-2xl cursor-pointer group z-50 transition-all duration-300 hover:bg-primary hover:text-primary-foreground active:scale-95 touch-manipulation"
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
-        <div className="h-11 w-11 rounded-full bg-background flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-          <Mail className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-colors" />
+        <div className="h-11 w-11 md:h-14 md:w-14 relative rounded-full bg-background flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <Mail className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-primary-foreground transition-colors" />
         </div>
-        <span className="text-lg font-semibold pr-1">Contact</span>
+        <div className="overflow-hidden h-7 md:h-8">
+          <div className="flex flex-col transition-transform duration-300 ease-[cubic-bezier(0.64,0.57,0.67,1.53)] group-hover:-translate-y-1/2">
+            <span className="text-lg md:text-xl font-semibold">Contact</span>
+            <span className="text-lg md:text-xl font-semibold">Contact</span>
+          </div>
+        </div>
       </motion.a>
 
     </main>
