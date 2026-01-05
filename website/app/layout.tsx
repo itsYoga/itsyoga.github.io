@@ -1,18 +1,38 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-inter",
-});
-
-const playfair_display = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-playfair",
+const lineSeedSans = localFont({
+  src: [
+    {
+      path: "../public/fonts/line-seed-sans-thin.woff2",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/line-seed-sans-regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/line-seed-sans-bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/line-seed-sans-extrabold.woff2",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/line-seed-sans-heavy.woff2",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-line-seed",
+  display: "swap",
 });
 
 const siteUrl = "https://yujialiang.com";
@@ -77,7 +97,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${playfair_display.variable} font-sans antialiased font-semibold`}>
+      <body className={`${lineSeedSans.variable} font-sans antialiased font-semibold`}>
         <Navigation />
         <main className="pt-16 md:pt-16">
           {children}

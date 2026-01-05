@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Copy from "@/components/Copy";
 import ClipReveal from "@/components/ClipReveal";
-import { Github, ExternalLink, X } from "lucide-react";
+import { Github, ExternalLink, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Custom hook for intersection observer (lazy loading)
@@ -228,7 +228,7 @@ function CompactCard({ project }: { project: typeof projects[0] }) {
       ref={observerRef}
       layoutId={`card-${project.id}`}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative w-full h-full rounded-3xl overflow-hidden border bg-card shadow-xl cursor-pointer"
+      className="group relative w-full h-full rounded-3xl overflow-hidden border bg-card shadow-xl cursor-pointer hover:shadow-2xl hover:border-accent-warm/50 transition-all duration-300"
     >
       {/* Hidden video for thumbnail extraction - loads only when visible */}
       {isVisible && (
@@ -245,18 +245,26 @@ function CompactCard({ project }: { project: typeof projects[0] }) {
       {/* Canvas thumbnail */}
       <canvas
         ref={canvasRef}
-        className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-300 ${
+        className={`absolute inset-0 w-full h-full object-cover z-0 transition-all duration-500 group-hover:scale-105 ${
           thumbnailLoaded ? 'opacity-100' : 'opacity-0'
         }`}
         style={{ objectFit: 'cover' }}
       />
 
       {/* Fallback Gradient Placeholder */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${project.color} z-0 transition-opacity duration-300 ${
-        thumbnailLoaded ? 'opacity-0' : 'opacity-30'
+      <div className={`absolute inset-0 bg-gradient-to-br ${project.color} z-0 transition-all duration-500 group-hover:scale-105 ${
+        thumbnailLoaded ? 'opacity-0' : 'opacity-50'
       }`} />
 
-      <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-20">
+      {/* View Project Overlay - appears on hover */}
+      <div className="absolute inset-0 z-15 bg-foreground/0 group-hover:bg-foreground/20 transition-all duration-300 flex items-center justify-center">
+        <div className="opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-2 bg-accent-warm text-accent-warm-foreground px-4 py-2 rounded-full font-semibold shadow-lg">
+          <span>View Project</span>
+          <ArrowUpRight className="w-4 h-4" />
+        </div>
+      </div>
+
+      <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-20 pointer-events-none">
         <motion.h3
           layoutId={`title-${project.id}`}
           className="text-2xl md:text-3xl font-bold leading-tight tracking-tight mb-2"
@@ -272,7 +280,7 @@ function CompactCard({ project }: { project: typeof projects[0] }) {
       </div>
 
       {/* Overlay Gradient */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-background/90 via-transparent to-transparent pointer-events-none" />
     </motion.div>
   );
 }
