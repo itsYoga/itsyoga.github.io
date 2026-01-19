@@ -41,7 +41,7 @@ export default function Navigation() {
         <div className="flex items-center justify-between h-16">
           <Magnetic strength={0.25} radius={60}>
             <Link href="/" className="text-[clamp(20px,2vw,28px)] font-bold block">
-              <span style={{ fontFamily: "var(--font-display)" }} className="italic">Yu</span>Jia
+              YuJia
             </Link>
           </Magnetic>
           

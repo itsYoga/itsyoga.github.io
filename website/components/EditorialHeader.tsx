@@ -47,8 +47,7 @@ export default function EditorialHeader({
           initial={{ opacity: 0, x: align === "right" ? 50 : -50 }}
           animate={isInView ? { opacity: 0.06, x: 0 } : {}}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className={`absolute -top-8 md:-top-16 ${align === "right" ? "-right-4" : "-left-4"} ${indexSizes[size]} font-display italic text-foreground select-none pointer-events-none leading-none`}
-          style={{ fontFamily: "var(--font-display)" }}
+          className={`absolute -top-8 md:-top-16 ${align === "right" ? "-right-4" : "-left-4"} ${indexSizes[size]} font-bold text-foreground select-none pointer-events-none leading-none`}
         >
           {index}
         </motion.span>
@@ -61,21 +60,7 @@ export default function EditorialHeader({
         transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         className={`${titleSizes[size]} font-bold tracking-tighter leading-[0.9] relative z-10`}
       >
-        {title.split(" ").map((word, i) => (
-          <span key={i} className="inline-block">
-            {i % 2 === 1 ? (
-              <span
-                className="italic font-normal"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                {word}
-              </span>
-            ) : (
-              word
-            )}
-            {i < title.split(" ").length - 1 && " "}
-          </span>
-        ))}
+        {title}
       </motion.h1>
 
       {/* Subtitle */}

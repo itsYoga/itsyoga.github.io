@@ -35,10 +35,7 @@ export default function Home() {
               transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="text-[clamp(3.5rem,12vw,11rem)] font-bold tracking-tighter leading-[0.95] text-center whitespace-nowrap pb-1"
             >
-              <span style={{ fontFamily: "var(--font-display)" }} className="italic font-normal">
-                <ScrambleText text="Yu" delay={0.8} duration={0.8} />
-              </span>
-              <ScrambleText text="Jia Liang" delay={1.0} duration={1.0} />
+              <ScrambleText text="YuJia Liang" delay={0.8} duration={1.2} />
             </motion.h1>
           </div>
         </motion.div>
@@ -101,13 +98,13 @@ export default function Home() {
             <span>AI Engineer</span>
           </MarqueeItem>
           <MarqueeItem separator="*">
-            <span style={{ fontFamily: "var(--font-display)" }} className="italic font-normal">Full-Stack</span>
+            <span>Full-Stack</span>
           </MarqueeItem>
           <MarqueeItem separator="*">
             <span>Developer</span>
           </MarqueeItem>
           <MarqueeItem separator="*">
-            <span style={{ fontFamily: "var(--font-display)" }} className="italic font-normal">Photographer</span>
+            <span>Photographer</span>
           </MarqueeItem>
           <MarqueeItem separator="*">
             <span>Creative</span>
