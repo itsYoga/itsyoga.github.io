@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Github, Linkedin, Instagram, Mail } from "lucide-react";
 import Copy from "@/components/Copy";
-import ModernTechStack from "@/components/ModernTechStack";
 import ProfessionalAt from "@/components/ProfessionalAt";
 import ScrambleText from "@/components/ScrambleText";
 import Magnetic from "@/components/Magnetic";
@@ -84,11 +83,6 @@ export default function Home() {
             ))}
           </motion.div>
         </div>
-      </section>
-
-      {/* Modern Tech Stack Section */}
-      <section className="px-4 -mt-16 lg:-mt-24">
-        <ModernTechStack />
       </section>
 
       {/* Kinetic Marquee Section */}
