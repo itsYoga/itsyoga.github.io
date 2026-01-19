@@ -1,171 +1,150 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import Copy from "@/components/Copy";
-import ClipReveal from "@/components/ClipReveal";
-import EditorialHeader from "@/components/EditorialHeader";
-import { Github, ExternalLink, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Github, ExternalLink, X, ArrowUpRight } from "lucide-react";
+import EditorialHeader from "@/components/EditorialHeader";
+import Magnetic from "@/components/Magnetic";
 
-// Custom hook for intersection observer (lazy loading)
-function useIntersectionObserver(options?: IntersectionObserverInit) {
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasLoaded, setHasLoaded] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
-
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-        setHasLoaded(true);
-        observer.disconnect(); // Stop observing once visible
-      }
-    }, { threshold: 0.1, rootMargin: '100px', ...options });
-
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, []);
-
-  return { ref, isVisible, hasLoaded };
-}
-
-// Updated Data Structure with video placeholders
 const projects = [
   {
     id: "volleyball",
-    title: "Volleyball Match Analysis System",
-    shortDesc: "AI-powered volleyball match analysis with ball tracking and action recognition.",
-    detailedDescription: "A comprehensive deep learning system for volleyball match analysis that integrates multiple AI models. Features ball tracking using VballNet (U-Net architecture) to track ball trajectory and landing points, action recognition with YOLOv11m to identify five key actions (serve, spike, block, receive, set), and player tracking using YOLOv8 combined with Norfair for multi-object tracking. Includes a full-stack web application with React frontend and FastAPI backend, supporting video upload, analysis processing, interactive playback with timeline controls, real-time visualization (player boxes, action boxes, ball trajectory, heatmaps), player statistics, and data visualization.",
-    tech: ["Python", "PyTorch", "YOLOv11", "YOLOv8", "React", "FastAPI", "OpenCV", "Norfair"],
+    title: "Volleyball Match Analysis",
+    shortDesc: "AI-powered match analysis with ball tracking and action recognition",
+    detailedDescription: "Deep learning system integrating multiple AI models for volleyball analysis. Features ball tracking (VballNet/U-Net), action recognition (YOLOv11m) for serve, spike, block, receive, set detection, and player tracking (YOLOv8 + Norfair). Full-stack app with React frontend and FastAPI backend.",
+    tech: ["Python", "PyTorch", "YOLOv11", "React", "FastAPI", "OpenCV"],
     github: "https://github.com/DL-Volleyball-Analysis",
     demo: null,
     video: "/videos/volleyball-demo.mp4",
-    color: "from-orange-500/20 to-red-500/20",
+    accent: "from-orange-500 to-red-500",
   },
   {
     id: "archon",
     title: "Archon RWA Tokenization",
-    shortDesc: "DeFi platform for Real-World Assets tokenization.",
-    detailedDescription: "A comprehensive decentralized finance (DeFi) platform designed to tokenize real-world assets (RWA). Features identity verification, asset management, and redemption functionality. The platform includes role-based access control, automated deployment, and a modern React frontend interface. Built with Solidity smart contracts for fractional ownership and seamless trading capabilities.",
+    shortDesc: "DeFi platform for Real-World Assets tokenization",
+    detailedDescription: "Decentralized finance platform for tokenizing real-world assets. Features identity verification, asset management, redemption functionality, role-based access control, and Solidity smart contracts for fractional ownership.",
     tech: ["React", "Solidity", "TypeScript", "Web3.js"],
     github: "https://github.com/itsYoga/Archon",
     demo: null,
     video: "/videos/archon-demo.mp4",
-    color: "from-blue-500/20 to-cyan-500/20",
+    accent: "from-blue-500 to-cyan-500",
   },
   {
     id: "asl",
     title: "ASL Gesture Recognition",
-    shortDesc: "iOS app for learning and practicing American Sign Language.",
-    detailedDescription: "An iOS application designed to help users learn and practice American Sign Language (ASL). Leverages machine learning and computer vision technologies to provide real-time sign language recognition and learning features. Built with SwiftUI for a modern, intuitive interface. Uses Apple's CoreML and CreateML for on-device processing, optimized for low latency and privacy.",
+    shortDesc: "iOS app for learning American Sign Language",
+    detailedDescription: "iOS application for learning and practicing ASL using machine learning and computer vision. Real-time sign language recognition with SwiftUI interface, CoreML and CreateML for on-device processing.",
     tech: ["SwiftUI", "CreateML", "CoreML"],
     github: "https://github.com/itsYoga/ASLoading",
     demo: null,
     video: "/videos/asl-demo.mp4",
-    color: "from-yellow-500/20 to-amber-500/20",
+    accent: "from-yellow-500 to-amber-500",
   },
   {
     id: "syncup",
     title: "SyncUp Social Calendar",
-    shortDesc: "AI-powered scheduling assistant for groups.",
-    detailedDescription: "A Flutter-based social organizer that uses RAG (Retrieval-Augmented Generation) to analyze friend group availabilities and suggest the perfect meeting time. Features intelligent scheduling algorithms, group management, and seamless integration with calendar systems.",
+    shortDesc: "AI-powered scheduling assistant for groups",
+    detailedDescription: "Flutter-based social organizer using RAG to analyze group availabilities and suggest optimal meeting times. Features intelligent scheduling, group management, and calendar integration.",
     tech: ["Flutter", "Firebase", "LLM/RAG", "Dart"],
     github: "https://github.com/itsYoga/Sync",
     demo: null,
     video: "/videos/syncup-demo.mp4",
-    color: "from-purple-500/20 to-pink-500/20",
+    accent: "from-purple-500 to-pink-500",
   },
   {
     id: "ghote",
     title: "Ghote Notes",
-    shortDesc: "Local-first, AI-powered note-taking app for macOS.",
-    detailedDescription: "A privacy-focused note-taking app built with Tauri 2.0 (Rust) and React 19. Features vault-based storage with Obsidian-compatible markdown files, Google Gemini AI integration for writing assistance, and a rich Lexical editor with slash commands, KaTeX math, and Mermaid diagrams. Includes an interactive D3.js knowledge graph with wiki-style [[links]], local RAG (Retrieval-Augmented Generation) using Transformers.js for semantic search, real-time collaboration via PartyKit/Yjs, cloud sync with Supabase using 'Local Wins' conflict resolution, and internationalization supporting 4 languages.",
-    tech: ["Tauri", "React 19", "TypeScript", "Rust", "Lexical", "D3.js", "Supabase", "PartyKit", "Transformers.js"],
+    shortDesc: "Local-first, AI-powered note-taking for macOS",
+    detailedDescription: "Privacy-focused note-taking app with Tauri 2.0 and React 19. Features Obsidian-compatible markdown, Gemini AI integration, Lexical editor with slash commands, D3.js knowledge graph, local RAG with Transformers.js, and real-time collaboration.",
+    tech: ["Tauri", "React", "Rust", "D3.js", "Supabase"],
     github: "https://github.com/Ghote-notes",
     demo: "https://ghote.dev",
     video: "/videos/ghote-demo.mp4",
-    color: "from-green-500/20 to-emerald-500/20",
+    accent: "from-green-500 to-emerald-500",
   },
 ];
 
 export default function Portfolio() {
-  // We store the ID of the currently hovered project
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [activeProject, setActiveProject] = useState<string | null>(null);
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen">
       <section className="px-4 pb-20 pt-10 lg:py-24">
-        <div className="max-w-6xl mx-auto relative">
-          
-          {/* Editorial Header */}
+        <div className="max-w-5xl mx-auto">
+
+          {/* Header */}
           <div className="mb-16 lg:mb-24">
             <EditorialHeader
-              index="01"
+              index="02"
               title="Selected Works"
-              subtitle="A showcase of recent projects spanning AI, full-stack development, and creative technology. Each project represents a unique challenge solved with intention and craft."
+              subtitle="Projects spanning AI, full-stack development, and creative technology."
               size="large"
             />
           </div>
 
-          {/* The Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Project List */}
+          <div className="space-y-6">
             {projects.map((project, index) => (
-              <ClipReveal key={project.id} direction="bottom" duration={0.6}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  // Important: On mouse enter (desktop) or click (mobile), we set this specific ID as active
-                  onMouseEnter={() => setActiveId(project.id)}
-                  onClick={() => setActiveId(project.id)}
-                  className="h-[350px] md:h-[400px] cursor-pointer"
-                >
-                  <CompactCard project={project} />
-                </motion.div>
-              </ClipReveal>
+              <motion.article
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                onClick={() => setActiveProject(project.id)}
+                className="group cursor-pointer"
+              >
+                <div className="flex items-start gap-6 p-6 rounded-2xl border border-border/50 bg-card/30 hover:bg-card/60 hover:border-border transition-all duration-300">
+                  {/* Index */}
+                  <span className="text-4xl md:text-5xl font-bold text-foreground/10 group-hover:text-foreground/20 transition-colors tabular-nums">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+
+                  {/* Content */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <h3 className="text-xl md:text-2xl font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
+                          {project.title}
+                        </h3>
+                        <p className="text-muted-foreground mb-4">
+                          {project.shortDesc}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tech.slice(0, 4).map((t) => (
+                            <span
+                              key={t}
+                              className="px-2.5 py-1 text-xs bg-accent/50 border border-border/50 rounded-full text-foreground/70"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                          {project.tech.length > 4 && (
+                            <span className="px-2.5 py-1 text-xs text-muted-foreground">
+                              +{project.tech.length - 4} more
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Arrow */}
+                      <div className="p-2 rounded-full border border-border/50 group-hover:border-primary/50 group-hover:bg-primary/10 transition-all">
+                        <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.article>
             ))}
           </div>
 
-          {/* The Overlay Layer 
-            This sits "outside" the grid z-flow to allow perfect centering 
-          */}
+          {/* Modal */}
           <AnimatePresence>
-            {activeId && (
-              <>
-                {/* Backdrop Blur */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 pointer-events-none"
-                />
-                
-                {/* The Expanded Card */}
-                <div 
-                  className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none"
-                  onClick={() => setActiveId(null)}
-                >
-                  <div 
-                    // Re-enable pointer events for the card itself so we can click links
-                    className="pointer-events-auto w-full h-full flex items-center justify-center p-4"
-                    // If mouse leaves the entire overlay area, we close it (desktop)
-                    onMouseLeave={() => setActiveId(null)}
-                    // Prevent closing when clicking inside the card
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <ExpandedCard 
-                      project={projects.find(p => p.id === activeId)!} 
-                      onMouseLeave={() => setActiveId(null)}
-                      onClose={() => setActiveId(null)}
-                    />
-                  </div>
-                </div>
-              </>
+            {activeProject && (
+              <ProjectModal
+                project={projects.find((p) => p.id === activeProject)!}
+                onClose={() => setActiveProject(null)}
+              />
             )}
           </AnimatePresence>
         </div>
@@ -174,243 +153,135 @@ export default function Portfolio() {
   );
 }
 
-// --- 1. The Compact Card (Grid View) ---
-function CompactCard({ project }: { project: typeof projects[0] }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
-  const { ref: observerRef, hasLoaded: isVisible } = useIntersectionObserver();
-
-  // Load first frame as thumbnail - only when card is visible
-  useEffect(() => {
-    if (!isVisible) return; // Don't load until visible
-
-    const video = videoRef.current;
-    const canvas = canvasRef.current;
-    if (!video || !canvas) return;
-
-    const handleSeeked = () => {
-      const ctx = canvas.getContext('2d');
-      if (ctx && video.videoWidth > 0 && video.videoHeight > 0) {
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        setThumbnailLoaded(true);
-        // Clean up video after thumbnail is captured
-        video.src = '';
-        video.load();
-      }
-    };
-
-    const handleLoadedData = () => {
-      video.currentTime = 0.1;
-    };
-
-    video.addEventListener('loadeddata', handleLoadedData);
-    video.addEventListener('seeked', handleSeeked);
-
-    // Only load metadata, not the full video
-    video.preload = 'metadata';
-    video.muted = true;
-    video.src = project.video;
-
-    return () => {
-      video.removeEventListener('loadeddata', handleLoadedData);
-      video.removeEventListener('seeked', handleSeeked);
-    };
-  }, [isVisible, project.video]);
-
-  return (
-    <motion.div
-      ref={observerRef}
-      layoutId={`card-${project.id}`}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative w-full h-full rounded-3xl overflow-hidden border bg-card shadow-xl cursor-pointer hover:shadow-2xl hover:border-accent-warm/50 transition-all duration-300"
-    >
-      {/* Hidden video for thumbnail extraction - loads only when visible */}
-      {isVisible && (
-        <video
-          ref={videoRef}
-          className="absolute opacity-0 pointer-events-none"
-          preload="metadata"
-          muted
-          playsInline
-          style={{ width: '1px', height: '1px' }}
-        />
-      )}
-
-      {/* Canvas thumbnail */}
-      <canvas
-        ref={canvasRef}
-        className={`absolute inset-0 w-full h-full object-cover z-0 transition-all duration-500 group-hover:scale-105 ${
-          thumbnailLoaded ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{ objectFit: 'cover' }}
-      />
-
-      {/* Fallback Gradient Placeholder */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${project.color} z-0 transition-all duration-500 group-hover:scale-105 ${
-        thumbnailLoaded ? 'opacity-0' : 'opacity-50'
-      }`} />
-
-      {/* View Project Overlay - appears on hover */}
-      <div className="absolute inset-0 z-15 bg-foreground/0 group-hover:bg-foreground/20 transition-all duration-300 flex items-center justify-center">
-        <div className="opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-2 bg-accent-warm text-accent-warm-foreground px-4 py-2 rounded-full font-semibold shadow-lg">
-          <span>View Project</span>
-          <ArrowUpRight className="w-4 h-4" />
-        </div>
-      </div>
-
-      <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-20 pointer-events-none">
-        <motion.h3
-          layoutId={`title-${project.id}`}
-          className="text-2xl md:text-3xl font-bold leading-tight tracking-tight mb-2"
-        >
-          {project.title}
-        </motion.h3>
-        <motion.p
-          layoutId={`desc-${project.id}`}
-          className="text-base md:text-lg text-muted-foreground font-medium"
-        >
-          {project.shortDesc}
-        </motion.p>
-      </div>
-
-      {/* Overlay Gradient */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-t from-background/90 via-transparent to-transparent pointer-events-none" />
-    </motion.div>
-  );
-}
-
-// --- 2. The Expanded Card (Hover/Center View) ---
-function ExpandedCard({
+function ProjectModal({
   project,
-  onMouseLeave,
-  onClose
+  onClose,
 }: {
   project: typeof projects[0];
-  onMouseLeave?: () => void;
-  onClose?: () => void;
+  onClose: () => void;
 }) {
-  const [hasVideoError, setHasVideoError] = useState(false);
-  const [isVideoLoading, setIsVideoLoading] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
-  // Start playing when video is ready
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     const handleCanPlay = () => {
-      setIsVideoLoading(false);
+      setVideoLoaded(true);
       video.play().catch(() => {});
     };
 
-    video.addEventListener('canplay', handleCanPlay);
-    return () => video.removeEventListener('canplay', handleCanPlay);
+    video.addEventListener("canplay", handleCanPlay);
+    return () => video.removeEventListener("canplay", handleCanPlay);
   }, []);
 
+  // Close on escape
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [onClose]);
+
   return (
-    <motion.div
-      layoutId={`card-${project.id}`}
-      onMouseLeave={onMouseLeave}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="w-full max-w-[90vw] md:max-w-[800px] h-auto max-h-[85vh] bg-card rounded-3xl shadow-2xl overflow-hidden border relative flex flex-col"
-    >
-      {/* Close Button - Visible on mobile, hidden on desktop (hover handles it) */}
-      <button
+    <>
+      {/* Backdrop */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         onClick={onClose}
-        className="absolute top-4 right-4 z-50 p-2 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 hover:bg-background transition-colors md:hidden"
-        aria-label="Close"
+        className="fixed inset-0 z-50 bg-background/90 backdrop-blur-sm"
+      />
+
+      {/* Modal */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed inset-4 md:inset-8 lg:inset-16 z-50 overflow-hidden rounded-2xl border border-border bg-card shadow-2xl flex flex-col"
       >
-        <X className="w-5 h-5" />
-      </button>
-
-      {/* Top Half: Video Area */}
-      <div className="relative h-[50%] min-h-[300px] md:min-h-[300px] w-full overflow-hidden bg-black">
-        {/* Loading indicator */}
-        {isVideoLoading && (
-          <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-30 flex items-center justify-center`}>
-            <div className="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-          </div>
-        )}
-
-        <video
-          ref={videoRef}
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isVideoLoading ? 'opacity-0' : 'opacity-100'}`}
-          onError={() => setHasVideoError(true)}
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-background/80 backdrop-blur border border-border/50 hover:bg-background transition-colors"
         >
-          <source src={project.video} type={project.video.endsWith('.mov') ? 'video/quicktime' : 'video/mp4'} />
-        </video>
+          <X className="w-5 h-5" />
+        </button>
 
-        {/* Fallback Gradient if video fails */}
-        {hasVideoError && (
-          <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-50`} />
-        )}
+        {/* Video */}
+        <div className={`relative h-[40%] md:h-[50%] bg-gradient-to-br ${project.accent} overflow-hidden`}>
+          {!videoLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            </div>
+          )}
+          <video
+            ref={videoRef}
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className={`w-full h-full object-cover transition-opacity duration-300 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
+          >
+            <source src={project.video} type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
+        </div>
 
-        {/* Gradient Overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-      </div>
-
-      {/* Bottom Half: Content */}
-      <div className="flex-1 p-6 md:p-8 flex flex-col justify-start relative bg-card overflow-y-auto">
-        <motion.h3 
-          layoutId={`title-${project.id}`}
-          className="text-2xl md:text-4xl font-bold mb-2"
-        >
-          {project.title}
-        </motion.h3>
-        
-        <motion.p 
-          layoutId={`desc-${project.id}`}
-          className="text-muted-foreground hidden" // Hide the short desc in expanded view to avoid duplication
-        >
-          {project.shortDesc}
-        </motion.p>
-
-        {/* Fade-in Detailed Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.3 }}
-          className="space-y-5"
-        >
-          <p className="text-sm md:text-lg text-muted-foreground leading-relaxed mb-4 md:mb-6">
+        {/* Content */}
+        <div className="flex-1 p-6 md:p-10 overflow-y-auto">
+          <h2 className="text-2xl md:text-4xl font-bold mb-4">{project.title}</h2>
+          <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6 max-w-3xl">
             {project.detailedDescription}
           </p>
 
-          {/* Tech Stack */}
-          <div className="flex flex-wrap gap-2 mb-4 md:mb-6">
+          {/* Tech */}
+          <div className="flex flex-wrap gap-2 mb-8">
             {project.tech.map((t) => (
-              <span key={t} className="px-2.5 md:px-3 py-1 bg-accent/50 border border-border/50 rounded-md text-xs font-semibold backdrop-blur-md">
+              <span
+                key={t}
+                className="px-3 py-1.5 text-sm bg-accent/50 border border-border/50 rounded-full"
+              >
                 {t}
               </span>
             ))}
           </div>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 pt-2">
+          {/* Links */}
+          <div className="flex flex-wrap gap-3">
             {project.github && (
-              <Button size="sm" variant="default" className="gap-2 rounded-full bg-foreground text-background hover:bg-foreground/90" asChild>
-                <a href={project.github} target="_blank" rel="noopener noreferrer">
-                  <Github className="w-4 h-4" /> Code
+              <Magnetic strength={0.3} radius={60}>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background rounded-full hover:bg-foreground/90 transition-colors"
+                >
+                  <Github className="w-4 h-4" />
+                  View Code
                 </a>
-              </Button>
+              </Magnetic>
             )}
             {project.demo && (
-              <Button size="sm" variant="secondary" className="gap-2 rounded-full" asChild>
-                <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="w-4 h-4" /> Live Demo
+              <Magnetic strength={0.3} radius={60}>
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 border border-border rounded-full hover:bg-accent transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  Live Demo
                 </a>
-              </Button>
+              </Magnetic>
             )}
           </div>
-        </motion.div>
-      </div>
-    </motion.div>
+        </div>
+      </motion.div>
+    </>
   );
 }
