@@ -48,12 +48,12 @@ export default function Home() {
             initial={{ y: "100%", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 2.0, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden text-center space-y-3"
+            className="overflow-hidden text-center space-y-4"
           >
-            <p className="text-[clamp(1.3rem,2.2vw,2.2rem)] font-bold text-foreground tracking-tight">
+            <p className="text-[clamp(1.2rem,2vw,1.8rem)] text-foreground/90 tracking-tight leading-relaxed">
               Building intelligent systems. <span className="text-primary">Capturing the world.</span>
             </p>
-            <p className="text-[clamp(0.95rem,1.4vw,1.3rem)] text-muted-foreground font-medium">
+            <p className="text-[clamp(0.9rem,1.2vw,1.1rem)] text-muted-foreground tracking-wide uppercase">
               AI Engineer & Full-Stack Developer
             </p>
           </motion.div>
@@ -63,7 +63,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 2.3 }}
-            className="flex justify-center gap-8 pt-4"
+            className="flex justify-center gap-6 pt-6"
           >
             {[
               { href: "https://github.com/itsYoga", icon: Github, label: "GitHub" },
@@ -74,11 +74,11 @@ export default function Home() {
                 <Link
                   href={social.href}
                   target="_blank"
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-300 block"
+                  className="p-3 rounded-full border border-border/50 text-foreground/60 hover:text-foreground hover:border-foreground/30 hover:bg-accent/50 transition-all duration-300 block"
                   aria-label={social.label}
                   data-cursor="View"
                 >
-                  <social.icon className="w-6 h-6" />
+                  <social.icon className="w-5 h-5" />
                 </Link>
               </Magnetic>
             ))}
@@ -92,22 +92,19 @@ export default function Home() {
       </section>
 
       {/* Kinetic Marquee Section */}
-      <section className="py-12 md:py-20 border-y border-border/50 overflow-hidden">
-        <Marquee speed={25} className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-foreground/[0.03]">
-          <MarqueeItem separator="*">
+      <section className="py-16 md:py-24 border-y border-border overflow-hidden bg-accent/30">
+        <Marquee speed={8} className="text-4xl md:text-6xl lg:text-7xl tracking-tight text-foreground/10">
+          <MarqueeItem separator="·">
             <span>AI Engineer</span>
           </MarqueeItem>
-          <MarqueeItem separator="*">
-            <span>Full-Stack</span>
+          <MarqueeItem separator="·">
+            <span>Full-Stack Developer</span>
           </MarqueeItem>
-          <MarqueeItem separator="*">
-            <span>Developer</span>
-          </MarqueeItem>
-          <MarqueeItem separator="*">
+          <MarqueeItem separator="·">
             <span>Photographer</span>
           </MarqueeItem>
-          <MarqueeItem separator="*">
-            <span>Creative</span>
+          <MarqueeItem separator="·">
+            <span>Creative Technologist</span>
           </MarqueeItem>
         </Marquee>
       </section>
@@ -130,18 +127,11 @@ export default function Home() {
         <Magnetic strength={0.3} radius={120}>
           <a
             href="mailto:ch993115@gmail.com"
-            className="flex items-center gap-2 md:gap-3 pl-1 py-1 pr-4 md:pr-6 rounded-full bg-accent shadow-2xl cursor-pointer group transition-all duration-300 hover:bg-primary hover:text-primary-foreground active:scale-95 touch-manipulation"
+            className="flex items-center gap-3 md:gap-4 px-5 md:px-6 py-3 md:py-4 rounded-full bg-foreground text-background shadow-2xl cursor-pointer group transition-all duration-300 hover:bg-primary active:scale-95 touch-manipulation"
             data-cursor="Email"
           >
-            <div className="h-11 w-11 md:h-14 md:w-14 relative rounded-full bg-background flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <Mail className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-primary-foreground transition-colors" />
-            </div>
-            <div className="overflow-hidden h-7 md:h-8">
-              <div className="flex flex-col transition-transform duration-300 ease-[cubic-bezier(0.64,0.57,0.67,1.53)] group-hover:-translate-y-1/2">
-                <span className="text-lg md:text-xl font-semibold">Contact</span>
-                <span className="text-lg md:text-xl font-semibold">Contact</span>
-              </div>
-            </div>
+            <Mail className="w-5 h-5 md:w-5 md:h-5" />
+            <span className="text-base md:text-lg tracking-wide">Get in Touch</span>
           </a>
         </Magnetic>
       </motion.div>

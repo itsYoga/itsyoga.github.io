@@ -60,37 +60,37 @@ export default function FluidBackground() {
 
       {/* Primary blob - follows cursor closely */}
       <motion.div
-        className="absolute w-[600px] h-[600px] rounded-full blur-[120px] opacity-30 dark:opacity-20"
+        className="absolute w-[700px] h-[700px] rounded-full blur-[150px] opacity-20 dark:opacity-15"
         style={{
           left: blob1X,
           top: blob1Y,
           translateX: "-50%",
           translateY: "-50%",
-          background: "linear-gradient(135deg, oklch(0.7 0.15 240), oklch(0.6 0.2 280))",
+          background: "linear-gradient(135deg, oklch(0.75 0.12 240), oklch(0.7 0.15 260))",
         }}
       />
 
       {/* Secondary blob - coral accent, moves opposite */}
       <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full blur-[100px] opacity-25 dark:opacity-15"
+        className="absolute w-[600px] h-[600px] rounded-full blur-[130px] opacity-15 dark:opacity-10"
         style={{
           left: blob2X,
           top: blob2Y,
           translateX: "-50%",
           translateY: "-50%",
-          background: "linear-gradient(135deg, oklch(0.7 0.18 25), oklch(0.65 0.2 45))",
+          background: "linear-gradient(135deg, oklch(0.8 0.12 25), oklch(0.75 0.14 40))",
         }}
       />
 
       {/* Tertiary blob - subtle blue */}
       <motion.div
-        className="absolute w-[400px] h-[400px] rounded-full blur-[80px] opacity-20 dark:opacity-10"
+        className="absolute w-[500px] h-[500px] rounded-full blur-[100px] opacity-15 dark:opacity-08"
         style={{
           left: blob3X,
           top: blob3Y,
           translateX: "-50%",
           translateY: "-50%",
-          background: "linear-gradient(135deg, oklch(0.5 0.2 220), oklch(0.6 0.15 200))",
+          background: "linear-gradient(135deg, oklch(0.6 0.15 220), oklch(0.7 0.1 200))",
         }}
       />
 
