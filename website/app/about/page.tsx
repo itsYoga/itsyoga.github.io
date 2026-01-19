@@ -8,35 +8,52 @@ import Magnetic from "@/components/Magnetic";
 import {
   FileText, ExternalLink, MapPin, Calendar, Briefcase, GraduationCap, Download
 } from "lucide-react";
+import Image from "next/image";
 import {
-  SiPython, SiCplusplus, SiJavascript, SiTypescript, SiSwift, SiDart, SiPostgresql,
-  SiPytorch, SiTensorflow, SiOpencv, SiScikitlearn, SiNumpy, SiPandas,
-  SiReact, SiNextdotjs, SiFlutter, SiFastapi, SiNodedotjs, SiCelery,
-  SiGit, SiDocker, SiFirebase, SiAmazon, SiGooglecloud, SiRedis, SiLinux, SiApple, SiRos,
-  SiFigma, SiOpenai, SiGoogle, SiSupabase
+  SiPython, SiCplusplus, SiTypescript, SiSwift, SiDart, SiPostgresql,
+  SiPytorch, SiTensorflow, SiOpencv, SiScikitlearn,
+  SiReact, SiNextdotjs, SiFlutter, SiFastapi, SiNodedotjs,
+  SiDocker, SiFirebase, SiRedis,
+  SiFigma, SiOpenai, SiGoogle, SiSupabase, SiTailwindcss, SiAnthropic, SiGithubcopilot,
+  SiRust, SiSolidity, SiTauri, SiVuedotjs, SiVite,
+  SiMongodb, SiInfluxdb, SiKubernetes, SiGithubactions, SiGrafana
 } from "react-icons/si";
 import { DiJava } from "react-icons/di";
 
 // Skill icons mapping
 const skillIcons: Record<string, any> = {
-  "Python": SiPython, "Java": DiJava, "C++": SiCplusplus, "JavaScript": SiJavascript,
-  "TypeScript": SiTypescript, "Swift": SiSwift, "Dart": SiDart, "SQL": SiPostgresql,
+  // Languages
+  "Python": SiPython, "TypeScript": SiTypescript, "Rust": SiRust, "Swift": SiSwift,
+  "Dart": SiDart, "Solidity": SiSolidity, "C++": SiCplusplus, "Java": DiJava,
+  // ML/AI
   "PyTorch": SiPytorch, "TensorFlow": SiTensorflow, "OpenCV": SiOpencv,
-  "scikit-learn": SiScikitlearn, "NumPy": SiNumpy, "Pandas": SiPandas,
-  "React": SiReact, "Next.js": SiNextdotjs, "Flutter": SiFlutter, "FastAPI": SiFastapi,
-  "Node.js": SiNodedotjs, "Celery": SiCelery, "Git": SiGit, "Docker": SiDocker,
-  "Firebase": SiFirebase, "Supabase": SiSupabase, "AWS": SiAmazon, "GCP": SiGooglecloud,
-  "PostgreSQL": SiPostgresql, "Redis": SiRedis, "Linux": SiLinux, "macOS": SiApple,
-  "ROS": SiRos, "Figma": SiFigma, "Gemini": SiGoogle, "ChatGPT": SiOpenai,
+  "scikit-learn": SiScikitlearn,
+  // Frontend & Mobile
+  "React": SiReact, "Next.js": SiNextdotjs, "Tauri": SiTauri, "Flutter": SiFlutter,
+  "SwiftUI": SiSwift, "Tailwind": SiTailwindcss, "Vue.js": SiVuedotjs, "Vite": SiVite,
+  // Backend
+  "FastAPI": SiFastapi, "Node.js": SiNodedotjs, "Redis": SiRedis,
+  // Infra
+  "MongoDB": SiMongodb, "PostgreSQL": SiPostgresql, "Firebase": SiFirebase,
+  "Supabase": SiSupabase, "InfluxDB": SiInfluxdb, "Docker": SiDocker, "Kubernetes": SiKubernetes,
+  // DevOps
+  "GitHub Actions": SiGithubactions,
+  // Testing & Monitoring
+  "Grafana": SiGrafana,
+  // AI Tools
+  "Claude": SiAnthropic, "ChatGPT": SiOpenai, "GitHub Copilot": SiGithubcopilot,
+  "Gemini": SiGoogle, "Figma": SiFigma,
 };
 
-// Condensed skills data
+// Skills data from resume
 const skills = {
-  "Languages": ["Python", "TypeScript", "JavaScript", "Swift", "Java", "C++", "Dart", "SQL"],
-  "AI / ML": ["PyTorch", "TensorFlow", "OpenCV", "scikit-learn", "NumPy", "Pandas"],
-  "Frontend": ["React", "Next.js", "Flutter", "Tailwind CSS"],
-  "Backend": ["FastAPI", "Node.js", "Supabase", "Firebase", "PostgreSQL", "Redis"],
-  "DevOps": ["Git", "Docker", "AWS", "GCP", "Linux"],
+  "Languages": ["Python", "TypeScript", "Rust", "Swift", "Dart", "Solidity", "C++", "Java"],
+  "ML / AI": ["PyTorch", "TensorFlow", "OpenCV", "YOLO", "ONNX", "scikit-learn"],
+  "Frontend & Mobile": ["React", "Next.js", "Tauri", "Flutter", "SwiftUI", "Tailwind", "Vue.js", "Vite"],
+  "Backend": ["FastAPI", "Node.js", "Redis"],
+  "Infra": ["MongoDB", "PostgreSQL", "Firebase", "Supabase", "InfluxDB", "Docker", "Kubernetes"],
+  "DevOps & Testing": ["GitHub Actions", "Playwright", "Pytest", "Grafana"],
+  "AI Tools": ["Claude", "ChatGPT", "Cursor", "GitHub Copilot", "Gemini", "Figma"],
 };
 
 const education = [
@@ -45,12 +62,14 @@ const education = [
     degree: "B.S. in Computer Science and Engineering",
     location: "Keelung, Taiwan",
     period: "2022 – 2026",
+    logo: "/images/schools/ntou.png",
   },
   {
     school: "Cotter High School",
     degree: "High School Diploma",
     location: "Winona, MN, USA",
     period: "2019 – 2021",
+    logo: "/images/schools/cotter.png",
   },
 ];
 
@@ -192,8 +211,18 @@ export default function About() {
                 {education.map((edu, idx) => (
                   <div key={idx} className="p-6 rounded-2xl bg-accent/30 border border-border/50">
                     <div className="flex items-start gap-4">
-                      <div className="p-2 rounded-lg bg-primary/10">
-                        <GraduationCap className="w-5 h-5 text-primary" />
+                      <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center overflow-hidden flex-shrink-0">
+                        {edu.logo ? (
+                          <Image
+                            src={edu.logo}
+                            alt={`${edu.school} logo`}
+                            width={40}
+                            height={40}
+                            className="object-contain"
+                          />
+                        ) : (
+                          <GraduationCap className="w-6 h-6 text-primary" />
+                        )}
                       </div>
                       <div>
                         <h3 className="font-semibold text-foreground mb-1">{edu.school}</h3>
