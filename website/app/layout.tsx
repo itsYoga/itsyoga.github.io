@@ -1,15 +1,40 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
 import FluidBackground from "@/components/FluidBackground";
 
-// Elegant serif font for the entire site
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-serif",
+// LINE Seed Sans - clean, modern font
+const lineSeedSans = localFont({
+  src: [
+    {
+      path: "../public/fonts/line-seed-sans-thin.woff2",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/line-seed-sans-regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/line-seed-sans-bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/line-seed-sans-extrabold.woff2",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/line-seed-sans-heavy.woff2",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-line-seed",
   display: "swap",
 });
 
@@ -75,7 +100,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${instrumentSerif.variable} antialiased`} style={{ fontFamily: "var(--font-serif), Georgia, serif" }}>
+      <body className={`${lineSeedSans.variable} antialiased`} style={{ fontFamily: "var(--font-line-seed), system-ui, sans-serif" }}>
         <CustomCursor />
         <FluidBackground />
         <Navigation />
