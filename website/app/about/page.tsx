@@ -56,14 +56,16 @@ const education = [
 
 const experience = [
   {
-    company: "Industrial Technology Research Institute (ITRI)",
+    company: "ITRI (Industrial Technology Research Institute)",
     role: "AI Image Recognition Intern",
-    location: "Taiwan",
-    period: "Summer 2025",
+    department: "Electronics and Optoelectronics Research Laboratories",
+    location: "Hsinchu, Taiwan",
+    period: "Jun. 2025 – Aug. 2025",
     highlights: [
-      "Optimized YOLO object detection model achieving 99% accuracy",
-      "Developed computer vision models for industrial applications",
-      "Built data preprocessing pipelines and evaluation frameworks",
+      "Optimized multi-task YOLO model for autonomous driving, improving inference speed while maintaining driving area accuracy and detection recall",
+      "Implemented real-time image streaming and detection result transmission via Ethernet/ROS, processing 30 FPS with sub-50ms latency",
+      "Applied neural network pruning techniques to YOLO models for edge deployment",
+      "Supported research by reproducing and exploring SOTA models to benchmark performance",
     ],
   },
 ];
@@ -152,6 +154,7 @@ export default function About() {
                       <div>
                         <h3 className="text-xl font-semibold text-foreground">{exp.role}</h3>
                         <p className="text-foreground/70">{exp.company}</p>
+                        {exp.department && <p className="text-sm text-muted-foreground">{exp.department}</p>}
                       </div>
                       <div className="flex items-center gap-4 text-sm text-muted-foreground">
                         <span className="flex items-center gap-1.5">
