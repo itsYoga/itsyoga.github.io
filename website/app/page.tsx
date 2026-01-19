@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Github, Linkedin, Instagram, Mail } from "lucide-react";
 import Copy from "@/components/Copy";
-import ProfessionalAt from "@/components/ProfessionalAt";
 import ScrambleText from "@/components/ScrambleText";
 import Magnetic from "@/components/Magnetic";
 import Marquee, { MarqueeItem } from "@/components/Marquee";
@@ -102,9 +101,6 @@ export default function Home() {
           </MarqueeItem>
         </Marquee>
       </section>
-
-      {/* Professional At Section */}
-      <ProfessionalAt />
 
       {/* Fixed Contact Button */}
       <motion.div
