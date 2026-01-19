@@ -158,6 +158,13 @@
 }
 
 @layer utilities {
+  /* Hide default cursor on non-touch devices */
+  @media (pointer: fine) {
+    * {
+      cursor: none !important;
+    }
+  }
+
   /* Invert effect for mouse follow highlight */
   .invert {
     filter: invert(1);

@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+import CustomCursor from "@/components/CustomCursor";
+import FluidBackground from "@/components/FluidBackground";
 
 const lineSeedSans = localFont({
   src: [
@@ -98,6 +100,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${lineSeedSans.variable} font-sans antialiased font-semibold`}>
+        <CustomCursor />
+        <FluidBackground />
         <Navigation />
         <main className="pt-16 md:pt-16">
           {children}
