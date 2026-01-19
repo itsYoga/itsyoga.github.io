@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Copy from "@/components/Copy";
 import ClipReveal from "@/components/ClipReveal";
+import EditorialHeader from "@/components/EditorialHeader";
 import { Github, ExternalLink, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -100,18 +101,14 @@ export default function Portfolio() {
       <section className="px-4 pb-20 pt-10 lg:py-24">
         <div className="max-w-6xl mx-auto relative">
           
-          {/* Header Text */}
-          <div className="mb-12 lg:mb-20 space-y-4">
-            <Copy animateOnScroll={false} delay={0}>
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1] pb-1">
-                Selected Works
-              </h1>
-            </Copy>
-            <Copy delay={0.02} animateOnScroll={false}>
-              <p className="text-lg text-muted-foreground max-w-2xl">
-                A showcase of my recent work and creative projects. Tap or hover over the cards to explore.
-              </p>
-            </Copy>
+          {/* Editorial Header */}
+          <div className="mb-16 lg:mb-24">
+            <EditorialHeader
+              index="01"
+              title="Selected Works"
+              subtitle="A showcase of recent projects spanning AI, full-stack development, and creative technology. Each project represents a unique challenge solved with intention and craft."
+              size="large"
+            />
           </div>
 
           {/* The Grid */}

@@ -6,6 +6,7 @@ import { X, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { photoCollections } from "@/data/photography";
 import Copy from "@/components/Copy";
+import EditorialHeader from "@/components/EditorialHeader";
 
 interface FlatPhoto {
   url: string;
@@ -41,17 +42,13 @@ export default function Photography() {
       <section className="px-4 pb-20 pt-10 lg:py-24">
         <div className="max-w-6xl mx-auto">
           
-          <div className="mb-12 lg:mb-20 space-y-4">
-            <Copy animateOnScroll={false} delay={0}>
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1] pb-1">
-                Through My Lens
-              </h1>
-            </Copy>
-            <Copy delay={0.02} animateOnScroll={false}>
-              <p className="text-lg text-muted-foreground max-w-2xl">
-                Exploring the world one frame at a time. A collection of moments captured during my travels and everyday adventures.
-              </p>
-            </Copy>
+          <div className="mb-16 lg:mb-24">
+            <EditorialHeader
+              index="03"
+              title="Through My Lens"
+              subtitle="Exploring the world one frame at a time. A collection of moments captured during travels and everyday adventures."
+              size="large"
+            />
           </div>
 
           {/* Masonry Grid */}

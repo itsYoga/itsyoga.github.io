@@ -2,6 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import Copy from "@/components/Copy";
+import EditorialHeader from "@/components/EditorialHeader";
 import { SiSpotify } from "react-icons/si";
 import Link from "next/link";
 import Image from "next/image";
@@ -56,12 +57,13 @@ export default function Hobbies() {
     <main>
       <section className="px-4 pb-20 lg:py-24">
         <div className="max-w-5xl mx-auto">
-          <div className="mb-12 lg:mb-16">
-            <Copy animateOnScroll={false} delay={0}>
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1] pb-1">
-                Hobbies & Interests
-              </h1>
-            </Copy>
+          <div className="mb-16 lg:mb-20">
+            <EditorialHeader
+              index="04"
+              title="Hobbies & Interests"
+              subtitle="Beyond the code. The activities and passions that bring balance and inspiration to life."
+              size="large"
+            />
           </div>
 
           <div className="space-y-4 md:space-y-6">

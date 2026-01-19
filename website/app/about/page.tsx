@@ -3,7 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Copy from "@/components/Copy";
-import { 
+import EditorialHeader from "@/components/EditorialHeader";
+import {
   FileText, ExternalLink, Download, Code, Code2, Globe, Monitor, Smartphone, Brain
 } from "lucide-react";
 import { 
@@ -198,20 +199,14 @@ export default function About() {
       <section className="px-4 pb-20 pt-10 lg:py-24">
         <div className="max-w-6xl mx-auto space-y-8">
           
-          {/* --- Header Section --- */}
-          <div className="pb-4 border-b">
-            <div className="space-y-2">
-              <Copy animateOnScroll={false} delay={0}>
-                <h1 className="text-4xl md:text-6xl font-bold tracking-tighter leading-[1.1] pb-1">
-                  About Me
-                </h1>
-              </Copy>
-              <Copy delay={0.02} animateOnScroll={false}>
-                <p className="text-muted-foreground text-lg max-w-lg">
-                  My academic background, technical expertise, and professional journey.
-                </p>
-              </Copy>
-            </div>
+          {/* --- Editorial Header Section --- */}
+          <div className="mb-12 lg:mb-16">
+            <EditorialHeader
+              index="02"
+              title="About Me"
+              subtitle="Academic background, technical expertise, and the journey that shapes my approach to building intelligent systems."
+              size="large"
+            />
           </div>
 
           {/* --- Education Section --- */}

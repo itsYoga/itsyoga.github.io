@@ -8,6 +8,7 @@ import ModernTechStack from "@/components/ModernTechStack";
 import ProfessionalAt from "@/components/ProfessionalAt";
 import ScrambleText from "@/components/ScrambleText";
 import Magnetic from "@/components/Magnetic";
+import Marquee, { MarqueeItem } from "@/components/Marquee";
 
 export default function Home() {
   return (
@@ -32,9 +33,12 @@ export default function Home() {
               initial={{ y: 200 }}
               animate={{ y: 0 }}
               transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[clamp(3.5rem,12vw,11rem)] font-bold tracking-tighter leading-[1.1] text-center whitespace-nowrap pb-1"
+              className="text-[clamp(3.5rem,12vw,11rem)] font-bold tracking-tighter leading-[0.95] text-center whitespace-nowrap pb-1"
             >
-              <ScrambleText text="YuJia Liang" delay={0.8} duration={1.2} />
+              <span style={{ fontFamily: "var(--font-display)" }} className="italic font-normal">
+                <ScrambleText text="Yu" delay={0.8} duration={0.8} />
+              </span>
+              <ScrambleText text="Jia Liang" delay={1.0} duration={1.0} />
             </motion.h1>
           </div>
         </motion.div>
@@ -88,6 +92,27 @@ export default function Home() {
       {/* Modern Tech Stack Section */}
       <section className="px-4 -mt-16 lg:-mt-24">
         <ModernTechStack />
+      </section>
+
+      {/* Kinetic Marquee Section */}
+      <section className="py-12 md:py-20 border-y border-border/50 overflow-hidden">
+        <Marquee speed={25} className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-foreground/[0.03]">
+          <MarqueeItem separator="*">
+            <span>AI Engineer</span>
+          </MarqueeItem>
+          <MarqueeItem separator="*">
+            <span style={{ fontFamily: "var(--font-display)" }} className="italic font-normal">Full-Stack</span>
+          </MarqueeItem>
+          <MarqueeItem separator="*">
+            <span>Developer</span>
+          </MarqueeItem>
+          <MarqueeItem separator="*">
+            <span style={{ fontFamily: "var(--font-display)" }} className="italic font-normal">Photographer</span>
+          </MarqueeItem>
+          <MarqueeItem separator="*">
+            <span>Creative</span>
+          </MarqueeItem>
+        </Marquee>
       </section>
 
       {/* Professional At Section */}

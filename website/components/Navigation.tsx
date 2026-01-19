@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Magnetic from "@/components/Magnetic";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -38,35 +39,38 @@ export default function Navigation() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-[clamp(20px,2vw,28px)] font-bold">
-            YuJia
-          </Link>
+          <Magnetic strength={0.25} radius={60}>
+            <Link href="/" className="text-[clamp(20px,2vw,28px)] font-bold block">
+              <span style={{ fontFamily: "var(--font-display)" }} className="italic">Yu</span>Jia
+            </Link>
+          </Magnetic>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
               return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={(e) => handleLinkClick(item.href, e)}
-                  className={cn(
-                    "relative px-4 py-2 rounded-xl text-[clamp(14px,1.2vw,16px)] font-semibold transition-colors",
-                    isActive
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeTab"
-                      className="absolute inset-0 bg-accent rounded-lg"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                    />
-                  )}
-                  <span className="relative">{item.label}</span>
-                </Link>
+                <Magnetic key={item.href} strength={0.3} radius={80}>
+                  <Link
+                    href={item.href}
+                    onClick={(e) => handleLinkClick(item.href, e)}
+                    className={cn(
+                      "relative px-4 py-2 rounded-xl text-[clamp(14px,1.2vw,16px)] font-semibold transition-colors block",
+                      isActive
+                        ? "text-foreground"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute inset-0 bg-accent rounded-lg"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                    <span className="relative">{item.label}</span>
+                  </Link>
+                </Magnetic>
               );
             })}
           </div>
