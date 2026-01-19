@@ -1,23 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Plus_Jakarta_Sans } from "next/font/google";
+import { Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
 import FluidBackground from "@/components/FluidBackground";
 
-// Editorial display font - elegant serif for headlines
+// Elegant serif font for the entire site
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
-  variable: "--font-display",
-  display: "swap",
-});
-
-// Clean modern sans-serif for body text
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-sans",
+  variable: "--font-serif",
   display: "swap",
 });
 
@@ -83,7 +75,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${plusJakartaSans.variable} ${instrumentSerif.variable} font-sans antialiased`}>
+      <body className={`${instrumentSerif.variable} antialiased`} style={{ fontFamily: "var(--font-serif), Georgia, serif" }}>
         <CustomCursor />
         <FluidBackground />
         <Navigation />
