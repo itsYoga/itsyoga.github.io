@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
-import { Instrument_Serif } from "next/font/google";
+import { Instrument_Serif, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
@@ -14,35 +13,11 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
-const lineSeedSans = localFont({
-  src: [
-    {
-      path: "../public/fonts/line-seed-sans-thin.woff2",
-      weight: "100",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/line-seed-sans-regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/line-seed-sans-bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/line-seed-sans-extrabold.woff2",
-      weight: "800",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/line-seed-sans-heavy.woff2",
-      weight: "900",
-      style: "normal",
-    },
-  ],
-  variable: "--font-line-seed",
+// Clean modern sans-serif for body text
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-sans",
   display: "swap",
 });
 
@@ -108,7 +83,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${lineSeedSans.variable} ${instrumentSerif.variable} font-sans antialiased font-semibold`}>
+      <body className={`${plusJakartaSans.variable} ${instrumentSerif.variable} font-sans antialiased`}>
         <CustomCursor />
         <FluidBackground />
         <Navigation />
