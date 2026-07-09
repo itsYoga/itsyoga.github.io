@@ -1,63 +1,54 @@
-# Photography Data Structure
+# Site Content — How to Maintain
 
-This file explains how to add your photography collections to the website.
+Almost everything you'd want to change lives in this `data/` folder.
+Edit the data file, run `npm run build` (or just push — CI builds it), done.
 
-## File Structure
+| What to change | Where |
+|---|---|
+| Projects (portfolio cards + detail pages + homepage) | `data/projects.ts` |
+| Technical skills on About | `data/skills.ts` |
+| Photography collections (film rolls) | `data/photography.ts` + `public/photography/` |
+| Hobbies | `hobbies` array at the top of `app/hobbies/hobbies-client.tsx` |
+| Bio / experience / education | `app/about/about-client.tsx` |
+| Resume PDF | edit `../resume/YuJia_resume.tex`, run `pdflatex`, copy PDF to `public/YuJia_resume.pdf` |
+| New page URLs | add to `public/sitemap.xml` |
 
-Organize your photos in the following structure:
+## Adding a project
 
-```
-public/photography/
-├── event-name-1/
-│   ├── photo1.jpg
-│   ├── photo2.jpg
-│   └── photo3.jpg
-├── place-name-1/
-│   ├── photo1.jpg
-│   └── photo2.jpg
-└── another-event/
-    └── photo1.jpg
-```
+Add an entry to `data/projects.ts`. It automatically appears on the
+portfolio page, gets its own page at `/portfolio/<id>`, and can be
+referenced from the homepage featured section (`app/page.tsx`) and the
+terminal page. Fields:
 
-## Adding a New Collection
+- `id` — becomes the URL slug
+- `thumb` — optional preview image in `public/images/projects/`
+  (extract from a demo video: `ffmpeg -i demo.mp4 -ss 2 -frames:v 1 -vf "scale=1280:-2" thumb.jpg`)
+- `video` — optional demo video in `public/videos/`
+- `award` / `news` — optional badge and press links
 
-1. **Create a folder** in `public/photography/` with a descriptive name (e.g., `sunset-beach-2024` or `taipei-night-market`)
+## Adding skills
 
-2. **Add your photos** to that folder
+Add the name to a category in `data/skills.ts`. To give it an icon,
+map it in `skillIcons` in `app/about/about-client.tsx` (icons come from
+`react-icons/si`). Skills without icons render as plain text chips.
 
-3. **Update `photography.ts`** with your collection details:
+## Adding a photography collection (film roll)
+
+1. Create a folder in `public/photography/` (kebab-case).
+2. Add photos — **compress first**: max 2000px long edge, ideally <500KB
+   (`sips -Z 2000 -s formatOptions 80 photo.jpg`).
+3. Add the collection to `data/photography.ts`:
 
 ```typescript
 {
-  id: "sunset-beach-2024",
-  title: "Sunset at the Beach",
-  description: "A beautiful sunset captured during summer vacation",
-  date: "Summer 2024",
-  location: "Beach Name, City",
+  id: "kyoto-2026",           // used as the roll's edge label
+  title: "Kyoto",
+  description: "Autumn in Kyoto",
+  location: "Kyoto, Japan",
   photos: [
-    {
-      src: "/photography/sunset-beach-2024/photo1.jpg",
-      alt: "Sunset over the ocean"
-    },
-    {
-      src: "/photography/sunset-beach-2024/photo2.jpg",
-      alt: "Waves crashing on the shore"
-    },
-    // Add more photos...
-  ]
+    { src: "/photography/kyoto-2026/photo1.jpg", alt: "Torii gate at dusk" },
+  ],
 }
 ```
 
-## Photo Requirements
-
-- Supported formats: JPG, PNG, WebP
-- Recommended size: 1200-2000px on the longest side
-- Keep file sizes reasonable for web (under 500KB per photo is ideal)
-
-## Tips
-
-- Use descriptive folder names (kebab-case recommended)
-- Add meaningful alt text for accessibility
-- Organize photos chronologically or by theme
-- You can add multiple collections to showcase different events/places
-
+Each collection renders as one scrollable film roll, in array order.

@@ -6,7 +6,6 @@ import { X, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import Image from "next/image";
 import { photoCollections } from "@/data/photography";
 import EditorialHeader from "@/components/EditorialHeader";
-import Magnetic from "@/components/Magnetic";
 
 interface FlatPhoto {
   url: string;
@@ -16,19 +15,26 @@ interface FlatPhoto {
   collectionId: string;
 }
 
+/* Sprocket-hole strip: holes punch through to the page background */
+function Perforations() {
+  return (
+    <div
+      aria-hidden
+      className="h-5 mx-2"
+      style={{
+        backgroundImage:
+          "radial-gradient(circle at 50% 50%, var(--background) 4px, transparent 4.5px)",
+        backgroundSize: "28px 100%",
+        backgroundPosition: "center",
+      }}
+    />
+  );
+}
+
 export default function Photography() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [activeCollection, setActiveCollection] = useState<string>("all");
 
-  // Get unique collection IDs for filtering
-  const collections = useMemo(() => {
-    return [
-      { id: "all", title: "All" },
-      ...photoCollections.map((c) => ({ id: c.id, title: c.title })),
-    ];
-  }, []);
-
-  // Flatten all photos from collections into a single array
+  // Flat list for the lightbox; rolls index into it via running offsets
   const allPhotos: FlatPhoto[] = useMemo(() => {
     const flatPhotos: FlatPhoto[] = [];
     photoCollections.forEach((collection) => {
@@ -45,11 +51,15 @@ export default function Photography() {
     return flatPhotos;
   }, []);
 
-  // Filter photos based on active collection
-  const photos = useMemo(() => {
-    if (activeCollection === "all") return allPhotos;
-    return allPhotos.filter((p) => p.collectionId === activeCollection);
-  }, [allPhotos, activeCollection]);
+  const collectionOffsets = useMemo(() => {
+    const offsets: Record<string, number> = {};
+    let offset = 0;
+    photoCollections.forEach((collection) => {
+      offsets[collection.id] = offset;
+      offset += collection.photos.length;
+    });
+    return offsets;
+  }, []);
 
   // Keyboard navigation
   const handleKeyDown = useCallback(
@@ -60,15 +70,15 @@ export default function Photography() {
         setSelectedImage(null);
       } else if (e.key === "ArrowLeft") {
         setSelectedImage((prev) =>
-          prev === 0 ? photos.length - 1 : (prev ?? 0) - 1
+          prev === 0 ? allPhotos.length - 1 : (prev ?? 0) - 1
         );
       } else if (e.key === "ArrowRight") {
         setSelectedImage((prev) =>
-          prev === photos.length - 1 ? 0 : (prev ?? 0) + 1
+          prev === allPhotos.length - 1 ? 0 : (prev ?? 0) + 1
         );
       }
     },
-    [selectedImage, photos.length]
+    [selectedImage, allPhotos.length]
   );
 
   useEffect(() => {
@@ -78,11 +88,7 @@ export default function Photography() {
 
   // Prevent body scroll when lightbox is open
   useEffect(() => {
-    if (selectedImage !== null) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = selectedImage !== null ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
@@ -90,128 +96,92 @@ export default function Photography() {
 
   return (
     <main className="min-h-screen">
-      <section className="px-4 pb-20 pt-10 lg:py-24">
+      <section className="px-4 pb-24 pt-10 lg:py-24">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="mb-12 lg:mb-20">
+          <div className="mb-16 lg:mb-24">
             <EditorialHeader
               index="03"
               title="Through My Lens"
-              subtitle="Exploring the world one frame at a time. A collection of moments captured during travels and everyday adventures."
+              subtitle="Every collection is a roll of film — scroll through the frames, click one to develop the memory."
               size="large"
             />
           </div>
 
-          {/* Collection Filter */}
-          <div className="mb-12">
-            <div className="flex flex-wrap gap-2">
-              {collections.map((collection) => (
-                <Magnetic key={collection.id} strength={0.2} radius={40}>
-                  <button
-                    onClick={() => {
-                      setActiveCollection(collection.id);
-                      setSelectedImage(null);
-                    }}
-                    className={`px-4 py-2 text-sm rounded-full border transition-all duration-300 ${
-                      activeCollection === collection.id
-                        ? "bg-foreground text-background border-foreground"
-                        : "bg-transparent text-foreground/70 border-border/50 hover:border-foreground/30 hover:text-foreground"
-                    }`}
-                  >
-                    {collection.title}
-                  </button>
-                </Magnetic>
-              ))}
-            </div>
-          </div>
-
-          {/* Photo Count */}
-          <div className="mb-8 flex items-center justify-between">
-            <p className="text-sm text-muted-foreground">
-              {photos.length} {photos.length === 1 ? "photo" : "photos"}
-              {activeCollection !== "all" && (
-                <span className="ml-2">
-                  in{" "}
-                  <span className="text-foreground">
-                    {collections.find((c) => c.id === activeCollection)?.title}
+          {/* Film rolls */}
+          <div className="space-y-16 md:space-y-20">
+            {photoCollections.map((collection, rollIndex) => (
+              <motion.section
+                key={collection.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6 }}
+              >
+                {/* Roll label */}
+                <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-4 px-1">
+                  <span className="font-mono text-xs tracking-[0.2em] text-primary">
+                    ROLL {String(rollIndex + 1).padStart(2, "0")}
                   </span>
-                </span>
-              )}
-            </p>
+                  <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
+                    {collection.title}
+                  </h2>
+                  <span className="text-sm text-muted-foreground">
+                    {collection.location && `${collection.location} · `}
+                    {collection.photos.length} frames
+                  </span>
+                  <span className="ml-auto hidden md:inline font-mono text-[11px] text-muted-foreground/60">
+                    scroll →
+                  </span>
+                </div>
+
+                {/* Film strip */}
+                <div className="rounded-2xl bg-[#171310] shadow-xl overflow-hidden">
+                  <Perforations />
+                  <div className="flex items-stretch gap-3 overflow-x-auto px-4 py-1 snap-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                    {collection.photos.map((photo, frameIndex) => (
+                      <button
+                        key={photo.src}
+                        onClick={() =>
+                          setSelectedImage(collectionOffsets[collection.id] + frameIndex)
+                        }
+                        className="group shrink-0 snap-center text-left"
+                        aria-label={`${collection.title} frame ${frameIndex + 1}`}
+                      >
+                        <div className="relative h-48 md:h-64 overflow-hidden bg-black/40">
+                          <Image
+                            src={photo.src}
+                            alt={photo.alt || collection.title}
+                            width={900}
+                            height={600}
+                            className="h-full w-auto max-w-none object-cover transition duration-500 group-hover:brightness-110 group-hover:contrast-[1.02]"
+                            sizes="(max-width: 768px) 60vw, 30vw"
+                            loading={rollIndex === 0 ? "eager" : "lazy"}
+                            quality={82}
+                          />
+                        </div>
+                        <div className="flex items-center justify-between mt-1 mb-1.5 px-0.5">
+                          <span className="font-mono text-[10px] tracking-[0.25em] text-amber-500/70">
+                            {String(frameIndex + 1).padStart(2, "0")}A
+                          </span>
+                          <span className="font-mono text-[10px] tracking-[0.2em] text-amber-500/40 uppercase group-hover:text-amber-500/70 transition-colors">
+                            {collection.id}·400
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                  <Perforations />
+                </div>
+              </motion.section>
+            ))}
           </div>
-
-          {/* Masonry Grid */}
-          <AnimatePresence mode="wait">
-            {photos.length > 0 ? (
-              <motion.div
-                key={activeCollection}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-                className="columns-1 sm:columns-2 lg:columns-3 gap-4"
-              >
-                {photos.map((photo, index) => (
-                  <motion.div
-                    key={`${photo.collectionId}-${photo.url}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.4,
-                      delay: Math.min(index * 0.05, 0.5),
-                    }}
-                    className="break-inside-avoid mb-4 group cursor-pointer"
-                    onClick={() => setSelectedImage(index)}
-                  >
-                    <div className="relative overflow-hidden rounded-xl bg-accent/30">
-                      <Image
-                        src={photo.url}
-                        alt={photo.title}
-                        width={800}
-                        height={600}
-                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        loading={index < 6 ? "eager" : "lazy"}
-                        priority={index < 6}
-                        quality={85}
-                        placeholder="blur"
-                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                      />
-                      {/* Subtle overlay on hover */}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-
-                      {/* Bottom info bar - appears on hover */}
-                      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <p className="text-white text-sm font-medium">{photo.title}</p>
-                        {photo.location && (
-                          <p className="text-white/70 text-xs flex items-center gap-1 mt-0.5">
-                            <MapPin className="w-3 h-3" />
-                            {photo.location}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-center py-20"
-              >
-                <p className="text-muted-foreground text-lg mb-4">
-                  No photos in this collection yet.
-                </p>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
       </section>
 
       {/* Lightbox */}
       <AnimatePresence>
-        {selectedImage !== null && photos[selectedImage] && (
+        {selectedImage !== null && allPhotos[selectedImage] && (
           <>
             {/* Backdrop */}
             <motion.div
@@ -239,14 +209,14 @@ export default function Photography() {
               </button>
 
               {/* Navigation buttons */}
-              {photos.length > 1 && (
+              {allPhotos.length > 1 && (
                 <>
                   <button
                     className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-foreground/10 border border-border/50 hover:bg-foreground/20 transition-colors z-10"
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedImage((prev) =>
-                        prev === 0 ? photos.length - 1 : (prev ?? 0) - 1
+                        prev === 0 ? allPhotos.length - 1 : (prev ?? 0) - 1
                       );
                     }}
                   >
@@ -257,7 +227,7 @@ export default function Photography() {
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedImage((prev) =>
-                        prev === photos.length - 1 ? 0 : (prev ?? 0) + 1
+                        prev === allPhotos.length - 1 ? 0 : (prev ?? 0) + 1
                       );
                     }}
                   >
@@ -278,8 +248,8 @@ export default function Photography() {
               >
                 <div className="relative w-full flex items-center justify-center">
                   <Image
-                    src={photos[selectedImage].url}
-                    alt={photos[selectedImage].title}
+                    src={allPhotos[selectedImage].url}
+                    alt={allPhotos[selectedImage].title}
                     width={1400}
                     height={1000}
                     className="max-h-[70vh] w-auto h-auto object-contain rounded-lg"
@@ -297,19 +267,19 @@ export default function Photography() {
                   className="mt-6 text-center"
                 >
                   <h3 className="text-xl md:text-2xl font-semibold mb-2">
-                    {photos[selectedImage].title}
+                    {allPhotos[selectedImage].title}
                   </h3>
                   <p className="text-muted-foreground text-sm mb-1">
-                    {photos[selectedImage].category}
+                    {allPhotos[selectedImage].category}
                   </p>
-                  {photos[selectedImage].location && (
+                  {allPhotos[selectedImage].location && (
                     <p className="text-muted-foreground/70 text-xs flex items-center justify-center gap-1">
                       <MapPin className="w-3 h-3" />
-                      {photos[selectedImage].location}
+                      {allPhotos[selectedImage].location}
                     </p>
                   )}
-                  <p className="text-muted-foreground/50 text-xs mt-4">
-                    {selectedImage + 1} / {photos.length}
+                  <p className="font-mono text-muted-foreground/50 text-xs mt-4 tracking-widest">
+                    FRAME {selectedImage + 1} / {allPhotos.length}
                   </p>
                 </motion.div>
               </motion.div>

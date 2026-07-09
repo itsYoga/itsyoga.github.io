@@ -149,22 +149,34 @@ export default function Hobbies() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="group"
               >
-                {/* Header row with index and title */}
-                <div className="flex items-start gap-6 mb-6">
-                  <span className="text-5xl md:text-6xl font-bold text-foreground/10 tabular-nums leading-none">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <div className="flex-1 pt-2">
-                    <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-3">
-                      {hobby.title}
-                    </h2>
-                    <p className="text-muted-foreground leading-relaxed max-w-2xl">
+                <div
+                  className={`grid grid-cols-1 gap-8 md:gap-14 items-center ${
+                    hobby.photos && hobby.photos.length > 0 ? "md:grid-cols-2" : ""
+                  }`}
+                >
+                  {/* Text — alternates sides on desktop */}
+                  <div
+                    className={
+                      hobby.photos && hobby.photos.length > 0 && index % 2 === 1
+                        ? "md:order-2"
+                        : ""
+                    }
+                  >
+                    <div className="flex items-baseline gap-4 mb-4">
+                      <span className="font-mono text-sm tracking-[0.2em] text-primary">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <h2 className="text-2xl md:text-3xl font-semibold text-foreground">
+                        {hobby.title}
+                      </h2>
+                    </div>
+                    <p className="text-muted-foreground leading-relaxed">
                       {hobby.description}
                     </p>
 
                     {/* Link */}
                     {hobby.link && (
-                      <div className="mt-4">
+                      <div className="mt-5">
                         <Magnetic strength={0.3} radius={60}>
                           <Link
                             href={hobby.link}
@@ -185,46 +197,43 @@ export default function Hobbies() {
                       </div>
                     )}
                   </div>
-                </div>
 
-                {/* Photo Gallery */}
-                {hobby.photos && hobby.photos.length > 0 && (
-                  <div className="ml-0 md:ml-[calc(3.75rem+1.5rem)]">
-                    <div
-                      className={`grid gap-3 ${
-                        hobby.photos.length === 1
-                          ? "grid-cols-1 max-w-md"
-                          : hobby.photos.length === 2
-                          ? "grid-cols-2"
-                          : hobby.photos.length === 3
-                          ? "grid-cols-3"
-                          : "grid-cols-2 md:grid-cols-4"
-                      }`}
-                    >
-                      {hobby.photos.map((photo, photoIndex) => (
-                        <motion.div
-                          key={photoIndex}
-                          initial={{ opacity: 0, scale: 0.95 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.4, delay: photoIndex * 0.05 }}
-                          onClick={() => setLightbox({ hobbyIndex: index, photoIndex })}
-                          className="relative aspect-square overflow-hidden rounded-xl cursor-pointer group/photo bg-accent/30"
-                        >
-                          <Image
-                            src={photo}
-                            alt={`${hobby.title} photo ${photoIndex + 1}`}
-                            fill
-                            className="object-cover transition-transform duration-500 group-hover/photo:scale-105"
-                            sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 bg-black/0 group-hover/photo:bg-black/20 transition-colors duration-300" />
-                        </motion.div>
-                      ))}
+                  {/* Photo collage */}
+                  {hobby.photos && hobby.photos.length > 0 && (
+                    <div className={index % 2 === 1 ? "md:order-1" : ""}>
+                      <div className="grid grid-cols-2 gap-3">
+                        {hobby.photos.map((photo, photoIndex) => {
+                          // With an odd photo count, let the first photo span the row
+                          const spansRow =
+                            hobby.photos!.length % 2 === 1 && photoIndex === 0;
+                          return (
+                            <motion.div
+                              key={photoIndex}
+                              initial={{ opacity: 0, scale: 0.96 }}
+                              whileInView={{ opacity: 1, scale: 1 }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 0.4, delay: photoIndex * 0.05 }}
+                              onClick={() => setLightbox({ hobbyIndex: index, photoIndex })}
+                              className={`relative overflow-hidden rounded-xl cursor-pointer group/photo bg-accent/30 ${
+                                spansRow ? "col-span-2 aspect-video" : "aspect-square"
+                              }`}
+                            >
+                              <Image
+                                src={photo}
+                                alt={`${hobby.title} photo ${photoIndex + 1}`}
+                                fill
+                                className="object-cover transition-transform duration-500 group-hover/photo:scale-105"
+                                sizes="(max-width: 768px) 50vw, 25vw"
+                                loading="lazy"
+                              />
+                              <div className="absolute inset-0 bg-black/0 group-hover/photo:bg-black/20 transition-colors duration-300" />
+                            </motion.div>
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </motion.article>
             ))}
           </div>

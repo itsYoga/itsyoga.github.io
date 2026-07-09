@@ -9,51 +9,30 @@ import {
   FileText, ExternalLink, MapPin, Calendar, Briefcase, GraduationCap, Download
 } from "lucide-react";
 import Image from "next/image";
+import type { IconType } from "react-icons";
 import {
   SiPython, SiCplusplus, SiTypescript, SiSwift, SiDart, SiPostgresql,
-  SiPytorch, SiTensorflow, SiOpencv, SiScikitlearn,
+  SiPytorch, SiTensorflow, SiOpencv, SiOnnx, SiScikitlearn,
   SiReact, SiNextdotjs, SiFlutter, SiFastapi, SiNodedotjs,
-  SiDocker, SiFirebase, SiRedis,
-  SiFigma, SiOpenai, SiGoogle, SiSupabase, SiTailwindcss, SiAnthropic, SiGithubcopilot,
-  SiRust, SiSolidity, SiTauri, SiVuedotjs, SiVite,
-  SiMongodb, SiInfluxdb, SiKubernetes, SiGithubactions, SiGrafana
+  SiDocker, SiFirebase, SiRedis, SiRust, SiTauri, SiTailwindcss,
+  SiOpenjdk, SiSupabase, SiGit, SiGithubactions, SiPytest, SiVitest,
+  SiClaude, SiOpenai, SiGithubcopilot, SiGooglegemini, SiFigma,
 } from "react-icons/si";
-import { DiJava } from "react-icons/di";
+import { skills } from "@/data/skills";
 
-// Skill icons mapping
-const skillIcons: Record<string, any> = {
-  // Languages
+// Icon per skill — skills without an entry render as plain chips.
+const skillIcons: Record<string, IconType> = {
   "Python": SiPython, "TypeScript": SiTypescript, "Rust": SiRust, "Swift": SiSwift,
-  "Dart": SiDart, "Solidity": SiSolidity, "C++": SiCplusplus, "Java": DiJava,
-  // ML/AI
+  "Dart": SiDart, "C++": SiCplusplus, "Java": SiOpenjdk,
   "PyTorch": SiPytorch, "TensorFlow": SiTensorflow, "OpenCV": SiOpencv,
-  "scikit-learn": SiScikitlearn,
-  // Frontend & Mobile
-  "React": SiReact, "Next.js": SiNextdotjs, "Tauri": SiTauri, "Flutter": SiFlutter,
-  "SwiftUI": SiSwift, "Tailwind": SiTailwindcss, "Vue.js": SiVuedotjs, "Vite": SiVite,
-  // Backend
-  "FastAPI": SiFastapi, "Node.js": SiNodedotjs, "Redis": SiRedis,
-  // Infra
-  "MongoDB": SiMongodb, "PostgreSQL": SiPostgresql, "Firebase": SiFirebase,
-  "Supabase": SiSupabase, "InfluxDB": SiInfluxdb, "Docker": SiDocker, "Kubernetes": SiKubernetes,
-  // DevOps
-  "GitHub Actions": SiGithubactions,
-  // Testing & Monitoring
-  "Grafana": SiGrafana,
-  // AI Tools
-  "Claude": SiAnthropic, "ChatGPT": SiOpenai, "GitHub Copilot": SiGithubcopilot,
-  "Gemini": SiGoogle, "Figma": SiFigma,
-};
-
-// Skills data from resume
-const skills = {
-  "Languages": ["Python", "TypeScript", "Rust", "Swift", "Dart", "Solidity", "C++", "Java"],
-  "ML / AI": ["PyTorch", "TensorFlow", "OpenCV", "YOLO", "ONNX", "scikit-learn"],
-  "Frontend & Mobile": ["React", "Next.js", "Tauri", "Flutter", "SwiftUI", "Tailwind", "Vue.js", "Vite"],
-  "Backend": ["FastAPI", "Node.js", "Redis"],
-  "Infra": ["MongoDB", "PostgreSQL", "Firebase", "Supabase", "InfluxDB", "Docker", "Kubernetes"],
-  "DevOps & Testing": ["GitHub Actions", "Playwright", "Pytest", "Grafana"],
-  "AI Tools": ["Claude", "ChatGPT", "Cursor", "GitHub Copilot", "Gemini", "Figma"],
+  "ONNX": SiOnnx, "scikit-learn": SiScikitlearn,
+  "React": SiReact, "Next.js": SiNextdotjs, "SwiftUI": SiSwift, "Flutter": SiFlutter,
+  "Tauri": SiTauri, "Tailwind": SiTailwindcss,
+  "FastAPI": SiFastapi, "Node.js": SiNodedotjs, "PostgreSQL": SiPostgresql,
+  "Redis": SiRedis, "Firebase": SiFirebase, "Supabase": SiSupabase, "Docker": SiDocker,
+  "Git": SiGit, "GitHub Actions": SiGithubactions, "pytest": SiPytest, "Vitest": SiVitest,
+  "Claude": SiClaude, "ChatGPT": SiOpenai, "GitHub Copilot": SiGithubcopilot,
+  "Gemini": SiGooglegemini, "Figma": SiFigma,
 };
 
 const education = [
@@ -106,7 +85,7 @@ export default function About() {
             <EditorialHeader
               index="01"
               title="About Me"
-              subtitle="Computer Science student passionate about AI, full-stack development, and creative problem-solving."
+              subtitle="AI engineer, WWDC26 Swift Student Challenge Winner, and photographer based in Taipei."
               size="large"
             />
           </div>
@@ -166,19 +145,24 @@ export default function About() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8">Technical Skills</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {Object.entries(skills).map(([category, items], idx) => (
-                  <div key={category}>
-                    <h3 className="text-lg font-semibold mb-4 text-foreground">{category}</h3>
-                    <div className="flex flex-wrap gap-2">
+              <div className="border-t border-border/60">
+                {Object.entries(skills).map(([category, items]) => (
+                  <div
+                    key={category}
+                    className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-2 md:gap-8 py-5 border-b border-border/60"
+                  >
+                    <h3 className="text-xs uppercase tracking-widest text-muted-foreground pt-2.5">
+                      {category}
+                    </h3>
+                    <div className="flex flex-wrap gap-1">
                       {items.map((skill) => {
                         const Icon = skillIcons[skill];
                         return (
                           <span
                             key={skill}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent/50 border border-border/50 rounded-full text-sm text-foreground/80 hover:border-primary/50 hover:bg-accent transition-colors"
+                            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-[15px] text-foreground/85 hover:bg-accent/60 hover:text-foreground transition-colors"
                           >
-                            {Icon && <Icon className="w-3.5 h-3.5" />}
+                            {Icon && <Icon className="w-4 h-4 opacity-80" />}
                             {skill}
                           </span>
                         );

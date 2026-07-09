@@ -4,9 +4,65 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight, Trophy } from "lucide-react";
 import EditorialHeader from "@/components/EditorialHeader";
-import { projects } from "@/data/projects";
+import { projects, type Project } from "@/data/projects";
+
+function ProjectMedia({ project, className = "" }: { project: Project; className?: string }) {
+  return (
+    <div className={`relative overflow-hidden bg-gradient-to-br ${project.accent} ${className}`}>
+      {project.thumb ? (
+        <img
+          src={project.thumb}
+          alt={`${project.title} preview`}
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+        />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-7xl font-bold text-white/30 select-none transition-transform duration-700 group-hover:scale-110">
+            {project.title.charAt(0)}
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TechChips({ tech, limit = 4 }: { tech: string[]; limit?: number }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {tech.slice(0, limit).map((t) => (
+        <span
+          key={t}
+          className="px-2.5 py-1 text-xs bg-accent/50 border border-border/50 rounded-full text-foreground/70"
+        >
+          {t}
+        </span>
+      ))}
+      {tech.length > limit && (
+        <span className="px-2.5 py-1 text-xs text-muted-foreground">
+          +{tech.length - limit} more
+        </span>
+      )}
+    </div>
+  );
+}
+
+function AwardBadge({ label, size = "sm" }: { label: string; size?: "sm" | "md" }) {
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 font-semibold rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 ${
+        size === "md" ? "px-3 py-1.5 text-sm" : "px-3 py-1 text-xs"
+      }`}
+    >
+      <Trophy className={size === "md" ? "w-4 h-4" : "w-3.5 h-3.5"} />
+      {label}
+    </span>
+  );
+}
 
 export default function Portfolio() {
+  const [featured, ...rest] = projects;
+
   return (
     <main className="min-h-screen">
       <section className="px-4 pb-20 pt-10 lg:py-24">
@@ -22,77 +78,69 @@ export default function Portfolio() {
             />
           </div>
 
-          {/* Project List */}
-          <div className="space-y-6">
-            {projects.map((project, index) => (
+          {/* Featured project */}
+          <motion.article
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="group mb-6"
+          >
+            <Link href={`/portfolio/${featured.id}`} data-cursor="View" className="block">
+              <div className="grid grid-cols-1 md:grid-cols-5 rounded-2xl border border-border/50 bg-card/30 hover:bg-card/60 hover:border-border transition-all duration-300 overflow-hidden">
+                <ProjectMedia
+                  project={featured}
+                  className="md:col-span-3 aspect-video md:aspect-auto md:min-h-[320px]"
+                />
+                <div className="md:col-span-2 flex flex-col justify-center p-7 md:p-9">
+                  {featured.award && (
+                    <div className="mb-4">
+                      <AwardBadge label={featured.award} size="md" />
+                    </div>
+                  )}
+                  <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors mb-3">
+                    {featured.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed mb-6">
+                    {featured.shortDesc}
+                  </p>
+                  <TechChips tech={featured.tech} limit={5} />
+                  <div className="flex items-center gap-2 mt-7 text-sm font-medium text-foreground/70 group-hover:text-primary transition-colors">
+                    View project
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </motion.article>
+
+          {/* Remaining projects */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {rest.map((project, index) => (
               <motion.article
                 key={project.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: (index % 2) * 0.1 }}
                 className="group"
               >
-                <Link href={`/portfolio/${project.id}`} data-cursor="View" className="block">
-                  <div className="flex items-start gap-6 p-6 rounded-2xl border border-border/50 bg-card/30 hover:bg-card/60 hover:border-border transition-all duration-300">
-                    {/* Thumbnail */}
-                    <div className={`hidden sm:block shrink-0 w-44 md:w-52 aspect-video rounded-xl overflow-hidden bg-gradient-to-br ${project.accent}`}>
-                      {project.thumb ? (
-                        <img
-                          src={project.thumb}
-                          alt={`${project.title} preview`}
-                          loading="lazy"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <span className="text-5xl font-bold text-white/40 select-none group-hover:scale-110 transition-transform duration-500">
-                            {project.title.charAt(0)}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <div className="flex flex-wrap items-center gap-3 mb-2">
-                            <h3 className="text-xl md:text-2xl font-semibold text-foreground group-hover:text-primary transition-colors">
-                              {project.title}
-                            </h3>
-                            {project.award && (
-                              <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
-                                <Trophy className="w-3.5 h-3.5" />
-                                {project.award}
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-muted-foreground mb-4">
-                            {project.shortDesc}
-                          </p>
-                          <div className="flex flex-wrap gap-2">
-                            {project.tech.slice(0, 4).map((t) => (
-                              <span
-                                key={t}
-                                className="px-2.5 py-1 text-xs bg-accent/50 border border-border/50 rounded-full text-foreground/70"
-                              >
-                                {t}
-                              </span>
-                            ))}
-                            {project.tech.length > 4 && (
-                              <span className="px-2.5 py-1 text-xs text-muted-foreground">
-                                +{project.tech.length - 4} more
-                              </span>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Arrow */}
-                        <div className="p-2 rounded-full border border-border/50 group-hover:border-primary/50 group-hover:bg-primary/10 transition-all">
-                          <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                        </div>
+                <Link href={`/portfolio/${project.id}`} data-cursor="View" className="block h-full">
+                  <div className="flex flex-col h-full rounded-2xl border border-border/50 bg-card/30 hover:bg-card/60 hover:border-border transition-all duration-300 overflow-hidden">
+                    <ProjectMedia project={project} className="aspect-video" />
+                    <div className="flex flex-col flex-1 p-6">
+                      <div className="flex items-start justify-between gap-3 mb-2">
+                        <h3 className="text-lg md:text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                          {project.title}
+                        </h3>
+                        <span className="font-mono text-xs text-muted-foreground/50 pt-1.5 shrink-0">
+                          {String(index + 2).padStart(2, "0")}
+                        </span>
                       </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
+                        {project.shortDesc}
+                      </p>
+                      <TechChips tech={project.tech} />
                     </div>
                   </div>
                 </Link>
