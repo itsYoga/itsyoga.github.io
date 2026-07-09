@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, X, SquareTerminal } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Magnetic from "@/components/Magnetic";
 
@@ -20,6 +20,25 @@ export default function Navigation() {
   const pathname = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Easter egg: press ` anywhere to open the terminal
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        e.key === "`" &&
+        !e.metaKey && !e.ctrlKey && !e.altKey &&
+        target.tagName !== "INPUT" &&
+        target.tagName !== "TEXTAREA" &&
+        !target.isContentEditable
+      ) {
+        e.preventDefault();
+        router.push("/terminal");
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [router]);
 
   const handleLinkClick = (href: string, e: React.MouseEvent) => {
     if (pathname === href) {
@@ -73,6 +92,22 @@ export default function Navigation() {
                 </Magnetic>
               );
             })}
+            <Magnetic strength={0.3} radius={80}>
+              <Link
+                href="/terminal"
+                onClick={(e) => handleLinkClick("/terminal", e)}
+                aria-label="Terminal"
+                title="Terminal (`)"
+                className={cn(
+                  "relative p-2 ml-1 rounded-xl transition-colors block",
+                  pathname === "/terminal"
+                    ? "text-foreground"
+                    : "text-muted-foreground/60 hover:text-foreground"
+                )}
+              >
+                <SquareTerminal className="w-[18px] h-[18px]" />
+              </Link>
+            </Magnetic>
           </div>
 
           {/* Mobile Menu Button */}
@@ -121,6 +156,22 @@ export default function Navigation() {
                     </Link>
                   );
                 })}
+                <Link
+                  href="/terminal"
+                  onClick={(e) => {
+                    setIsMobileMenuOpen(false);
+                    handleLinkClick("/terminal", e);
+                  }}
+                  className={cn(
+                    "flex items-center gap-2 px-4 py-3 rounded-xl text-[clamp(16px,1.2vw,18px)] font-semibold transition-colors",
+                    pathname === "/terminal"
+                      ? "text-foreground bg-accent"
+                      : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                  )}
+                >
+                  <SquareTerminal className="w-5 h-5" />
+                  Terminal
+                </Link>
               </div>
             </motion.div>
           )}
