@@ -55,7 +55,8 @@
   --card-foreground: oklch(0.12 0.02 240);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.12 0.02 240);
-  --primary: oklch(0.45 0.18 240);
+  /* Signature amber — echoes the WWDC award badge */
+  --primary: oklch(0.55 0.13 65);
   --primary-foreground: oklch(0.99 0.005 240);
   --secondary: oklch(0.95 0.015 240);
   --secondary-foreground: oklch(0.12 0.02 240);
@@ -69,7 +70,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.88 0.015 240);
   --input: oklch(0.88 0.015 240);
-  --ring: oklch(0.45 0.18 240);
+  --ring: oklch(0.55 0.13 65);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -92,8 +93,9 @@
   --card-foreground: oklch(0.95 0.005 240);
   --popover: oklch(0.15 0.02 240);
   --popover-foreground: oklch(0.95 0.005 240);
-  --primary: oklch(0.65 0.18 240);
-  --primary-foreground: oklch(0.1 0.02 240);
+  /* Signature amber — echoes the WWDC award badge */
+  --primary: oklch(0.8 0.14 80);
+  --primary-foreground: oklch(0.15 0.03 80);
   --secondary: oklch(0.2 0.02 240);
   --secondary-foreground: oklch(0.95 0.005 240);
   --muted: oklch(0.2 0.02 240);
@@ -106,7 +108,7 @@
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(0.25 0.02 240);
   --input: oklch(0.25 0.02 240);
-  --ring: oklch(0.65 0.18 240);
+  --ring: oklch(0.8 0.14 80);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
