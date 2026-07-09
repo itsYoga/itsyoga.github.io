@@ -8,27 +8,27 @@ const PROMPT = "yujia@yujialiang.com:~$";
 const projects: Record<string, { desc: string; url: string }> = {
   riffnode: {
     desc: "AI guitar effects studio — WWDC26 Swift Student Challenge Winner",
-    url: "/portfolio",
+    url: "/portfolio/riffnode",
   },
   volleyball: {
     desc: "Deep-learning volleyball analytics (ball tracking, action recognition)",
-    url: "https://github.com/DL-Volleyball-Analysis",
+    url: "/portfolio/volleyball",
   },
   ghote: {
     desc: "Local-first AI note-taking app for macOS (Tauri + React)",
-    url: "https://github.com/Ghote-notes",
+    url: "/portfolio/ghote",
   },
   syncup: {
     desc: "AI-powered social calendar app (Flutter + Gemini)",
-    url: "https://github.com/itsYoga/Sync",
+    url: "/portfolio/syncup",
   },
   archon: {
     desc: "DeFi platform for real-world asset tokenization",
-    url: "https://github.com/itsYoga/Archon",
+    url: "/portfolio/archon",
   },
   asl: {
     desc: "iOS app for learning American Sign Language (CoreML)",
-    url: "https://github.com/itsYoga/ASLoading",
+    url: "/portfolio/asl",
   },
 };
 

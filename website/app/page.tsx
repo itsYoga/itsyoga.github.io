@@ -136,18 +136,21 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
               {
+                slug: "riffnode",
                 title: "RiffNode",
                 desc: "AI guitar effects studio built with native Apple frameworks — WWDC26 Swift Student Challenge Winner.",
                 tech: ["SwiftUI", "AVFoundation", "vDSP"],
                 award: true,
               },
               {
+                slug: "volleyball",
                 title: "Volleyball Match Analysis",
                 desc: "Deep-learning analytics platform with ball tracking, action recognition, and player tracking.",
                 tech: ["PyTorch", "YOLO", "FastAPI"],
                 award: false,
               },
               {
+                slug: "ghote",
                 title: "Ghote Notes",
                 desc: "Local-first AI note-taking app for macOS with knowledge graph and real-time collaboration.",
                 tech: ["Tauri", "Rust", "React"],
@@ -162,7 +165,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
                 <Link
-                  href="/portfolio"
+                  href={`/portfolio/${project.slug}`}
                   data-cursor="View"
                   className="group flex flex-col h-full p-6 rounded-2xl border border-border/50 bg-card/30 hover:bg-card/60 hover:border-border transition-all duration-300"
                 >
