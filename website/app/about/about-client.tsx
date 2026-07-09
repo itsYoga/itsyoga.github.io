@@ -6,9 +6,11 @@ import Copy from "@/components/Copy";
 import EditorialHeader from "@/components/EditorialHeader";
 import Magnetic from "@/components/Magnetic";
 import {
-  FileText, ExternalLink, MapPin, Calendar, Briefcase, GraduationCap, Download
+  FileText, ExternalLink, MapPin, Calendar, Briefcase, GraduationCap, Download, Camera
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { SiSpotify } from "react-icons/si";
 import type { IconType } from "react-icons";
 import {
   SiPython, SiCplusplus, SiTypescript, SiSwift, SiDart, SiPostgresql,
@@ -274,6 +276,44 @@ export default function About() {
                     )}
                   </div>
                 ))}
+              </div>
+            </motion.section>
+
+            {/* Beyond Code Section */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8">Beyond Code</h2>
+              <p className="text-lg leading-relaxed text-foreground/75 max-w-3xl mb-6">
+                Off the clock I captain my department&apos;s volleyball team, scuba dive, play guitar,
+                and develop film as darkroom officer of NTU&apos;s photography club. Most of it ends up
+                in front of a camera sooner or later — the results live on the Photography page.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Magnetic strength={0.3} radius={60}>
+                  <Link
+                    href="/photography"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-primary/10 text-primary hover:bg-primary/20 border border-primary/30 transition-all"
+                  >
+                    <Camera className="w-4 h-4" />
+                    View Photography
+                  </Link>
+                </Magnetic>
+                <Magnetic strength={0.3} radius={60}>
+                  <a
+                    href="https://open.spotify.com/user/21t6mkxonp73ou4n3ahjddbkq?si=78805a09a5b0464a"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-[#1DB954]/10 text-[#1DB954] hover:bg-[#1DB954]/20 border border-[#1DB954]/30 transition-all"
+                  >
+                    <SiSpotify className="w-4 h-4" />
+                    My Spotify
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </Magnetic>
               </div>
             </motion.section>
 

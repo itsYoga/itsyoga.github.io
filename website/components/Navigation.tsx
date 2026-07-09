@@ -13,7 +13,6 @@ const navItems = [
   { href: "/about", label: "About" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/photography", label: "Photography" },
-  { href: "/hobbies", label: "Hobbies" },
 ];
 
 export default function Navigation() {
