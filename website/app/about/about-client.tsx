@@ -87,7 +87,7 @@ export default function About() {
             <EditorialHeader
               index="01"
               title="About Me"
-              subtitle="AI engineer, WWDC26 Swift Student Challenge Winner, and photographer based in Taipei."
+              subtitle="AI engineer and photographer based in Taipei, Taiwan."
               size="large"
             />
           </div>
@@ -105,17 +105,17 @@ export default function About() {
               <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-center">
               <div className="space-y-6 md:col-span-3">
                 <p className="text-xl md:text-2xl leading-relaxed text-foreground/80">
-                  I'm a Computer Science graduate from National Taiwan Ocean University (Class of 2026) and an{" "}
+                  I'm a Computer Science graduate from National Taiwan Ocean University (Class of 2026).
+                  My most recent project, RiffNode — an AI guitar effects studio built entirely with
+                  native Apple frameworks —{" "}
                   <a
                     href="https://udn.com/news/story/6928/9489917"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary underline underline-offset-4 decoration-primary/40 hover:decoration-primary transition-colors"
                   >
-                    Apple WWDC26 Swift Student Challenge Winner
-                  </a>{" "}
-                  — one of 8 in Taiwan and 350 worldwide — for RiffNode, an AI guitar effects studio built
-                  entirely with native Apple frameworks.
+                    won the Apple WWDC26 Swift Student Challenge
+                  </a>.
                 </p>
                 <p className="text-lg md:text-xl leading-relaxed text-foreground/70">
                   At ITRI I optimized real-time YOLO vision models for autonomous driving, and my capstone

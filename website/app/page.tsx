@@ -56,28 +56,12 @@ export default function Home() {
             </p>
           </motion.div>
 
-          {/* WWDC26 Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <Link
-              href="/portfolio"
-              data-cursor="View"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-sm font-semibold hover:bg-amber-500/20 transition-colors"
-            >
-              <Trophy className="w-4 h-4" />
-              Apple WWDC26 Swift Student Challenge Winner
-            </Link>
-          </motion.div>
-
           {/* Social Links */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.4 }}
-            className="flex justify-center gap-6 pt-2"
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="flex justify-center gap-6 pt-6"
           >
             {[
               { href: "https://github.com/itsYoga", icon: Github, label: "GitHub" },
@@ -110,10 +94,10 @@ export default function Home() {
             <span>Full-Stack Developer</span>
           </MarqueeItem>
           <MarqueeItem separator="·">
-            <span>WWDC26 Winner</span>
+            <span>Photographer</span>
           </MarqueeItem>
           <MarqueeItem separator="·">
-            <span>Photographer</span>
+            <span>Creative Technologist</span>
           </MarqueeItem>
         </Marquee>
       </section>
@@ -138,7 +122,7 @@ export default function Home() {
               {
                 slug: "riffnode",
                 title: "RiffNode",
-                desc: "AI guitar effects studio built with native Apple frameworks — WWDC26 Swift Student Challenge Winner.",
+                desc: "AI guitar effects studio built entirely with native Apple frameworks.",
                 tech: ["SwiftUI", "AVFoundation", "vDSP"],
                 award: true,
               },

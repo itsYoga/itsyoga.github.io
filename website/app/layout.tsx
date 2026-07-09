@@ -46,8 +46,8 @@ export const metadata: Metadata = {
     default: "YuJia Liang | AI Engineer & Full-Stack Developer",
     template: "%s | YuJia Liang",
   },
-  description: "AI Engineer & Full-Stack Developer. Apple WWDC26 Swift Student Challenge Winner. Building intelligent systems across web, mobile, and macOS — and capturing the world through photography.",
-  keywords: ["AI Engineer", "Full-Stack Developer", "WWDC26 Swift Student Challenge", "Machine Learning", "React", "TypeScript", "Python", "Swift", "Photography"],
+  description: "AI Engineer & Full-Stack Developer building intelligent systems across web, mobile, and macOS — and capturing the world through photography.",
+  keywords: ["AI Engineer", "Full-Stack Developer", "Machine Learning", "React", "TypeScript", "Python", "Swift", "Photography"],
   authors: [{ name: "YuJia Liang" }],
   creator: "YuJia Liang",
   icons: {
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "YuJia Liang",
     title: "YuJia Liang | AI Engineer & Full-Stack Developer",
-    description: "AI Engineer & Full-Stack Developer. Apple WWDC26 Swift Student Challenge Winner.",
+    description: "Building intelligent systems across web, mobile, and macOS.",
     images: [
       {
         url: "/og-image.png",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "YuJia Liang | AI Engineer & Full-Stack Developer",
-    description: "AI Engineer & Full-Stack Developer. Apple WWDC26 Swift Student Challenge Winner.",
+    description: "Building intelligent systems across web, mobile, and macOS.",
     images: ["/og-image.png"],
   },
   robots: {

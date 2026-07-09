@@ -134,9 +134,9 @@ export default function Terminal() {
         return (
           <div className="space-y-1">
             <p>YuJia Liang — AI Engineer & Full-Stack Developer.</p>
-            <p>Apple WWDC26 Swift Student Challenge Winner (1 of 8 in Taiwan, 350 worldwide).</p>
             <p>B.S. in Computer Science, National Taiwan Ocean University, Class of 2026.</p>
             <p className="text-zinc-400">Also: photographer, volleyball captain, darkroom officer at NTUPhoto.</p>
+            <p className="text-zinc-500">The work speaks for itself — try <span className="text-amber-400">ls projects</span></p>
           </div>
         );
       case "ls": {
@@ -225,7 +225,6 @@ export default function Terminal() {
             <div className="space-y-0.5">
               <p><span className="text-amber-400">user</span>      yujia@yujialiang.com</p>
               <p><span className="text-amber-400">role</span>      AI Engineer & Full-Stack Developer</p>
-              <p><span className="text-amber-400">award</span>     WWDC26 Swift Student Challenge Winner</p>
               <p><span className="text-amber-400">edu</span>       NTOU Computer Science, Class of 2026</p>
               <p><span className="text-amber-400">langs</span>     Mandarin, English (TOEFL 110), 日本語 (N3)</p>
               <p><span className="text-amber-400">shell</span>     zsh</p>
