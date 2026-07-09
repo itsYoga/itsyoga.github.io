@@ -43,11 +43,11 @@ const siteUrl = "https://yujialiang.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "YuJia Liang | Software Engineer & AI Enthusiast",
+    default: "YuJia Liang | AI Engineer & Full-Stack Developer",
     template: "%s | YuJia Liang",
   },
-  description: "Computer Science Student | AI Enthusiast | Full-Stack Developer | Photographer. Passionate about technology, creativity, and capturing moments through code and photography.",
-  keywords: ["Software Engineer", "AI", "Machine Learning", "Full-Stack Developer", "React", "TypeScript", "Python", "Photography"],
+  description: "AI Engineer & Full-Stack Developer. Apple WWDC26 Swift Student Challenge Winner. Building intelligent systems across web, mobile, and macOS — and capturing the world through photography.",
+  keywords: ["AI Engineer", "Full-Stack Developer", "WWDC26 Swift Student Challenge", "Machine Learning", "React", "TypeScript", "Python", "Swift", "Photography"],
   authors: [{ name: "YuJia Liang" }],
   creator: "YuJia Liang",
   icons: {
@@ -59,21 +59,21 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "YuJia Liang",
-    title: "YuJia Liang | Software Engineer & AI Enthusiast",
-    description: "Computer Science Student | AI Enthusiast | Full-Stack Developer | Photographer. Passionate about technology, creativity, and capturing moments through code and photography.",
+    title: "YuJia Liang | AI Engineer & Full-Stack Developer",
+    description: "AI Engineer & Full-Stack Developer. Apple WWDC26 Swift Student Challenge Winner.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "YuJia Liang - Software Engineer & AI Enthusiast",
+        alt: "YuJia Liang - AI Engineer & Full-Stack Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "YuJia Liang | Software Engineer & AI Enthusiast",
-    description: "Computer Science Student | AI Enthusiast | Full-Stack Developer | Photographer.",
+    title: "YuJia Liang | AI Engineer & Full-Stack Developer",
+    description: "AI Engineer & Full-Stack Developer. Apple WWDC26 Swift Student Challenge Winner.",
     images: ["/og-image.png"],
   },
   robots: {

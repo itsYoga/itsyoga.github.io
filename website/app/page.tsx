@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Github, Linkedin, Instagram, Mail } from "lucide-react";
+import { Github, Linkedin, Instagram, Mail, Trophy, ArrowUpRight } from "lucide-react";
 import Copy from "@/components/Copy";
 import ScrambleText from "@/components/ScrambleText";
 import Magnetic from "@/components/Magnetic";
@@ -19,10 +19,10 @@ export default function Home() {
           initial={{ scale: 0.5, y: 0 }}
           animate={{ scale: 1, y: -80 }}
           transition={{
-            duration: 1.4,
+            duration: 1,
             ease: [0.22, 1, 0.36, 1],
-            scale: { duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] },
-            y: { duration: 1.2, delay: 1.2, ease: [0.22, 1, 0.36, 1] },
+            scale: { duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] },
+            y: { duration: 0.9, delay: 0.7, ease: [0.22, 1, 0.36, 1] },
           }}
           className="absolute z-20 flex items-center justify-center origin-center md:translate-y-[-40px]"
         >
@@ -30,10 +30,10 @@ export default function Home() {
             <motion.h1
               initial={{ y: 200 }}
               animate={{ y: 0 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="text-[clamp(3.5rem,12vw,11rem)] font-bold tracking-tighter leading-[0.95] text-center whitespace-nowrap pb-1"
             >
-              <ScrambleText text="YuJia Liang" delay={0.8} duration={1.2} />
+              <ScrambleText text="YuJia Liang" delay={0.4} duration={1} />
             </motion.h1>
           </div>
         </motion.div>
@@ -45,7 +45,7 @@ export default function Home() {
           <motion.div
             initial={{ y: "100%", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 2.0, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden text-center space-y-4"
           >
             <p className="text-[clamp(1.2rem,2vw,1.8rem)] text-foreground/90 tracking-tight leading-relaxed">
@@ -56,12 +56,28 @@ export default function Home() {
             </p>
           </motion.div>
 
+          {/* WWDC26 Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Link
+              href="/portfolio"
+              data-cursor="View"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-sm font-semibold hover:bg-amber-500/20 transition-colors"
+            >
+              <Trophy className="w-4 h-4" />
+              Apple WWDC26 Swift Student Challenge Winner
+            </Link>
+          </motion.div>
+
           {/* Social Links */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 2.3 }}
-            className="flex justify-center gap-6 pt-6"
+            transition={{ duration: 0.8, delay: 1.4 }}
+            className="flex justify-center gap-6 pt-2"
           >
             {[
               { href: "https://github.com/itsYoga", icon: Github, label: "GitHub" },
@@ -86,7 +102,7 @@ export default function Home() {
 
       {/* Kinetic Marquee Section */}
       <section className="py-16 md:py-24 border-y border-border overflow-hidden bg-accent/30">
-        <Marquee speed={8} className="text-4xl md:text-6xl lg:text-7xl tracking-tight text-foreground/10">
+        <Marquee speed={8} className="text-4xl md:text-6xl lg:text-7xl tracking-tight text-foreground/20">
           <MarqueeItem separator="·">
             <span>AI Engineer</span>
           </MarqueeItem>
@@ -94,12 +110,91 @@ export default function Home() {
             <span>Full-Stack Developer</span>
           </MarqueeItem>
           <MarqueeItem separator="·">
-            <span>Photographer</span>
+            <span>WWDC26 Winner</span>
           </MarqueeItem>
           <MarqueeItem separator="·">
-            <span>Creative Technologist</span>
+            <span>Photographer</span>
           </MarqueeItem>
         </Marquee>
+      </section>
+
+      {/* Featured Work */}
+      <section className="px-4 pt-20 md:pt-28 pb-32 md:pb-36">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex items-end justify-between mb-10 md:mb-14">
+            <h2 className="text-sm uppercase tracking-widest text-muted-foreground">Featured Work</h2>
+            <Link
+              href="/portfolio"
+              data-cursor="View"
+              className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              All projects
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {[
+              {
+                title: "RiffNode",
+                desc: "AI guitar effects studio built with native Apple frameworks — WWDC26 Swift Student Challenge Winner.",
+                tech: ["SwiftUI", "AVFoundation", "vDSP"],
+                award: true,
+              },
+              {
+                title: "Volleyball Match Analysis",
+                desc: "Deep-learning analytics platform with ball tracking, action recognition, and player tracking.",
+                tech: ["PyTorch", "YOLO", "FastAPI"],
+                award: false,
+              },
+              {
+                title: "Ghote Notes",
+                desc: "Local-first AI note-taking app for macOS with knowledge graph and real-time collaboration.",
+                tech: ["Tauri", "Rust", "React"],
+                award: false,
+              },
+            ].map((project, i) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+              >
+                <Link
+                  href="/portfolio"
+                  data-cursor="View"
+                  className="group flex flex-col h-full p-6 rounded-2xl border border-border/50 bg-card/30 hover:bg-card/60 hover:border-border transition-all duration-300"
+                >
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h3>
+                    {project.award && (
+                      <span className="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
+                        <Trophy className="w-3 h-3" />
+                        WWDC26
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
+                    {project.desc}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="px-2.5 py-1 text-xs bg-accent/50 border border-border/50 rounded-full text-foreground/70"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Fixed Contact Button */}
@@ -108,7 +203,7 @@ export default function Home() {
         animate={{ y: 0, scale: 1 }}
         transition={{
           duration: 1,
-          delay: 2.5,
+          delay: 1.5,
           ease: [0.22, 1, 0.36, 1],
         }}
         className="fixed bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-50"
