@@ -2,11 +2,41 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, ExternalLink, X, ArrowUpRight } from "lucide-react";
+import { Github, ExternalLink, X, ArrowUpRight, Trophy, Newspaper } from "lucide-react";
 import EditorialHeader from "@/components/EditorialHeader";
 import Magnetic from "@/components/Magnetic";
 
-const projects = [
+interface Project {
+  id: string;
+  title: string;
+  shortDesc: string;
+  detailedDescription: string;
+  tech: string[];
+  award?: string;
+  github: string | null;
+  demo: string | null;
+  news?: { label: string; href: string }[];
+  video: string | null;
+  accent: string;
+}
+
+const projects: Project[] = [
+  {
+    id: "riffnode",
+    title: "RiffNode",
+    shortDesc: "AI guitar effects studio — WWDC26 Swift Student Challenge Winner",
+    detailedDescription: "Professional guitar effects app built entirely with native Apple frameworks, selected as an Apple WWDC26 Swift Student Challenge Winner (one of 8 in Taiwan, 350 worldwide). Features a dual-AI tone engine with on-device Apple Foundation Models, a low-latency AVAudioEngine pipeline driving 11 effects in a drag-and-drop signal chain, and hands-free control via Vision Framework face gestures with real-time vDSP FFT analysis and pitch detection.",
+    tech: ["SwiftUI", "AVFoundation", "Accelerate/vDSP", "Foundation Models", "Vision"],
+    award: "WWDC26 Winner",
+    github: null,
+    demo: null,
+    news: [
+      { label: "UDN Coverage", href: "https://udn.com/news/story/6928/9489917" },
+      { label: "CNA Coverage", href: "https://www.cna.com.tw/postwrite/chi/432895" },
+    ],
+    video: null,
+    accent: "from-indigo-500 to-violet-500",
+  },
   {
     id: "volleyball",
     title: "Volleyball Match Analysis",
@@ -26,7 +56,7 @@ const projects = [
     tech: ["React", "Solidity", "TypeScript", "Web3.js"],
     github: "https://github.com/itsYoga/Archon",
     demo: null,
-    video: "/videos/archon-demo.mp4",
+    video: null,
     accent: "from-blue-500 to-cyan-500",
   },
   {
@@ -37,7 +67,7 @@ const projects = [
     tech: ["SwiftUI", "CreateML", "CoreML"],
     github: "https://github.com/itsYoga/ASLoading",
     demo: null,
-    video: "/videos/asl-demo.mp4",
+    video: null,
     accent: "from-yellow-500 to-amber-500",
   },
   {
@@ -48,7 +78,7 @@ const projects = [
     tech: ["Flutter", "Firebase", "LLM/RAG", "Dart"],
     github: "https://github.com/itsYoga/Sync",
     demo: null,
-    video: "/videos/syncup-demo.mp4",
+    video: null,
     accent: "from-purple-500 to-pink-500",
   },
   {
@@ -104,9 +134,17 @@ export default function Portfolio() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <h3 className="text-xl md:text-2xl font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
-                          {project.title}
-                        </h3>
+                        <div className="flex flex-wrap items-center gap-3 mb-2">
+                          <h3 className="text-xl md:text-2xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                            {project.title}
+                          </h3>
+                          {project.award && (
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
+                              <Trophy className="w-3.5 h-3.5" />
+                              {project.award}
+                            </span>
+                          )}
+                        </div>
                         <p className="text-muted-foreground mb-4">
                           {project.shortDesc}
                         </p>
@@ -157,7 +195,7 @@ function ProjectModal({
   project,
   onClose,
 }: {
-  project: typeof projects[0];
+  project: Project;
   onClose: () => void;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -212,29 +250,47 @@ function ProjectModal({
           <X className="w-5 h-5" />
         </button>
 
-        {/* Video */}
+        {/* Video / gradient header */}
         <div className={`relative h-[40%] md:h-[50%] bg-gradient-to-br ${project.accent} overflow-hidden`}>
-          {!videoLoaded && (
+          {project.video ? (
+            <>
+              {!videoLoaded && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                </div>
+              )}
+              <video
+                ref={videoRef}
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                className={`w-full h-full object-cover transition-opacity duration-300 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
+              >
+                <source src={project.video} type="video/mp4" />
+              </video>
+            </>
+          ) : (
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              <span className="text-5xl md:text-7xl font-bold text-white/25 tracking-tight select-none">
+                {project.title}
+              </span>
             </div>
           )}
-          <video
-            ref={videoRef}
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            className={`w-full h-full object-cover transition-opacity duration-300 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
-          >
-            <source src={project.video} type="video/mp4" />
-          </video>
           <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
         </div>
 
         {/* Content */}
         <div className="flex-1 p-6 md:p-10 overflow-y-auto">
-          <h2 className="text-2xl md:text-4xl font-bold mb-4">{project.title}</h2>
+          <div className="flex flex-wrap items-center gap-4 mb-4">
+            <h2 className="text-2xl md:text-4xl font-bold">{project.title}</h2>
+            {project.award && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
+                <Trophy className="w-4 h-4" />
+                {project.award}
+              </span>
+            )}
+          </div>
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6 max-w-3xl">
             {project.detailedDescription}
           </p>
@@ -279,6 +335,19 @@ function ProjectModal({
                 </a>
               </Magnetic>
             )}
+            {project.news?.map((item) => (
+              <Magnetic key={item.href} strength={0.3} radius={60}>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 border border-border rounded-full hover:bg-accent transition-colors"
+                >
+                  <Newspaper className="w-4 h-4" />
+                  {item.label}
+                </a>
+              </Magnetic>
+            ))}
           </div>
         </div>
       </motion.div>

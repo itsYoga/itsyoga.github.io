@@ -91,7 +91,7 @@ const experience = [
 
 const languages = [
   { name: "Mandarin", level: "Native" },
-  { name: "English", level: "Fluent", note: "TOEFL 110" },
+  { name: "English", level: "Fluent", note: "TOEFL 110 · TOEIC 920" },
   { name: "Japanese", level: "Intermediate", note: "JLPT N3" },
 ];
 
@@ -121,10 +121,27 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <p className="text-xl md:text-2xl leading-relaxed text-foreground/80 max-w-3xl">
-                I build intelligent systems and craft digital experiences. Currently pursuing my degree in Taiwan,
-                with experience in AI research and a passion for turning complex problems into elegant solutions.
-              </p>
+              <div className="space-y-6 max-w-3xl">
+                <p className="text-xl md:text-2xl leading-relaxed text-foreground/80">
+                  I'm a Computer Science graduate from National Taiwan Ocean University (Class of 2026) and an{" "}
+                  <a
+                    href="https://udn.com/news/story/6928/9489917"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary underline underline-offset-4 decoration-primary/40 hover:decoration-primary transition-colors"
+                  >
+                    Apple WWDC26 Swift Student Challenge Winner
+                  </a>{" "}
+                  — one of 8 in Taiwan and 350 worldwide — for RiffNode, an AI guitar effects studio built
+                  entirely with native Apple frameworks.
+                </p>
+                <p className="text-lg md:text-xl leading-relaxed text-foreground/70">
+                  At ITRI I optimized real-time YOLO vision models for autonomous driving, and my capstone
+                  team built a deep-learning volleyball analytics platform. I love working across the stack —
+                  from on-device ML and audio DSP to React frontends — and turning complex problems into
+                  products people can actually use.
+                </p>
+              </div>
             </motion.section>
 
             {/* Skills Section */}
