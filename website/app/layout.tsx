@@ -43,7 +43,7 @@ const siteUrl = "https://yujialiang.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "YuJia Liang | AI Engineer & Full-Stack Developer",
+    default: "YuJia Liang",
     template: "%s | YuJia Liang",
   },
   description: "AI Engineer & Full-Stack Developer building intelligent systems across web, mobile, and macOS — and capturing the world through photography.",
