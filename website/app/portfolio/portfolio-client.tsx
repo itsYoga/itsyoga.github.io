@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowUpRight, Trophy } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { SiApple } from "react-icons/si";
 import EditorialHeader from "@/components/EditorialHeader";
 import { projects, type Project } from "@/data/projects";
 
@@ -50,11 +51,11 @@ function TechChips({ tech, limit = 4 }: { tech: string[]; limit?: number }) {
 function AwardBadge({ label, size = "sm" }: { label: string; size?: "sm" | "md" }) {
   return (
     <span
-      className={`inline-flex items-center gap-1.5 font-semibold rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 ${
+      className={`inline-flex items-center gap-1.5 font-semibold rounded-full bg-foreground/[0.06] text-foreground/80 border border-border ${
         size === "md" ? "px-3 py-1.5 text-sm" : "px-3 py-1 text-xs"
       }`}
     >
-      <Trophy className={size === "md" ? "w-4 h-4" : "w-3.5 h-3.5"} />
+      <SiApple className={size === "md" ? "w-4 h-4 -mt-px" : "w-3.5 h-3.5 -mt-px"} />
       {label}
     </span>
   );

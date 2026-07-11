@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Github, Linkedin, Instagram, Mail, Trophy, ArrowUpRight } from "lucide-react";
+import { Github, Linkedin, Instagram, Mail, ArrowUpRight } from "lucide-react";
+import { SiApple } from "react-icons/si";
 import Copy from "@/components/Copy";
 import ScrambleText from "@/components/ScrambleText";
 import Magnetic from "@/components/Magnetic";
@@ -158,8 +159,8 @@ export default function Home() {
                       {project.title}
                     </h3>
                     {project.award && (
-                      <span className="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
-                        <Trophy className="w-3 h-3" />
+                      <span className="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-full bg-foreground/[0.06] text-foreground/80 border border-border">
+                        <SiApple className="w-3 h-3 -mt-px" />
                         WWDC26
                       </span>
                     )}

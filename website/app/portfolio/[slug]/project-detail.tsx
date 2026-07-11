@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, Github, Newspaper, Trophy } from "lucide-react";
+import { ArrowLeft, ExternalLink, Github, Newspaper } from "lucide-react";
+import { SiApple } from "react-icons/si";
 import Magnetic from "@/components/Magnetic";
 import type { Project } from "@/data/projects";
 
@@ -70,8 +71,8 @@ export default function ProjectDetail({ project }: { project: Project }) {
             <div className="flex flex-wrap items-center gap-4 mb-6">
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight">{project.title}</h1>
               {project.award && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
-                  <Trophy className="w-4 h-4" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold rounded-full bg-foreground/[0.06] text-foreground/80 border border-border">
+                  <SiApple className="w-4 h-4 -mt-px" />
                   {project.award}
                 </span>
               )}
