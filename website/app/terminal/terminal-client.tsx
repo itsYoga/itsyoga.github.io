@@ -39,10 +39,24 @@ const socials: Record<string, string> = {
   resume: "/YuJia_resume.pdf",
 };
 
+const pages: Record<string, string> = {
+  home: "/",
+  about: "/about",
+  portfolio: "/portfolio",
+  photography: "/photography",
+};
+
 const COMMANDS = [
-  "help", "whoami", "ls", "cat", "open", "skills", "neofetch",
-  "contact", "clear", "pwd", "echo", "history", "exit", "sudo",
+  "help", "whoami", "ls", "cat", "open", "skills", "neofetch", "wwdc",
+  "contact", "clear", "pwd", "echo", "history", "date", "uname", "exit", "sudo",
 ];
+
+// Second-word completions per command
+const ARG_COMPLETIONS: Record<string, string[]> = {
+  open: [...Object.keys(projects), ...Object.keys(socials), ...Object.keys(pages)],
+  cat: ["contact.txt", "resume.pdf"],
+  ls: ["projects"],
+};
 
 const bannerWidth = 44;
 const banner = [
@@ -116,11 +130,12 @@ export default function Terminal() {
               ["whoami", "who is this guy"],
               ["ls", "list files"],
               ["cat <file>", "read a file (try: cat contact.txt)"],
-              ["open <name>", "open a project / resume / github / linkedin"],
+              ["open <name>", "open a project, page, resume, or profile"],
               ["skills", "technical skills"],
+              ["wwdc", "about the WWDC26 award"],
               ["neofetch", "system info"],
               ["sudo hire-me", "you know you want to"],
-              ["clear", "clear the screen"],
+              ["clear", "clear the screen (or Ctrl+L)"],
               ["exit", "back to the pretty website"],
             ].map(([c, d]) => (
               <p key={c}>
@@ -211,8 +226,26 @@ export default function Terminal() {
           window.open(socials[key], "_blank");
           return <p className="text-zinc-400">opening {key}…</p>;
         }
+        if (pages[key]) {
+          router.push(pages[key]);
+          return <p className="text-zinc-400">opening {key}…</p>;
+        }
         return <p className="text-red-400">open: {arg}: not found (try ls projects)</p>;
       }
+      case "wwdc":
+        return (
+          <div className="space-y-1">
+            <p className="text-emerald-400">WWDC26 Swift Student Challenge — Winner</p>
+            <p className="text-zinc-300">
+              RiffNode, an AI guitar effects studio built entirely with native Apple
+              frameworks, was selected as one of 8 winning submissions in Taiwan
+              (350 worldwide) and covered by UDN and CNA.
+            </p>
+            <p className="text-zinc-500">
+              details: <span className="text-amber-400">open riffnode</span>
+            </p>
+          </div>
+        );
       case "neofetch":
         return (
           <div className="flex gap-6">
@@ -226,7 +259,9 @@ export default function Terminal() {
               <p><span className="text-amber-400">user</span>      yujia@yujialiang.com</p>
               <p><span className="text-amber-400">role</span>      AI Engineer & Full-Stack Developer</p>
               <p><span className="text-amber-400">edu</span>       NTOU Computer Science, Class of 2026</p>
+              <p><span className="text-amber-400">award</span>     WWDC26 Swift Student Challenge Winner</p>
               <p><span className="text-amber-400">langs</span>     Mandarin, English (TOEFL 110), 日本語 (N3)</p>
+              <p><span className="text-amber-400">uptime</span>    coding since Sep 2022</p>
               <p><span className="text-amber-400">shell</span>     zsh</p>
               <p><span className="text-amber-400">coffee</span>    ∞</p>
             </div>
@@ -238,6 +273,10 @@ export default function Terminal() {
         return execute("open resume");
       case "pwd":
         return <p>/Users/yujia/portfolio</p>;
+      case "date":
+        return <p>{new Date().toString()}</p>;
+      case "uname":
+        return <p>PortfolioOS · Next.js 16 · static export · handcrafted in Taipei</p>;
       case "echo":
         return <p>{arg}</p>;
       case "history":
@@ -311,8 +350,30 @@ export default function Terminal() {
       }
     } else if (e.key === "Tab") {
       e.preventDefault();
-      const match = COMMANDS.find((c) => c.startsWith(input.trim()) && input.trim());
-      if (match) setInput(match + " ");
+      const parts = input.split(/\s+/);
+      if (parts.length <= 1) {
+        const match = COMMANDS.find((c) => c.startsWith(input.trim()) && input.trim());
+        if (match) setInput(match + " ");
+      } else {
+        const partial = parts[parts.length - 1];
+        const pool = ARG_COMPLETIONS[parts[0]] ?? [];
+        const match = pool.find((p) => p.startsWith(partial) && partial);
+        if (match) setInput([...parts.slice(0, -1), match].join(" "));
+      }
+    } else if (e.key === "c" && e.ctrlKey) {
+      e.preventDefault();
+      print(
+        <p>
+          <span className="text-emerald-400">{PROMPT}</span>{" "}
+          <span className="text-zinc-100">{input}</span>
+          <span className="text-zinc-500">^C</span>
+        </p>
+      );
+      setInput("");
+      setHistoryIndex(-1);
+    } else if (e.key === "l" && e.ctrlKey) {
+      e.preventDefault();
+      setLines([]);
     }
   };
 

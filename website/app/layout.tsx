@@ -2,8 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
-import CustomCursor from "@/components/CustomCursor";
-import FluidBackground from "@/components/FluidBackground";
+import Footer from "@/components/Footer";
 
 // LINE Seed Sans - clean, modern font
 const lineSeedSans = localFont({
@@ -101,12 +100,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${lineSeedSans.variable} antialiased`} style={{ fontFamily: "var(--font-line-seed), system-ui, sans-serif" }}>
-        <CustomCursor />
-        <FluidBackground />
         <Navigation />
-        <main className="pt-16 md:pt-16">
+        <div className="pt-16 md:pt-16">
           {children}
-        </main>
+        </div>
+        <Footer />
       </body>
     </html>
   );
