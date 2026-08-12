@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, ExternalLink, Github, Newspaper } from "lucide-react";
 import { SiApple } from "react-icons/si";
-import Magnetic from "@/components/Magnetic";
 import type { Project } from "@/data/projects";
 
 export default function ProjectDetail({ project }: { project: Project }) {
@@ -97,43 +96,38 @@ export default function ProjectDetail({ project }: { project: Project }) {
             {/* Links */}
             <div className="flex flex-wrap gap-3">
               {project.github && (
-                <Magnetic strength={0.3} radius={60}>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background rounded-full hover:bg-foreground/90 transition-colors"
-                  >
-                    <Github className="w-4 h-4" />
-                    View Code
-                  </a>
-                </Magnetic>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background rounded-full hover:bg-foreground/90 transition-colors"
+                >
+                  <Github className="w-4 h-4" />
+                  View Code
+                </a>
               )}
               {project.demo && (
-                <Magnetic strength={0.3} radius={60}>
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 border border-border rounded-full hover:bg-accent transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    Live Demo
-                  </a>
-                </Magnetic>
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 border border-border rounded-full hover:bg-accent transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  Live Demo
+                </a>
               )}
               {project.news?.map((item) => (
-                <Magnetic key={item.href} strength={0.3} radius={60}>
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 border border-border rounded-full hover:bg-accent transition-colors"
-                  >
-                    <Newspaper className="w-4 h-4" />
-                    {item.label}
-                  </a>
-                </Magnetic>
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 border border-border rounded-full hover:bg-accent transition-colors"
+                >
+                  <Newspaper className="w-4 h-4" />
+                  {item.label}
+                </a>
               ))}
             </div>
           </motion.div>

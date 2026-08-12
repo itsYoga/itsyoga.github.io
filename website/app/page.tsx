@@ -2,115 +2,115 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Github, Linkedin, Instagram, Mail, ArrowUpRight } from "lucide-react";
+import { Github, Linkedin, Instagram, Mail, ArrowUpRight, FileText } from "lucide-react";
 import { SiApple } from "react-icons/si";
-import Copy from "@/components/Copy";
-import ScrambleText from "@/components/ScrambleText";
-import Magnetic from "@/components/Magnetic";
-import Marquee, { MarqueeItem } from "@/components/Marquee";
+
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const fadeUp = (delay: number) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.7, delay, ease },
+});
+
+const socials = [
+  { href: "https://github.com/itsYoga", icon: Github, label: "GitHub" },
+  { href: "https://www.linkedin.com/in/yujia-liang-77ab022a7/", icon: Linkedin, label: "LinkedIn" },
+  { href: "https://www.instagram.com/yogaliang0702/", icon: Instagram, label: "Instagram" },
+];
+
+const featured = [
+  {
+    slug: "riffnode",
+    title: "RiffNode",
+    desc: "AI guitar effects studio built entirely with native Apple frameworks.",
+    tech: ["SwiftUI", "AVFoundation", "vDSP"],
+    award: true,
+  },
+  {
+    slug: "volleyball",
+    title: "Volleyball Match Analysis",
+    desc: "Deep-learning analytics platform with ball tracking, action recognition, and player tracking.",
+    tech: ["PyTorch", "YOLO", "FastAPI"],
+    award: false,
+  },
+  {
+    slug: "ghote",
+    title: "Ghote Notes",
+    desc: "Local-first AI note-taking app for macOS with knowledge graph and real-time collaboration.",
+    tech: ["Tauri", "Rust", "React"],
+    award: false,
+  },
+];
 
 export default function Home() {
   return (
     <main className="text-foreground selection:bg-primary selection:text-primary-foreground">
-      {/* Hero Section */}
-      <section className="relative h-[100svh] w-full overflow-hidden flex flex-col items-center justify-center px-4">
+      {/* Hero */}
+      <section className="min-h-[calc(100svh-4rem)] flex items-center px-4">
+        <div className="max-w-5xl mx-auto w-full py-24">
+          <motion.p
+            {...fadeUp(0)}
+            className="text-sm uppercase tracking-widest text-muted-foreground mb-6"
+          >
+            AI Engineer &amp; Full-Stack Developer
+          </motion.p>
 
-        {/* 1. Title Animation - Responsive movement */}
-        <motion.div
-          initial={{ scale: 0.5, y: 0 }}
-          animate={{ scale: 1, y: -80 }}
-          transition={{
-            duration: 1,
-            ease: [0.22, 1, 0.36, 1],
-            scale: { duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] },
-            y: { duration: 0.9, delay: 0.7, ease: [0.22, 1, 0.36, 1] },
-          }}
-          className="absolute z-20 flex items-center justify-center origin-center md:translate-y-[-40px]"
-        >
-          <div className="overflow-visible">
-            <motion.h1
-              initial={{ y: 200 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[clamp(3.5rem,12vw,11rem)] font-bold tracking-tighter leading-[0.95] text-center whitespace-nowrap pb-1"
+          <motion.h1
+            {...fadeUp(0.1)}
+            className="text-[clamp(3rem,9vw,7.5rem)] font-bold tracking-tighter leading-[0.95] mb-8"
+          >
+            YuJia Liang
+          </motion.h1>
+
+          <motion.p
+            {...fadeUp(0.2)}
+            className="text-[clamp(1.1rem,1.8vw,1.5rem)] text-foreground/80 tracking-tight leading-relaxed max-w-2xl mb-10"
+          >
+            Building intelligent systems. <span className="text-primary">Capturing the world.</span>
+          </motion.p>
+
+          <motion.div {...fadeUp(0.3)} className="flex flex-wrap items-center gap-4">
+            <a
+              href="mailto:ch993115@gmail.com"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-foreground text-background text-sm font-semibold hover:bg-primary transition-colors"
             >
-              <ScrambleText text="YuJia Liang" delay={0.4} duration={1} />
-            </motion.h1>
-          </div>
-        </motion.div>
-
-        {/* 2. Content - Now positioned in the center, just below the title */}
-        <div className="absolute top-1/2 w-full max-w-3xl px-4 flex flex-col items-center gap-6 pt-12 z-10">
-          
-          {/* Tagline */}
-          <motion.div
-            initial={{ y: "100%", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden text-center space-y-4"
-          >
-            <p className="text-[clamp(1.2rem,2vw,1.8rem)] text-foreground/90 tracking-tight leading-relaxed">
-              Building intelligent systems. <span className="text-primary">Capturing the world.</span>
-            </p>
-            <p className="text-[clamp(0.9rem,1.2vw,1.1rem)] text-muted-foreground tracking-wide uppercase">
-              AI Engineer & Full-Stack Developer
-            </p>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-            className="flex justify-center gap-6 pt-6"
-          >
-            {[
-              { href: "https://github.com/itsYoga", icon: Github, label: "GitHub" },
-              { href: "https://www.linkedin.com/in/yujia-liang-77ab022a7/", icon: Linkedin, label: "LinkedIn" },
-              { href: "https://www.instagram.com/yogaliang0702/", icon: Instagram, label: "Instagram" },
-            ].map((social) => (
-              <Magnetic key={social.label} strength={0.4} radius={100}>
+              <Mail className="w-4 h-4" />
+              Get in touch
+            </a>
+            <a
+              href="/YuJia_resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-border text-sm font-semibold text-foreground/80 hover:text-foreground hover:border-foreground/30 transition-colors"
+            >
+              <FileText className="w-4 h-4" />
+              Resume
+            </a>
+            <div className="flex items-center gap-1 sm:ml-2">
+              {socials.map((social) => (
                 <Link
+                  key={social.label}
                   href={social.href}
                   target="_blank"
-                  className="p-3 rounded-full border border-border/50 text-foreground/60 hover:text-foreground hover:border-foreground/30 hover:bg-accent/50 transition-all duration-300 block"
+                  className="p-3 rounded-full text-foreground/60 hover:text-foreground hover:bg-accent/60 transition-colors"
                   aria-label={social.label}
-                  data-cursor="View"
                 >
                   <social.icon className="w-5 h-5" />
                 </Link>
-              </Magnetic>
-            ))}
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Kinetic Marquee Section */}
-      <section className="py-16 md:py-24 border-y border-border overflow-hidden bg-accent/30">
-        <Marquee speed={8} className="text-4xl md:text-6xl lg:text-7xl tracking-tight text-foreground/20">
-          <MarqueeItem separator="·">
-            <span>AI Engineer</span>
-          </MarqueeItem>
-          <MarqueeItem separator="·">
-            <span>Full-Stack Developer</span>
-          </MarqueeItem>
-          <MarqueeItem separator="·">
-            <span>Photographer</span>
-          </MarqueeItem>
-          <MarqueeItem separator="·">
-            <span>Creative Technologist</span>
-          </MarqueeItem>
-        </Marquee>
-      </section>
-
       {/* Featured Work */}
-      <section className="px-4 pt-20 md:pt-28 pb-32 md:pb-36">
+      <section className="px-4 pt-20 md:pt-24 pb-24 md:pb-28 border-t border-border">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-end justify-between mb-10 md:mb-14">
             <h2 className="text-sm uppercase tracking-widest text-muted-foreground">Featured Work</h2>
             <Link
               href="/portfolio"
-              data-cursor="View"
               className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               All projects
@@ -119,29 +119,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[
-              {
-                slug: "riffnode",
-                title: "RiffNode",
-                desc: "AI guitar effects studio built entirely with native Apple frameworks.",
-                tech: ["SwiftUI", "AVFoundation", "vDSP"],
-                award: true,
-              },
-              {
-                slug: "volleyball",
-                title: "Volleyball Match Analysis",
-                desc: "Deep-learning analytics platform with ball tracking, action recognition, and player tracking.",
-                tech: ["PyTorch", "YOLO", "FastAPI"],
-                award: false,
-              },
-              {
-                slug: "ghote",
-                title: "Ghote Notes",
-                desc: "Local-first AI note-taking app for macOS with knowledge graph and real-time collaboration.",
-                tech: ["Tauri", "Rust", "React"],
-                award: false,
-              },
-            ].map((project, i) => (
+            {featured.map((project, i) => (
               <motion.div
                 key={project.title}
                 initial={{ opacity: 0, y: 20 }}
@@ -151,7 +129,6 @@ export default function Home() {
               >
                 <Link
                   href={`/portfolio/${project.slug}`}
-                  data-cursor="View"
                   className="group flex flex-col h-full p-6 rounded-2xl border border-border/50 bg-card/30 hover:bg-card/60 hover:border-border transition-all duration-300"
                 >
                   <div className="flex items-start justify-between gap-3 mb-3">
@@ -185,30 +162,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Fixed Contact Button */}
-      <motion.div
-        initial={{ y: 200, scale: 0.8 }}
-        animate={{ y: 0, scale: 1 }}
-        transition={{
-          duration: 1,
-          delay: 1.5,
-          ease: [0.22, 1, 0.36, 1],
-        }}
-        className="fixed bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-50"
-        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
-      >
-        <Magnetic strength={0.3} radius={120}>
-          <a
-            href="mailto:ch993115@gmail.com"
-            className="flex items-center gap-3 md:gap-4 px-5 md:px-6 py-3 md:py-4 rounded-full bg-foreground text-background shadow-2xl cursor-pointer group transition-all duration-300 hover:bg-primary active:scale-95 touch-manipulation"
-            data-cursor="Email"
-          >
-            <Mail className="w-5 h-5 md:w-5 md:h-5" />
-            <span className="text-base md:text-lg tracking-wide">Get in Touch</span>
-          </a>
-        </Magnetic>
-      </motion.div>
-
+      {/* Contact */}
+      <section className="px-4 py-20 md:py-24 border-t border-border">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-8">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-3">Let&apos;s work together</h2>
+            <p className="text-muted-foreground max-w-md">
+              Open to internships, research collaborations, and interesting projects.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-4">
+            <a
+              href="mailto:ch993115@gmail.com"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-foreground text-background text-sm font-semibold hover:bg-primary transition-colors"
+            >
+              <Mail className="w-4 h-4" />
+              ch993115@gmail.com
+            </a>
+            <div className="flex items-center gap-1">
+              {socials.map((social) => (
+                <Link
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  className="p-3 rounded-full text-foreground/60 hover:text-foreground hover:bg-accent/60 transition-colors"
+                  aria-label={social.label}
+                >
+                  <social.icon className="w-5 h-5" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Copy from "@/components/Copy";
 import EditorialHeader from "@/components/EditorialHeader";
-import Magnetic from "@/components/Magnetic";
 import {
   FileText, ExternalLink, MapPin, Calendar, Briefcase, GraduationCap, Download, Camera
 } from "lucide-react";
@@ -293,27 +292,23 @@ export default function About() {
                 in front of a camera sooner or later — the results live on the Photography page.
               </p>
               <div className="flex flex-wrap gap-3">
-                <Magnetic strength={0.3} radius={60}>
-                  <Link
-                    href="/photography"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-primary/10 text-primary hover:bg-primary/20 border border-primary/30 transition-all"
-                  >
-                    <Camera className="w-4 h-4" />
-                    View Photography
-                  </Link>
-                </Magnetic>
-                <Magnetic strength={0.3} radius={60}>
-                  <a
-                    href="https://open.spotify.com/user/21t6mkxonp73ou4n3ahjddbkq?si=78805a09a5b0464a"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-[#1DB954]/10 text-[#1DB954] hover:bg-[#1DB954]/20 border border-[#1DB954]/30 transition-all"
-                  >
-                    <SiSpotify className="w-4 h-4" />
-                    My Spotify
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                </Magnetic>
+                <Link
+                  href="/photography"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-primary/10 text-primary hover:bg-primary/20 border border-primary/30 transition-all"
+                >
+                  <Camera className="w-4 h-4" />
+                  View Photography
+                </Link>
+                <a
+                  href="https://open.spotify.com/user/21t6mkxonp73ou4n3ahjddbkq?si=78805a09a5b0464a"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-[#1DB954]/10 text-[#1DB954] hover:bg-[#1DB954]/20 border border-[#1DB954]/30 transition-all"
+                >
+                  <SiSpotify className="w-4 h-4" />
+                  My Spotify
+                  <ExternalLink className="w-3 h-3" />
+                </a>
               </div>
             </motion.section>
 
@@ -337,27 +332,23 @@ export default function About() {
                     <span className="text-sm text-muted-foreground ml-2">YuJia_resume.pdf</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Magnetic strength={0.3} radius={50}>
-                      <a
-                        href="/YuJia_resume.pdf"
-                        download
-                        className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg hover:bg-accent transition-colors"
-                      >
-                        <Download className="w-4 h-4" />
-                        Download
-                      </a>
-                    </Magnetic>
-                    <Magnetic strength={0.3} radius={50}>
-                      <a
-                        href="/YuJia_resume.pdf"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg hover:bg-accent transition-colors"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        Open
-                      </a>
-                    </Magnetic>
+                    <a
+                      href="/YuJia_resume.pdf"
+                      download
+                      className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg hover:bg-accent transition-colors"
+                    >
+                      <Download className="w-4 h-4" />
+                      Download
+                    </a>
+                    <a
+                      href="/YuJia_resume.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg hover:bg-accent transition-colors"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      Open
+                    </a>
                   </div>
                 </div>
 

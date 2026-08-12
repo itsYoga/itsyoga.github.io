@@ -87,7 +87,7 @@ export default function Portfolio() {
             transition={{ duration: 0.5 }}
             className="group mb-6"
           >
-            <Link href={`/portfolio/${featured.id}`} data-cursor="View" className="block">
+            <Link href={`/portfolio/${featured.id}`} className="block">
               <div className="grid grid-cols-1 md:grid-cols-5 rounded-2xl border border-border/50 bg-card/30 hover:bg-card/60 hover:border-border transition-all duration-300 overflow-hidden">
                 <ProjectMedia
                   project={featured}
@@ -126,7 +126,7 @@ export default function Portfolio() {
                 transition={{ duration: 0.5, delay: (index % 2) * 0.1 }}
                 className="group"
               >
-                <Link href={`/portfolio/${project.id}`} data-cursor="View" className="block h-full">
+                <Link href={`/portfolio/${project.id}`} className="block h-full">
                   <div className="flex flex-col h-full rounded-2xl border border-border/50 bg-card/30 hover:bg-card/60 hover:border-border transition-all duration-300 overflow-hidden">
                     <ProjectMedia project={project} className="aspect-video" />
                     <div className="flex flex-col flex-1 p-6">
