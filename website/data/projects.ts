@@ -17,7 +17,7 @@ export const projects: Project[] = [
   {
     id: "riffnode",
     title: "RiffNode",
-    shortDesc: "AI guitar effects studio — WWDC26 Swift Student Challenge Winner",
+    shortDesc: "AI guitar effects studio built entirely with native Apple frameworks",
     detailedDescription:
       "Professional guitar effects studio built entirely with native Apple frameworks, selected as an Apple WWDC26 Swift Student Challenge Winner (one of 8 in Taiwan, 350 worldwide). The assistant is a tool-calling agent: it works the board through 13 rig tools over a multi-turn observe-act-report loop with undo, and every value it proposes is clamped to its parameter range before reaching the DSP. One inference protocol backs five interchangeable providers — on-device Apple Foundation Models by default and fully offline, Claude Code CLI, Codex CLI, Anthropic API, and a keyword fallback — with retrieval over an on-device NaturalLanguage embedding corpus. Underneath sits a low-latency AVAudioEngine pipeline driving 11 effects in a drag-and-drop chain, plus real-time vDSP FFT and autocorrelation pitch detection powering a tuner, metronome and chord detection.",
     tech: ["Swift 6", "SwiftUI", "AVFoundation", "Accelerate/vDSP", "Foundation Models", "NaturalLanguage"],

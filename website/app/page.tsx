@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Github, Linkedin, Instagram, Mail, ArrowUpRight, FileText } from "lucide-react";
 import { SiApple } from "react-icons/si";
+import { projects } from "@/data/projects";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -19,29 +20,15 @@ const socials = [
   { href: "https://www.instagram.com/yogaliang0702/", icon: Instagram, label: "Instagram" },
 ];
 
-const featured = [
-  {
-    slug: "riffnode",
-    title: "RiffNode",
-    desc: "AI guitar effects studio built entirely with native Apple frameworks.",
-    tech: ["SwiftUI", "AVFoundation", "vDSP"],
-    award: true,
-  },
-  {
-    slug: "volleyball",
-    title: "Volleyball Match Analysis",
-    desc: "Deep-learning analytics platform with ball tracking, action recognition, and player tracking.",
-    tech: ["PyTorch", "YOLO", "FastAPI"],
-    award: false,
-  },
-  {
-    slug: "ghote",
-    title: "Ghote Notes",
-    desc: "Local-first AI note-taking app for macOS with knowledge graph and real-time collaboration.",
-    tech: ["Tauri", "Rust", "React"],
-    award: false,
-  },
-];
+// Derived from the shared project data so the homepage cannot drift
+// out of sync with /portfolio — reorder projects.ts to reorder this.
+const featured = projects.slice(0, 3).map((p) => ({
+  slug: p.id,
+  title: p.title,
+  desc: p.shortDesc,
+  tech: p.tech.slice(0, 3),
+  award: Boolean(p.award),
+}));
 
 export default function Home() {
   return (
@@ -179,19 +166,6 @@ export default function Home() {
               <Mail className="w-4 h-4" />
               ch993115@gmail.com
             </a>
-            <div className="flex items-center gap-1">
-              {socials.map((social) => (
-                <Link
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  className="p-3 rounded-full text-foreground/60 hover:text-foreground hover:bg-accent/60 transition-colors"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-5 h-5" />
-                </Link>
-              ))}
-            </div>
           </div>
         </div>
       </section>
