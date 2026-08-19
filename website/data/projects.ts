@@ -15,30 +15,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "toneleak",
-    title: "ToneLeak",
-    shortDesc: "Does guitar tone transfer steal your touch? — independent research",
-    detailedDescription:
-      "Ongoing independent research auditing whether guitar-tone models change only the requested production tone, or also change performance attributes that should stay attributable to the source player: bends, vibrato, articulation, attack and dynamics. It does not assume tone and touch are separable — a deterministic effect applied to the exact same DI performance supplies counterfactual ground truth. A pilot audit of 2,040 published Fx embeddings found intended tone decodes at 99.3% balanced accuracy while source combination stays at 87.3%, so the public representation is tone-informative but not source-invariant. A held-out causal reference swap then confirmed the output shifts under an identical query and tone target. Projecting out the source-predictive subspace reduced leakage but raised target error — reported as a negative result rather than a fix.",
-    tech: ["Python", "PyTorch", "scikit-learn", "librosa", "NumPy"],
-    github: null,
-    demo: null,
-    video: null,
-    accent: "from-rose-500 to-orange-500",
-  },
-  {
-    id: "soredemo",
-    title: "Soredemo",
-    shortDesc: "Turning every release into a published demo — macOS, Swift 6",
-    detailedDescription:
-      "Teams ship 20+ times a year and demo two or three times. Soredemo turns each release into a demo: detected from GitHub, recorded once, derived into video and launch copy, reviewed by a person, and posted. The premise is measured rather than assumed — only 2.1% of 2,241 releases across 151 developer tools carried any visual demo. Architecturally it is an 11-target Swift package in three tiers: a deterministic core where the same input always gives the same output, a Capture tier that reads the world through ScreenCaptureKit and accessibility APIs, and a GPU Compositing tier. Two custom SwiftPM build plugins turn those boundaries into compile errors rather than conventions someone has to remember. 584 tests, with more test code than source. Recording and export work today; the derivation pipeline is still in progress.",
-    tech: ["Swift 6", "SwiftUI", "ScreenCaptureKit", "AVFoundation", "Core Image", "SwiftPM plugins"],
-    github: null,
-    demo: null,
-    video: null,
-    accent: "from-slate-500 to-zinc-600",
-  },
-  {
     id: "riffnode",
     title: "RiffNode",
     shortDesc: "AI guitar effects studio — WWDC26 Swift Student Challenge Winner",
@@ -63,6 +39,30 @@ export const projects: Project[] = [
     accent: "from-indigo-500 to-violet-500",
   },
   {
+    id: "toneleak",
+    title: "ToneLeak",
+    shortDesc: "Does guitar tone transfer steal your touch? — independent research",
+    detailedDescription:
+      "Ongoing independent research auditing whether guitar-tone models change only the requested production tone, or also change performance attributes that should stay attributable to the source player: bends, vibrato, articulation, attack and dynamics. It does not assume tone and touch are separable — a deterministic effect applied to the exact same DI performance supplies counterfactual ground truth. A pilot audit of 2,040 published Fx embeddings found intended tone decodes at 99.3% balanced accuracy while source combination stays at 87.3%, so the public representation is tone-informative but not source-invariant. A held-out causal reference swap then confirmed the output shifts under an identical query and tone target. Projecting out the source-predictive subspace reduced leakage but raised target error — reported as a negative result rather than a fix.",
+    tech: ["Python", "PyTorch", "scikit-learn", "librosa", "NumPy"],
+    github: null,
+    demo: null,
+    video: null,
+    accent: "from-rose-500 to-orange-500",
+  },
+  {
+    id: "soredemo",
+    title: "Soredemo",
+    shortDesc: "Turning every release into a published demo — macOS, Swift 6",
+    detailedDescription:
+      "Teams ship 20+ times a year and demo two or three times. Soredemo turns each release into a demo: detected from GitHub, recorded once, derived into video and launch copy, reviewed by a person, and posted. The premise is measured rather than assumed — only 2.1% of 2,241 releases across 151 developer tools carried any visual demo. Architecturally it is an 11-target Swift package in three tiers: a deterministic core where the same input always gives the same output, a Capture tier that reads the world through ScreenCaptureKit and accessibility APIs, and a GPU Compositing tier. Two custom SwiftPM build plugins turn those boundaries into compile errors rather than conventions someone has to remember. 584 tests, with more test code than source. Recording and export work today; the derivation pipeline is still in progress.",
+    tech: ["Swift 6", "SwiftUI", "ScreenCaptureKit", "AVFoundation", "Core Image", "SwiftPM plugins"],
+    github: null,
+    demo: null,
+    video: null,
+    accent: "from-slate-500 to-zinc-600",
+  },
+  {
     id: "volleyball",
     title: "Volleyball Match Analysis",
     shortDesc: "AI-powered match analysis with ball tracking and action recognition",
@@ -74,6 +74,19 @@ export const projects: Project[] = [
     video: "/videos/volleyball-demo.mp4",
     thumb: "/images/projects/volleyball.jpg",
     accent: "from-orange-500 to-red-500",
+  },
+  {
+    id: "ghote",
+    title: "Ghote Notes",
+    shortDesc: "Local-first, AI-powered note-taking for macOS",
+    detailedDescription:
+      "Privacy-focused note-taking app with Tauri 2.0 and React 19. Features Obsidian-compatible markdown, Gemini AI integration, Lexical editor with slash commands, D3.js knowledge graph, local RAG with Transformers.js, and real-time collaboration.",
+    tech: ["Tauri", "React", "Rust", "D3.js", "Supabase"],
+    github: "https://github.com/Ghote-notes",
+    demo: "https://ghote.dev",
+    video: "/videos/ghote-demo.mp4",
+    thumb: "/images/projects/ghote.jpg",
+    accent: "from-green-500 to-emerald-500",
   },
   {
     id: "archon",
@@ -110,18 +123,5 @@ export const projects: Project[] = [
     demo: null,
     video: null,
     accent: "from-purple-500 to-pink-500",
-  },
-  {
-    id: "ghote",
-    title: "Ghote Notes",
-    shortDesc: "Local-first, AI-powered note-taking for macOS",
-    detailedDescription:
-      "Privacy-focused note-taking app with Tauri 2.0 and React 19. Features Obsidian-compatible markdown, Gemini AI integration, Lexical editor with slash commands, D3.js knowledge graph, local RAG with Transformers.js, and real-time collaboration.",
-    tech: ["Tauri", "React", "Rust", "D3.js", "Supabase"],
-    github: "https://github.com/Ghote-notes",
-    demo: "https://ghote.dev",
-    video: "/videos/ghote-demo.mp4",
-    thumb: "/images/projects/ghote.jpg",
-    accent: "from-green-500 to-emerald-500",
   },
 ];

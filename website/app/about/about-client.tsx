@@ -61,10 +61,10 @@ const experience = [
     location: "Hsinchu, Taiwan",
     period: "Jun. 2025 – Aug. 2025",
     highlights: [
-      "Optimized multi-task YOLO model for autonomous driving, improving inference speed while maintaining driving area accuracy and detection recall",
-      "Implemented real-time image streaming and detection result transmission via Ethernet/ROS, processing 30 FPS with sub-50ms latency",
-      "Applied neural network pruning techniques to YOLO models for edge deployment",
-      "Supported research by reproducing and exploring SOTA models to benchmark performance",
+      "Trained YOLOPX, a multi-task panoptic driving perception network doing object detection, drivable-area segmentation and lane segmentation in a single forward pass — reaching 0.972 mIoU (drivable area), 0.793 mIoU (lane) and 0.838 mAP@0.5 over 4 classes after 200 epochs on ITRI's in-house driving dataset",
+      "Extended the open-source YOLOPX codebase by ~1,900 lines (6 files rewritten, 5 added) for ITRI's data format, building a YOLO-segmentation loader and a Mosaic/MixUp/Albumentations augmentation pipeline to replace one that handled BDD100K only",
+      "Owned the edge deployment path: network pruning, ONNX export, a tool resolving dynamic convolution-bias subgraphs that blocked TensorRT conversion, a TensorRT/PyCUDA engine for NVIDIA Jetson Nano, and image + detection streaming to a desktop PC over Ethernet/ROS at 30 FPS with sub-50ms latency",
+      "Delivered a command-line batch-inference tool for ARTC (Automotive Research & Testing Center) running the trained model across image and video datasets including a new rainy-weather set; separately reproduced and benchmarked YOLOP, YOLOPv2, YOLOPX and A-YOLOM to identify deployment-viable designs",
     ],
   },
 ];
@@ -117,10 +117,11 @@ export default function About() {
                   </a>.
                 </p>
                 <p className="text-lg md:text-xl leading-relaxed text-foreground/70">
-                  At ITRI I optimized real-time YOLO vision models for autonomous driving, and my capstone
-                  team built a deep-learning volleyball analytics platform. I love working across the stack —
-                  from on-device ML and audio DSP to React frontends — and turning complex problems into
-                  products people can actually use.
+                  At ITRI I trained and deployed multi-task driving-perception models down to a Jetson Nano,
+                  and my capstone team built a deep-learning volleyball analytics platform. Lately I have been
+                  auditing whether guitar-tone models quietly change a player&apos;s touch, and building a macOS
+                  app whose architecture the compiler enforces. I like working across the stack — on-device ML,
+                  audio DSP, systems Swift — and turning hard problems into things people can actually use.
                 </p>
               </div>
               <div className="md:col-span-2">

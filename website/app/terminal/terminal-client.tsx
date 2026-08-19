@@ -10,6 +10,14 @@ const projects: Record<string, { desc: string; url: string }> = {
     desc: "AI guitar effects studio — WWDC26 Swift Student Challenge Winner",
     url: "/portfolio/riffnode",
   },
+  toneleak: {
+    desc: "Does guitar tone transfer steal your touch? — independent research",
+    url: "/portfolio/toneleak",
+  },
+  soredemo: {
+    desc: "Turning every release into a published demo (macOS, Swift 6)",
+    url: "/portfolio/soredemo",
+  },
   volleyball: {
     desc: "Deep-learning volleyball analytics (ball tracking, action recognition)",
     url: "/portfolio/volleyball",
@@ -201,10 +209,11 @@ export default function Terminal() {
         return (
           <div className="space-y-1">
             {[
-              ["languages", "Python, TypeScript, Rust, Swift, C++, Java, Dart, SQL"],
-              ["ml/ai", "PyTorch, TensorFlow, OpenCV, ONNX, YOLO, Foundation Models"],
-              ["frameworks", "React, FastAPI, SwiftUI, AVFoundation, Tauri, Flutter"],
-              ["devops", "Docker, GitHub Actions, Redis, PostgreSQL, pytest, Vitest"],
+              ["languages", "Python, TypeScript, Rust, Swift, C++, Dart, SQL"],
+              ["ml/ai", "PyTorch, TensorFlow, OpenCV, ONNX, TensorRT, YOLO, ROS, RAG"],
+              ["apple", "SwiftUI, AVFoundation, Accelerate/vDSP, ScreenCaptureKit, Foundation Models"],
+              ["web", "React, Next.js, Tailwind, FastAPI, Celery, Flutter"],
+              ["devops", "Docker, GitHub Actions, GCP, Redis, PostgreSQL, MongoDB, pytest"],
             ].map(([k, v]) => (
               <p key={k}>
                 <span className="text-amber-400 inline-block w-28">{k}</span>
