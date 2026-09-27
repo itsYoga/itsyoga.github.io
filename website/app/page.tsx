@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <main className="text-foreground selection:bg-primary selection:text-primary-foreground">
       {/* Hero */}
-      <section className="min-h-[calc(100svh-4rem)] flex items-center px-4">
+      <section className="min-h-[calc(100svh-2.75rem)] flex items-center px-4">
         <div className="max-w-5xl mx-auto w-full py-24">
           <motion.p
             {...fadeUp(0)}

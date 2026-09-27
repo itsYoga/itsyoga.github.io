@@ -176,3 +176,9 @@
     transform: none !important;
   }
 }
+
+/* The menu bar's now-playing equaliser. */
+@keyframes np-eq {
+  from { transform: scaleY(0.25); }
+  to { transform: scaleY(1); }
+}

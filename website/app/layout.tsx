@@ -101,7 +101,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body className={`${lineSeedSans.variable} antialiased`} style={{ fontFamily: "var(--font-line-seed), system-ui, sans-serif" }}>
         <Navigation />
-        <div className="pt-16 md:pt-16">
+        <div className="pt-11">
           {children}
         </div>
         <Footer />

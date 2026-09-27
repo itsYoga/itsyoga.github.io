@@ -53,13 +53,14 @@ export const projects: Project[] = [
   {
     id: "soredemo",
     title: "Soredemo",
-    shortDesc: "Turning every release into a published demo — macOS, Swift 6",
+    shortDesc: "A macOS screen recorder that zooms in on what you click — and says why",
     detailedDescription:
-      "Teams ship 20+ times a year and demo two or three times. Soredemo turns each release into a demo: detected from GitHub, recorded once, derived into video and launch copy, reviewed by a person, and posted. The premise is measured rather than assumed — only 2.1% of 2,241 releases across 151 developer tools carried any visual demo. Architecturally it is an 11-target Swift package in three tiers: a deterministic core where the same input always gives the same output, a Capture tier that reads the world through ScreenCaptureKit and accessibility APIs, and a GPU Compositing tier. Two custom SwiftPM build plugins turn those boundaries into compile errors rather than conventions someone has to remember. 584 tests, with more test code than source. Recording and export work today; the derivation pipeline is still in progress.",
-    tech: ["Swift 6", "SwiftUI", "ScreenCaptureKit", "AVFoundation", "Core Image", "SwiftPM plugins"],
+      "A screen recorder that lives in the menu bar and the notch, and keeps its reasons. Record a display, a window, a dragged-out area or a plugged-in iPhone or iPad, and the editor opens with the work already done: every click matched to the control under it through the accessibility APIs, the camera framing that control rather than just the cursor, and a review panel that says why each click was or was not zoomed, so the user can overrule any of it. Around that: a camera bubble that moves to another corner when the cursor comes near, music that ducks under speech, silences that cut themselves, window-follow capture, on-device captions with word-level timing, and one take exported to 16:9, 9:16 and 1:1 in H.264, HEVC, ProRes or GIF. Nothing leaves the Mac — no account, no upload, zero third-party dependencies. Underneath, the core is an eleven-target Swift package in three tiers: a deterministic core where the same input always gives the same output, a Capture tier over ScreenCaptureKit and the accessibility APIs, and a GPU Compositing tier, with two custom SwiftPM build plugins turning those boundaries into compile errors. Interface in ten languages, MIT licensed. Recording, editing and export work end to end; the derivation pipeline is still in progress.",
+    tech: ["Swift 6", "SwiftUI", "ScreenCaptureKit", "AVFoundation", "Core Image", "Metal", "SpeechAnalyzer", "SwiftPM plugins"],
     github: null,
-    demo: null,
+    demo: "https://soredemo.dev",
     video: null,
+    thumb: "/images/projects/soredemo.jpg",
     accent: "from-slate-500 to-zinc-600",
   },
   {

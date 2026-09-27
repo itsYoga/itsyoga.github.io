@@ -15,7 +15,7 @@ const projects: Record<string, { desc: string; url: string }> = {
     url: "/portfolio/toneleak",
   },
   soredemo: {
-    desc: "Turning every release into a published demo (macOS, Swift 6)",
+    desc: "A macOS screen recorder that zooms in on what you click (Swift 6)",
     url: "/portfolio/soredemo",
   },
   volleyball: {
@@ -387,7 +387,7 @@ export default function Terminal() {
   };
 
   return (
-    <main className="min-h-[calc(100svh-4rem)] px-4 py-8 flex items-start justify-center">
+    <main className="min-h-[calc(100svh-2.75rem)] px-4 py-8 flex items-start justify-center">
       <div className="w-full max-w-3xl rounded-2xl border border-zinc-700/60 bg-zinc-950 shadow-2xl overflow-hidden">
         {/* Window chrome */}
         <div className="flex items-center gap-2 px-4 py-3 bg-zinc-900 border-b border-zinc-800">
