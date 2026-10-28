@@ -1,17 +1,22 @@
-// Photography data structure
-// Add your photos to public/photography/[event-or-place-name]/ folder
-// Then add the event/place details here
+// Photography: only photographs I took. Pictures of me, group photos and
+// other people's work belong on About, not here.
+//
+// width/height are the displayed (EXIF-rotated) pixel size; the justified grid
+// uses them to size each row without cropping. Measure a new photo with:
+//   node -e "require('sharp')('public/photography/x.jpg').metadata().then(console.log)"
+// and swap width/height when orientation is 5–8.
 
 export interface Photo {
   src: string;
   alt: string;
+  width: number;
+  height: number;
 }
 
 export interface PhotoCollection {
   id: string;
   title: string;
   description?: string;
-  date?: string;
   location?: string;
   photos: Photo[];
 }
@@ -20,285 +25,85 @@ export const photoCollections: PhotoCollection[] = [
   {
     id: "keelung",
     title: "Keelung",
-    description: "Scenes from Keelung, Taiwan",
+    description: "Harbors, headlands and the coast at night",
     location: "Keelung, Taiwan",
     photos: [
-      {
-        src: "/photography/keelung/DSCF1160.JPG",
-        alt: "Keelung scenery"
-      },
-      {
-        src: "/photography/keelung/DSCF1163.JPG",
-        alt: "Keelung view"
-      },
-      {
-        src: "/photography/keelung/DSCF1183.JPG",
-        alt: "Zhengbin Harbor waterfront with colorful buildings and fishing boats"
-      },
-      {
-        src: "/photography/keelung/DSCF1652.JPG",
-        alt: "Keelung landscape"
-      },
-    ]
+      { src: "/photography/keelung/DSCF1183.JPG", width: 2000, height: 1333, alt: "Zhengbin Harbor's waterfront houses and fishing boats reflected in still water" },
+      { src: "/photography/keelung/DSCF1160.JPG", width: 1600, height: 2400, alt: "A white lighthouse on a green headland under a clear sky" },
+      { src: "/photography/keelung/DSCF1163.JPG", width: 1600, height: 2400, alt: "A rocky reef running out into the sea off the Keelung coast" },
+      { src: "/photography/keelung/DSCF1652.JPG", width: 1600, height: 2400, alt: "A lit bridge reflected in black water at night" },
+    ],
   },
   {
-    id: "cotter",
-    title: "Cotter",
-    description: "Life at Cotter",
-    location: "Winona, MN, US",
-    photos: [
-      {
-        src: "/photography/cotter/boys_varsity_soccer.jpg",
-        alt: "Boys varsity soccer"
-      },
-      {
-        src: "/photography/cotter/halloween.jpg",
-        alt: "Halloween celebration"
-      },
-    ]
-  },
-  {
-    id: "foody",
+    id: "food",
     title: "Food",
-    description: "Delicious food moments",
-    location: "Various locations",
+    description: "Stalls, cafés and dessert",
     photos: [
-      {
-        src: "/photography/foody/DSCF0176.JPG",
-        alt: "Food photography"
-      },
-      {
-        src: "/photography/foody/DSCF0564.JPG",
-        alt: "Food photography"
-      },
-      {
-        src: "/photography/foody/DSCF1203.JPG",
-        alt: "Food photography"
-      },
-    ]
+      { src: "/photography/foody/DSCF1203.JPG", width: 2400, height: 1600, alt: "Tiramisu and a parfait glass, shot with a shallow depth of field" },
+      { src: "/photography/foody/DSCF0176.JPG", width: 1600, height: 2400, alt: "A cook working the grill at a night-market stall" },
+      { src: "/photography/foody/DSCF0564.JPG", width: 1600, height: 2400, alt: "Tiramisu and an iced latte on a caf\u00e9 table" },
+    ],
   },
   {
-    id: "kyoto",
-    title: "Kyoto",
-    description: "Exploring Kyoto",
-    location: "Kyoto, Japan",
+    id: "live-music",
+    title: "Live Music",
+    description: "Concerts and small stages",
     photos: [
-      {
-        src: "/photography/kyoto/20241105_093249.jpg",
-        alt: "Kyoto scenery"
-      },
-      {
-        src: "/photography/kyoto/20241105_102425.jpg",
-        alt: "Kyoto landscape"
-      },
-    ]
-  },
-  {
-    id: "me",
-    title: "Personal",
-    description: "Personal moments and memories",
-    location: "Various locations",
-    photos: [
-      {
-        src: "/photography/me/1724085988099.jpg",
-        alt: "Personal moment"
-      },
-      {
-        src: "/photography/me/1732370825178.jpg",
-        alt: "Personal memory"
-      },
-      {
-        src: "/photography/me/1743432564333.jpg",
-        alt: "Personal photo"
-      },
-      {
-        src: "/photography/me/1749613149427.jpg",
-        alt: "Personal memory"
-      },
-      {
-        src: "/photography/me/DSCF0462.JPG",
-        alt: "Personal photo"
-      },
-    ]
-  },
-  {
-    id: "ntou",
-    title: "NTOU",
-    description: "Life at National Taiwan Ocean University",
-    location: "Keelung, Taiwan",
-    photos: [
-      {
-        src: "/photography/ntou/1700303422224.jpg",
-        alt: "NTOU campus"
-      },
-      {
-        src: "/photography/ntou/1743432669074.jpg",
-        alt: "NTOU campus view"
-      },
-      {
-        src: "/photography/ntou/20240906_141019.jpg",
-        alt: "NTOU campus"
-      },
-      {
-        src: "/photography/ntou/DSCF0349.JPG",
-        alt: "NTOU campus photo"
-      },
-      {
-        src: "/photography/ntou/DSCF1034.JPG",
-        alt: "NTOU campus view"
-      },
-      {
-        src: "/photography/ntou/IMG_5787.jpg",
-        alt: "NTOU campus"
-      },
-    ]
-  },
-  {
-    id: "scubadiving",
-    title: "Scuba Diving",
-    description: "Underwater adventures",
-    location: "Various locations",
-    photos: [
-      {
-        src: "/photography/scubadiving/P4020012.JPG",
-        alt: "Scuba diving underwater"
-      },
-      {
-        src: "/photography/scubadiving/P4020014.JPG",
-        alt: "Scuba diving marine life"
-      },
-      {
-        src: "/photography/scubadiving/P4020039.JPG",
-        alt: "Scuba diving underwater scene"
-      },
-      {
-        src: "/photography/scubadiving/P4020043.JPG",
-        alt: "Scuba diving adventure"
-      },
-    ]
-  },
-  {
-    id: "summer_camp",
-    title: "Summer Camp",
-    description: "Summer camp memories",
-    location: "Various locations",
-    photos: [
-      {
-        src: "/photography/summer_camp/1723918503360.jpg",
-        alt: "Summer camp activity"
-      },
-      {
-        src: "/photography/summer_camp/mmexport1723943892871.jpg",
-        alt: "Summer camp moment"
-      },
-    ]
+      { src: "/photography/concert/gracie_abrams.jpg", width: 1108, height: 1477, alt: "Gracie Abrams at the piano under a single spotlight" },
+      { src: "/photography/concert/aimyon-cropped.jpg", width: 1080, height: 726, alt: "Aimyon on stage in orange light" },
+      { src: "/photography/concert/gracie_abrams2.jpg", width: 1080, height: 1920, alt: "Gracie Abrams playing guitar on stage" },
+      { src: "/photography/music/04bd1c25-0486-4241-acee-eb4d437f71c6.jpeg", width: 1080, height: 1620, alt: "A caj\u00f3n player in low light" },
+    ],
   },
   {
     id: "yilan",
     title: "Yilan",
-    description: "Scenic views of Yilan",
+    description: "The east coast",
     location: "Yilan, Taiwan",
     photos: [
-      {
-        src: "/photography/yilan/old_man_fishing.JPG",
-        alt: "Old man fishing in Yilan"
-      },
-    ]
+      { src: "/photography/yilan/old_man_fishing.JPG", width: 2400, height: 1600, alt: "A man fishing from a pebble beach below green mountains" },
+    ],
   },
   {
-    id: "california",
-    title: "Sequoia National Park",
-    description: "Exploring Sequoia National Park",
-    location: "California, US",
+    id: "kyoto",
+    title: "Kyoto",
+    description: "Gardens and gates",
+    location: "Kyoto, Japan",
     photos: [
-      {
-        src: "/photography/california/Sequoia National Park.webp",
-        alt: "Sequoia National Park scenery"
-      },
-      {
-        src: "/photography/california/Sequoia National Park2.webp",
-        alt: "Sequoia National Park landscape"
-      },
-      {
-        src: "/photography/california/Sequoia National Park3.webp",
-        alt: "Sequoia National Park view"
-      },
-    ]
+      { src: "/photography/kyoto/20241105_093249.jpg", width: 1500, height: 2000, alt: "A red bridge over a garden pond framed by trees" },
+      { src: "/photography/kyoto/20241105_102425.jpg", width: 1500, height: 2000, alt: "A stone torii gate over a busy shopping street" },
+    ],
   },
   {
     id: "tokyo",
     title: "Tokyo",
-    description: "Exploring Tokyo",
+    description: "Shrines, streets and summer sky",
     location: "Tokyo, Japan",
     photos: [
-      {
-        src: "/photography/tokyo/IMG_20230823_141251_449.webp",
-        alt: "Tokyo cityscape"
-      },
-      {
-        src: "/photography/tokyo/IMG_20230823_163514_756.webp",
-        alt: "Tokyo street scene"
-      },
-      {
-        src: "/photography/tokyo/IMG_20230825_163046_330.webp",
-        alt: "Tokyo view"
-      },
-      {
-        src: "/photography/tokyo/IMG_20230826_132231_077.webp",
-        alt: "Tokyo landscape"
-      },
-      {
-        src: "/photography/tokyo/IMG_20230826_132811_615.webp",
-        alt: "Tokyo scenery"
-      },
-      {
-        src: "/photography/tokyo/IMG_20230826_164637_713.webp",
-        alt: "Tokyo city view"
-      },
-    ]
+      { src: "/photography/tokyo/IMG_20230826_132231_077.webp", width: 1080, height: 1920, alt: "A side street leading toward Tokyo Tower" },
+      { src: "/photography/tokyo/IMG_20230823_141251_449.webp", width: 1080, height: 1920, alt: "Mossy stone steps climbing through a shrine forest" },
+      { src: "/photography/tokyo/IMG_20230823_163514_756.webp", width: 1080, height: 1920, alt: "A great bronze Buddha beneath a wide blue sky" },
+      { src: "/photography/tokyo/IMG_20230826_132811_615.webp", width: 1080, height: 1920, alt: "Towering summer clouds over the city" },
+    ],
   },
   {
-    id: "volleyball",
-    title: "Volleyball",
-    description: "Volleyball matches and moments",
-    location: "Various locations",
+    id: "sequoia",
+    title: "Sequoia National Park",
+    description: "Rivers and giant trees",
+    location: "California, USA",
     photos: [
-      {
-        src: "/photography/volleyball/1747577189638.jpg",
-        alt: "Volleyball match"
-      },
-      {
-        src: "/photography/volleyball/1749805710516.jpg",
-        alt: "Volleyball action"
-      },
-      {
-        src: "/photography/volleyball/received_1762153534291220.jpeg",
-        alt: "Volleyball moment"
-      },
-    ]
+      { src: "/photography/california/Sequoia National Park3.webp", width: 1080, height: 1920, alt: "Looking up the trunk of a giant sequoia" },
+      { src: "/photography/california/Sequoia National Park.webp", width: 1080, height: 1920, alt: "A clear river running over boulders through the forest" },
+      { src: "/photography/california/Sequoia National Park2.webp", width: 1080, height: 1920, alt: "A trail winding between giant trees" },
+    ],
   },
   {
-    id: "music",
-    title: "Music",
-    description: "Music-related moments and live concert performances",
-    location: "Various locations",
+    id: "underwater",
+    title: "Underwater",
+    description: "Sea turtles on a dive",
     photos: [
-      {
-        src: "/photography/music/04bd1c25-0486-4241-acee-eb4d437f71c6.jpeg",
-        alt: "Music moment"
-      },
-      {
-        src: "/photography/concert/aimyon.jpg",
-        alt: "Aimyon concert performance"
-      },
-      {
-        src: "/photography/concert/gracie_abrams.jpg",
-        alt: "Gracie Abrams concert"
-      },
-      {
-        src: "/photography/concert/gracie_abrams2.jpg",
-        alt: "Gracie Abrams concert performance"
-      },
-    ]
+      { src: "/photography/scubadiving/P4020012.JPG", width: 1500, height: 2000, alt: "A sea turtle gliding above divers in blue water" },
+      { src: "/photography/scubadiving/P4020014.JPG", width: 1500, height: 2000, alt: "A sea turtle overhead, divers far below" },
+    ],
   },
 ];

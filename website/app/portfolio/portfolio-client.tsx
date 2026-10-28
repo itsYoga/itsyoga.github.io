@@ -48,8 +48,21 @@ function TechChips({ tech, limit = 4 }: { tech: string[]; limit?: number }) {
   );
 }
 
+/** Timeline and award on one line above the title, so every card's title gets the full width. */
+function CardMeta({ project }: { project: Project }) {
+  if (!project.period && !project.award) return null;
+  return (
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-3">
+      {project.period && <span className="text-xs font-medium text-muted-foreground tabular-nums">{project.period}</span>}
+      {project.award && <AwardBadge label={project.award} size="sm" />}
+    </div>
+  );
+}
+
 export default function Portfolio() {
-  const [featured, ...rest] = projects;
+  // Two wide features, then a 2×2 grid: six projects with no orphan row.
+  const featured = projects.slice(0, 2);
+  const rest = projects.slice(2);
 
   return (
     <main className="min-h-screen">
@@ -57,49 +70,48 @@ export default function Portfolio() {
         <div className="max-w-5xl mx-auto">
 
           {/* Header */}
-          <div className="mb-16 lg:mb-24">
+          <div className="mb-14 lg:mb-20">
             <EditorialHeader
               title="Selected Works"
-              subtitle="Projects spanning AI, full-stack development, and creative technology."
+              subtitle="Six projects across on-device audio, computer vision, research and developer tools — each with my role, the timeline and the numbers behind it."
               size="large"
             />
           </div>
 
-          {/* Featured project */}
-          <motion.article
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="group mb-6"
-          >
-            <Link href={`/portfolio/${featured.id}`} className="block">
-              <div className="grid grid-cols-1 md:grid-cols-5 rounded-2xl border border-border/50 bg-card/30 hover:bg-card/60 hover:border-border transition-all duration-300 overflow-hidden">
-                <ProjectMedia
-                  project={featured}
-                  className="md:col-span-3 aspect-video md:aspect-auto md:min-h-[320px]"
-                />
-                <div className="md:col-span-2 flex flex-col justify-center p-7 md:p-9">
-                  {featured.award && (
-                    <div className="mb-4">
-                      <AwardBadge label={featured.award} size="lg" />
+          {/* Featured projects, image side alternating */}
+          <div className="space-y-6 mb-6">
+            {featured.map((project, i) => (
+              <motion.article
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="group"
+              >
+                <Link href={`/portfolio/${project.id}`} className="block">
+                  <div className="grid grid-cols-1 md:grid-cols-5 rounded-2xl border border-border/50 bg-card/30 hover:bg-card/60 hover:border-border transition-all duration-300 overflow-hidden">
+                    <ProjectMedia
+                      project={project}
+                      className={`md:col-span-3 aspect-video md:aspect-auto md:min-h-[320px] ${i % 2 === 1 ? "md:order-2" : ""}`}
+                    />
+                    <div className="md:col-span-2 flex flex-col justify-center p-7 md:p-9">
+                      <CardMeta project={project} />
+                      <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors mb-3">
+                        {project.title}
+                      </h3>
+                      <p className="text-muted-foreground leading-relaxed mb-6">{project.shortDesc}</p>
+                      <TechChips tech={project.tech} limit={5} />
+                      <div className="flex items-center gap-2 mt-7 text-sm font-medium text-foreground/70 group-hover:text-primary transition-colors">
+                        View project
+                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </div>
                     </div>
-                  )}
-                  <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors mb-3">
-                    {featured.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    {featured.shortDesc}
-                  </p>
-                  <TechChips tech={featured.tech} limit={5} />
-                  <div className="flex items-center gap-2 mt-7 text-sm font-medium text-foreground/70 group-hover:text-primary transition-colors">
-                    View project
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
-                </div>
-              </div>
-            </Link>
-          </motion.article>
+                </Link>
+              </motion.article>
+            ))}
+          </div>
 
           {/* Remaining projects */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -116,21 +128,11 @@ export default function Portfolio() {
                   <div className="flex flex-col h-full rounded-2xl border border-border/50 bg-card/30 hover:bg-card/60 hover:border-border transition-all duration-300 overflow-hidden">
                     <ProjectMedia project={project} className="aspect-video" />
                     <div className="flex flex-col flex-1 p-6">
-                      <div className="flex items-start justify-between gap-3 mb-2">
-                        <h3 className="text-lg md:text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
-                          {project.title}
-                        </h3>
-                        {project.award ? (
-                          <AwardBadge label={project.award} size="sm" />
-                        ) : (
-                          <span className="font-mono text-xs text-muted-foreground/50 pt-1.5 shrink-0">
-                            {String(index + 2).padStart(2, "0")}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
-                        {project.shortDesc}
-                      </p>
+                      <CardMeta project={project} />
+                      <h3 className="text-lg md:text-xl font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
+                        {project.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">{project.shortDesc}</p>
                       <TechChips tech={project.tech} />
                     </div>
                   </div>

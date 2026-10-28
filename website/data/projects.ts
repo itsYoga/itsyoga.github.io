@@ -168,6 +168,7 @@ export const projects: Project[] = [
   },
   {
     id: "ghote",
+    period: "2025",
     title: "Ghote Notes",
     shortDesc: "Local-first, AI-powered note-taking for macOS",
     detailedDescription:
