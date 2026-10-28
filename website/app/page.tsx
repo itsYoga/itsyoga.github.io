@@ -3,8 +3,9 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Github, Linkedin, Instagram, Mail, ArrowUpRight, FileText } from "lucide-react";
-import { SiApple } from "react-icons/si";
+import AwardBadge from "@/components/AwardBadge";
 import { projects } from "@/data/projects";
+import { site, socials } from "@/data/site";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -14,10 +15,10 @@ const fadeUp = (delay: number) => ({
   transition: { duration: 0.7, delay, ease },
 });
 
-const socials = [
-  { href: "https://github.com/itsYoga", icon: Github, label: "GitHub" },
-  { href: "https://www.linkedin.com/in/yujia-liang-77ab022a7/", icon: Linkedin, label: "LinkedIn" },
-  { href: "https://www.instagram.com/yogaliang0702/", icon: Instagram, label: "Instagram" },
+const socialLinks = [
+  { href: socials.github, icon: Github, label: "GitHub" },
+  { href: socials.linkedin, icon: Linkedin, label: "LinkedIn" },
+  { href: socials.instagram, icon: Instagram, label: "Instagram" },
 ];
 
 // Derived from the shared project data so the homepage cannot drift
@@ -27,15 +28,16 @@ const featured = projects.slice(0, 3).map((p) => ({
   title: p.title,
   desc: p.shortDesc,
   tech: p.tech.slice(0, 3),
-  award: Boolean(p.award),
+  award: p.award,
 }));
 
 export default function Home() {
   return (
     <main className="text-foreground selection:bg-primary selection:text-primary-foreground">
       {/* Hero */}
-      <section className="min-h-[calc(100svh-2.75rem)] flex items-center px-4">
-        <div className="max-w-5xl mx-auto w-full py-24">
+      <section className="flex items-center px-4">
+        <div className="max-w-5xl mx-auto w-full py-20 md:py-28 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center">
+          <div>
           <motion.p
             {...fadeUp(0)}
             className="text-sm uppercase tracking-widest text-muted-foreground mb-6"
@@ -45,7 +47,7 @@ export default function Home() {
 
           <motion.h1
             {...fadeUp(0.1)}
-            className="text-[clamp(3rem,9vw,7.5rem)] font-bold tracking-tighter leading-[0.95] mb-8"
+            className="text-[clamp(3rem,8vw,6.5rem)] font-bold tracking-tighter leading-[0.95] mb-8"
           >
             YuJia Liang
           </motion.h1>
@@ -59,14 +61,14 @@ export default function Home() {
 
           <motion.div {...fadeUp(0.3)} className="flex flex-wrap items-center gap-4">
             <a
-              href="mailto:ch993115@gmail.com"
+              href={`mailto:${site.email}`}
               className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-foreground text-background text-sm font-semibold hover:bg-primary transition-colors"
             >
               <Mail className="w-4 h-4" />
               Get in touch
             </a>
             <a
-              href="/YuJia_resume.pdf"
+              href={site.resume}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-border text-sm font-semibold text-foreground/80 hover:text-foreground hover:border-foreground/30 transition-colors"
@@ -75,7 +77,7 @@ export default function Home() {
               Resume
             </a>
             <div className="flex items-center gap-1 sm:ml-2">
-              {socials.map((social) => (
+              {socialLinks.map((social) => (
                 <Link
                   key={social.label}
                   href={social.href}
@@ -88,6 +90,15 @@ export default function Home() {
               ))}
             </div>
           </motion.div>
+          </div>
+
+          <motion.div {...fadeUp(0.2)} className="hidden md:block w-[260px] lg:w-[300px]">
+            <img
+              src="/images/projects/riffnode/interview.jpg"
+              alt="YuJia Liang with a guitar and the RiffNode spectrum on a laptop"
+              className="w-full aspect-[4/5] object-cover rounded-2xl border border-border/50 shadow-lg"
+            />
+          </motion.div>
         </div>
       </section>
 
@@ -95,7 +106,7 @@ export default function Home() {
       <section className="px-4 pt-20 md:pt-24 pb-24 md:pb-28 border-t border-border">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-end justify-between mb-10 md:mb-14">
-            <h2 className="text-sm uppercase tracking-widest text-muted-foreground">Featured Work</h2>
+            <h2 className="pill-label">Featured Work</h2>
             <Link
               href="/portfolio"
               className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -118,17 +129,11 @@ export default function Home() {
                   href={`/portfolio/${project.slug}`}
                   className="group flex flex-col h-full p-6 rounded-2xl border border-border/50 bg-card/30 hover:bg-card/60 hover:border-border transition-all duration-300"
                 >
-                  <div className="flex items-start justify-between gap-3 mb-3">
-                    <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-                      {project.title}
-                    </h3>
-                    {project.award && (
-                      <span className="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-full bg-foreground/[0.06] text-foreground/80 border border-border">
-                        <SiApple className="w-3 h-3 -mt-px" />
-                        WWDC26
-                      </span>
-                    )}
-                  </div>
+                  {/* Badge above the title, so a long title keeps the full width. */}
+                  <div className="h-7 mb-3">{project.award && <AwardBadge label={project.award} size="sm" />}</div>
+                  <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors mb-3">
+                    {project.title}
+                  </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
                     {project.desc}
                   </p>
@@ -160,11 +165,11 @@ export default function Home() {
           </div>
           <div className="flex flex-wrap items-center gap-4">
             <a
-              href="mailto:ch993115@gmail.com"
+              href={`mailto:${site.email}`}
               className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-foreground text-background text-sm font-semibold hover:bg-primary transition-colors"
             >
               <Mail className="w-4 h-4" />
-              ch993115@gmail.com
+              {site.email}
             </a>
           </div>
         </div>

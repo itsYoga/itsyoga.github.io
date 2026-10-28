@@ -4,7 +4,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 interface EditorialHeaderProps {
-  index?: string;
   title: string;
   subtitle?: string;
   align?: "left" | "center" | "right";
@@ -12,7 +11,6 @@ interface EditorialHeaderProps {
 }
 
 export default function EditorialHeader({
-  index,
   title,
   subtitle,
   align = "left",
@@ -33,26 +31,8 @@ export default function EditorialHeader({
     hero: "text-6xl md:text-8xl lg:text-[10rem]",
   };
 
-  const indexSizes = {
-    default: "text-7xl md:text-9xl",
-    large: "text-8xl md:text-[10rem]",
-    hero: "text-9xl md:text-[12rem]",
-  };
-
   return (
     <div ref={ref} className={`flex flex-col ${alignClasses[align]} relative`}>
-      {/* Large Editorial Index Number */}
-      {index && (
-        <motion.span
-          initial={{ opacity: 0, x: align === "right" ? 50 : -50 }}
-          animate={isInView ? { opacity: 0.06, x: 0 } : {}}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className={`absolute -top-8 md:-top-16 ${align === "right" ? "-right-4" : "-left-4"} ${indexSizes[size]} font-bold text-foreground select-none pointer-events-none leading-none`}
-        >
-          {index}
-        </motion.span>
-      )}
-
       {/* Main Title */}
       <motion.h1
         initial={{ opacity: 0, y: 40 }}
@@ -75,13 +55,6 @@ export default function EditorialHeader({
         </motion.p>
       )}
 
-      {/* Decorative Line */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        animate={isInView ? { scaleX: 1 } : {}}
-        transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className={`h-px bg-border mt-6 md:mt-8 ${align === "center" ? "w-24" : "w-16 md:w-24"} origin-left`}
-      />
     </div>
   );
 }

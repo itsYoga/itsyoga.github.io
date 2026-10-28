@@ -3,18 +3,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Github, Linkedin, Instagram, Mail } from "lucide-react";
+import { site, socials } from "@/data/site";
 
 const links = [
-  { href: "mailto:ch993115@gmail.com", icon: Mail, label: "Email" },
-  { href: "https://github.com/itsYoga", icon: Github, label: "GitHub" },
-  { href: "https://www.linkedin.com/in/yujia-liang-77ab022a7/", icon: Linkedin, label: "LinkedIn" },
-  { href: "https://www.instagram.com/yogaliang0702/", icon: Instagram, label: "Instagram" },
+  { href: `mailto:${site.email}`, icon: Mail, label: "Email" },
+  { href: socials.github, icon: Github, label: "GitHub" },
+  { href: socials.linkedin, icon: Linkedin, label: "LinkedIn" },
+  { href: socials.instagram, icon: Instagram, label: "Instagram" },
 ];
 
 export default function Footer() {
   const pathname = usePathname();
   // The terminal page is its own full-screen experience
-  if (pathname === "/terminal") return null;
+  if (pathname.startsWith("/terminal")) return null;
 
   return (
     <footer className="border-t border-border px-4 py-8">

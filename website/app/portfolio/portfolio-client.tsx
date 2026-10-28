@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { SiApple } from "react-icons/si";
 import EditorialHeader from "@/components/EditorialHeader";
 import { projects, type Project } from "@/data/projects";
+import AwardBadge from "@/components/AwardBadge";
 
 function ProjectMedia({ project, className = "" }: { project: Project; className?: string }) {
   return (
@@ -48,19 +48,6 @@ function TechChips({ tech, limit = 4 }: { tech: string[]; limit?: number }) {
   );
 }
 
-function AwardBadge({ label, size = "sm" }: { label: string; size?: "sm" | "md" }) {
-  return (
-    <span
-      className={`inline-flex items-center gap-1.5 font-semibold rounded-full bg-foreground/[0.06] text-foreground/80 border border-border ${
-        size === "md" ? "px-3 py-1.5 text-sm" : "px-3 py-1 text-xs"
-      }`}
-    >
-      <SiApple className={size === "md" ? "w-4 h-4 -mt-px" : "w-3.5 h-3.5 -mt-px"} />
-      {label}
-    </span>
-  );
-}
-
 export default function Portfolio() {
   const [featured, ...rest] = projects;
 
@@ -72,7 +59,6 @@ export default function Portfolio() {
           {/* Header */}
           <div className="mb-16 lg:mb-24">
             <EditorialHeader
-              index="02"
               title="Selected Works"
               subtitle="Projects spanning AI, full-stack development, and creative technology."
               size="large"
@@ -96,7 +82,7 @@ export default function Portfolio() {
                 <div className="md:col-span-2 flex flex-col justify-center p-7 md:p-9">
                   {featured.award && (
                     <div className="mb-4">
-                      <AwardBadge label={featured.award} size="md" />
+                      <AwardBadge label={featured.award} size="lg" />
                     </div>
                   )}
                   <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors mb-3">
@@ -134,9 +120,13 @@ export default function Portfolio() {
                         <h3 className="text-lg md:text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
                           {project.title}
                         </h3>
-                        <span className="font-mono text-xs text-muted-foreground/50 pt-1.5 shrink-0">
-                          {String(index + 2).padStart(2, "0")}
-                        </span>
+                        {project.award ? (
+                          <AwardBadge label={project.award} size="sm" />
+                        ) : (
+                          <span className="font-mono text-xs text-muted-foreground/50 pt-1.5 shrink-0">
+                            {String(index + 2).padStart(2, "0")}
+                          </span>
+                        )}
                       </div>
                       <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
                         {project.shortDesc}

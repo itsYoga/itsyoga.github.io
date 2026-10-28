@@ -1,11 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import Copy from "@/components/Copy";
 import EditorialHeader from "@/components/EditorialHeader";
 import {
-  FileText, ExternalLink, MapPin, Calendar, Briefcase, GraduationCap, Download, Camera
+  ExternalLink, MapPin, Calendar, Download, Camera, Trophy
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,6 +18,8 @@ import {
   SiClaude, SiOpenai, SiGithubcopilot, SiGooglegemini, SiFigma,
 } from "react-icons/si";
 import { skills } from "@/data/skills";
+import { awards, certificates, education, experience, languages, lifePhotos } from "@/data/profile";
+import { site, socials } from "@/data/site";
 
 // Icon per skill — skills without an entry render as plain chips.
 const skillIcons: Record<string, IconType> = {
@@ -36,45 +36,6 @@ const skillIcons: Record<string, IconType> = {
   "Gemini": SiGooglegemini, "Figma": SiFigma,
 };
 
-const education = [
-  {
-    school: "National Taiwan Ocean University",
-    degree: "B.S. in Computer Science and Engineering",
-    location: "Keelung, Taiwan",
-    period: "2022 – 2026",
-    logo: "/images/schools/ntou.png",
-  },
-  {
-    school: "Cotter High School",
-    degree: "High School Diploma",
-    location: "Winona, MN, USA",
-    period: "2019 – 2021",
-    logo: "/images/schools/cotter.png",
-  },
-];
-
-const experience = [
-  {
-    company: "ITRI (Industrial Technology Research Institute)",
-    role: "AI Image Recognition Intern",
-    department: "Electronics and Optoelectronics Research Laboratories",
-    location: "Hsinchu, Taiwan",
-    period: "Jun. 2025 – Aug. 2025",
-    highlights: [
-      "Trained YOLOPX, a multi-task panoptic driving perception network doing object detection, drivable-area segmentation and lane segmentation in a single forward pass — reaching 0.972 mIoU (drivable area), 0.793 mIoU (lane) and 0.838 mAP@0.5 over 4 classes after 200 epochs on ITRI's in-house driving dataset",
-      "Extended the open-source YOLOPX codebase by ~1,900 lines (6 files rewritten, 5 added) for ITRI's data format, building a YOLO-segmentation loader and a Mosaic/MixUp/Albumentations augmentation pipeline to replace one that handled BDD100K only",
-      "Owned the edge deployment path: network pruning, ONNX export, a tool resolving dynamic convolution-bias subgraphs that blocked TensorRT conversion, a TensorRT/PyCUDA engine for NVIDIA Jetson Nano, and image + detection streaming to a desktop PC over Ethernet/ROS at 30 FPS with sub-50ms latency",
-      "Delivered a command-line batch-inference tool for ARTC (Automotive Research & Testing Center) running the trained model across image and video datasets including a new rainy-weather set; separately reproduced and benchmarked YOLOP, YOLOPv2, YOLOPX and A-YOLOM to identify deployment-viable designs",
-    ],
-  },
-];
-
-const languages = [
-  { name: "Mandarin", level: "Native" },
-  { name: "English", level: "Fluent", note: "TOEFL 110 · TOEIC 920" },
-  { name: "Japanese", level: "Intermediate", note: "JLPT N3" },
-];
-
 export default function About() {
   return (
     <main className="min-h-screen">
@@ -84,7 +45,6 @@ export default function About() {
           {/* Header */}
           <div className="mb-16 lg:mb-24">
             <EditorialHeader
-              index="01"
               title="About Me"
               subtitle="AI engineer and photographer based in Taipei, Taiwan."
               size="large"
@@ -104,9 +64,9 @@ export default function About() {
               <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-center">
               <div className="space-y-6 md:col-span-3">
                 <p className="text-xl md:text-2xl leading-relaxed text-foreground/80">
-                  I'm a Computer Science graduate from National Taiwan Ocean University (Class of 2026).
-                  My most recent project, RiffNode — an AI guitar effects studio built entirely with
-                  native Apple frameworks —{" "}
+                  I&apos;m a Computer Science and Engineering graduate of National Taiwan Ocean University
+                  (Class of 2026). RiffNode — a guitar effects studio
+                  built entirely with native Apple frameworks —{" "}
                   <a
                     href="https://udn.com/news/story/6928/9489917"
                     target="_blank"
@@ -117,8 +77,10 @@ export default function About() {
                   </a>.
                 </p>
                 <p className="text-lg md:text-xl leading-relaxed text-foreground/70">
-                  At ITRI I trained and deployed multi-task driving-perception models down to a Jetson Nano,
-                  and my capstone team built a deep-learning volleyball analytics platform. Lately I have been
+                  At ITRI I trained and deployed multi-task driving-perception models down to a Jetson Nano.
+                  I led my capstone team&apos;s volleyball analysis system, which won the department&apos;s
+                  Software Development Silver Award, and I have kept building it as a research project —
+                  from one camera to the court in metres, tracked players and 3D ball flights. Lately I have been
                   auditing whether guitar-tone models quietly change a player&apos;s touch, and building a macOS
                   app whose architecture the compiler enforces. I like working across the stack — on-device ML,
                   audio DSP, systems Swift — and turning hard problems into things people can actually use.
@@ -139,6 +101,129 @@ export default function About() {
               </div>
             </motion.section>
 
+            {/* Experience Section */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="pill-label mb-6">Experience</h2>
+              <div className="space-y-8">
+                {experience.map((exp, idx) => (
+                  <div key={idx} className="border-l-2 border-primary/30 pl-6 py-2">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
+                      <div>
+                        <h3 className="text-xl font-semibold text-foreground">{exp.role}</h3>
+                        <p className="text-foreground/70">{exp.company}</p>
+                        {exp.department && <p className="text-sm text-muted-foreground">{exp.department}</p>}
+                      </div>
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                        <span className="flex items-center gap-1.5">
+                          <MapPin className="w-3.5 h-3.5" />
+                          {exp.location}
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                          <Calendar className="w-3.5 h-3.5" />
+                          {exp.period}
+                        </span>
+                      </div>
+                    </div>
+                    {exp.highlights.length > 0 && (
+                    <ul className="space-y-2">
+                      {exp.highlights.map((highlight, i) => (
+                        <li key={i} className="text-muted-foreground flex items-start gap-2">
+                          <span className="text-primary mt-1.5">·</span>
+                          {highlight}
+                        </li>
+                      ))}
+                    </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </motion.section>
+
+            {/* Awards Section */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="pill-label mb-6">Awards</h2>
+              <div className="space-y-12">
+                {awards.map((award) => (
+                  <div key={award.title} className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-6 md:gap-10 items-start">
+                    <div className="border-l-2 border-primary/30 pl-6 py-1">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                        <Trophy className="w-3.5 h-3.5" />
+                        {award.date}
+                      </div>
+                      <h3 className="text-xl font-semibold text-foreground mb-2 leading-snug">{award.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed mb-3">{award.detail}</p>
+                      <Link href={award.href} className="text-sm text-primary underline underline-offset-4 decoration-primary/40 hover:decoration-primary">
+                        See the project
+                      </Link>
+                    </div>
+                    <div className={`grid gap-3 ${award.photos.length === 3 ? "grid-cols-3" : "grid-cols-2"}`}>
+                      {award.photos.map((photo) => (
+                        <a
+                          key={photo.src}
+                          href={photo.src}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block rounded-xl overflow-hidden border border-border/50 bg-accent/30 hover:border-border transition-colors"
+                        >
+                          <img
+                            src={photo.src}
+                            alt={photo.alt}
+                            loading="lazy"
+                            className={`w-full object-cover ${award.photos.length === 3 ? "aspect-square" : "aspect-[3/4]"}`}
+                          />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.section>
+
+            {/* Certificates & Volunteering */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="pill-label mb-6">Certificates &amp; Volunteering</h2>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-8">
+                {certificates.map((cert) => (
+                  <a
+                    key={cert.title}
+                    href={cert.image}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block"
+                  >
+                    <div className="aspect-[4/3] rounded-xl border border-border/60 bg-accent/30 p-3 overflow-hidden group-hover:border-border transition-colors">
+                      <img
+                        src={cert.image}
+                        alt={`${cert.title} certificate`}
+                        loading="lazy"
+                        className="w-full h-full object-contain drop-shadow-sm"
+                      />
+                    </div>
+                    <div className="mt-3 text-xs text-muted-foreground tabular-nums">{cert.date}</div>
+                    <h3 className="mt-0.5 text-sm font-semibold leading-snug text-foreground group-hover:text-primary transition-colors">
+                      {cert.title}
+                    </h3>
+                    <p className="mt-0.5 text-xs text-muted-foreground leading-relaxed">{cert.detail}</p>
+                  </a>
+                ))}
+              </div>
+            </motion.section>
+
             {/* Skills Section */}
             <motion.section
               initial={{ opacity: 0, y: 20 }}
@@ -146,7 +231,7 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8">Technical Skills</h2>
+              <h2 className="pill-label mb-6">Technical Skills</h2>
               <div className="border-t border-border/60">
                 {Object.entries(skills).map(([category, items]) => (
                   <div
@@ -175,107 +260,67 @@ export default function About() {
               </div>
             </motion.section>
 
-            {/* Experience Section */}
+            {/* Education and Languages — one row: a timeline that matches Experience, languages beside it */}
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="grid grid-cols-1 lg:grid-cols-[1fr_17rem] gap-14 lg:gap-16"
             >
-              <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8">Experience</h2>
-              <div className="space-y-8">
-                {experience.map((exp, idx) => (
-                  <div key={idx} className="border-l-2 border-primary/30 pl-6 py-2">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
-                      <div>
-                        <h3 className="text-xl font-semibold text-foreground">{exp.role}</h3>
-                        <p className="text-foreground/70">{exp.company}</p>
-                        {exp.department && <p className="text-sm text-muted-foreground">{exp.department}</p>}
-                      </div>
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                        <span className="flex items-center gap-1.5">
-                          <MapPin className="w-3.5 h-3.5" />
-                          {exp.location}
-                        </span>
-                        <span className="flex items-center gap-1.5">
-                          <Calendar className="w-3.5 h-3.5" />
-                          {exp.period}
-                        </span>
-                      </div>
-                    </div>
-                    <ul className="space-y-2">
-                      {exp.highlights.map((highlight, i) => (
-                        <li key={i} className="text-muted-foreground flex items-start gap-2">
-                          <span className="text-primary mt-1.5">·</span>
-                          {highlight}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </motion.section>
-
-            {/* Education Section */}
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8">Education</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {education.map((edu, idx) => (
-                  <div key={idx} className="p-6 rounded-2xl bg-accent/30 border border-border/50">
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center overflow-hidden flex-shrink-0">
-                        {edu.logo ? (
-                          <Image
-                            src={edu.logo}
-                            alt={`${edu.school} logo`}
-                            width={40}
-                            height={40}
-                            className="object-contain"
-                          />
-                        ) : (
-                          <GraduationCap className="w-6 h-6 text-primary" />
-                        )}
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-foreground mb-1">{edu.school}</h3>
-                        <p className="text-sm text-foreground/70 mb-2">{edu.degree}</p>
-                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <MapPin className="w-3 h-3" />
-                            {edu.location}
-                          </span>
-                          <span>{edu.period}</span>
+              <div>
+                <h2 className="pill-label mb-6">Education</h2>
+                <ol className="space-y-8">
+                  {education.map((edu) => (
+                    <li key={edu.school} className="border-l-2 border-primary/30 pl-6">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-x-6 gap-y-1">
+                        <div className="flex items-center gap-3.5">
+                          {edu.logo && (
+                            <span className="w-10 h-10 shrink-0 rounded-lg bg-white border border-border/60 grid place-items-center overflow-hidden">
+                              <Image src={edu.logo} alt="" width={32} height={32} className="object-contain" />
+                            </span>
+                          )}
+                          <div>
+                            <h3 className="font-semibold text-foreground leading-snug">{edu.school}</h3>
+                            <p className="text-sm text-foreground/70">{edu.degree}</p>
+                          </div>
+                        </div>
+                        <div className={`text-sm text-muted-foreground sm:text-right shrink-0 sm:pt-0.5 ${edu.logo ? "pl-[3.375rem] sm:pl-0" : ""}`}>
+                          <div className="tabular-nums">{edu.period}</div>
+                          <div className="text-xs">{edu.location}</div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
+                      {edu.coursework?.map((group) => (
+                        <div key={group.title} className="mt-4">
+                          <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-2">{group.title}</h4>
+                          <p className="text-sm leading-relaxed text-foreground/80">
+                            {group.courses.map((course, i) => (
+                              <span key={course}>
+                                {i > 0 && <span className="mx-1.5 text-muted-foreground/40" aria-hidden="true">· </span>}
+                                <span className="whitespace-nowrap">{course}</span>
+                              </span>
+                            ))}
+                          </p>
+                        </div>
+                      ))}
+                    </li>
+                  ))}
+                </ol>
               </div>
-            </motion.section>
 
-            {/* Languages Section */}
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8">Languages</h2>
-              <div className="flex flex-wrap gap-4">
-                {languages.map((lang) => (
-                  <div key={lang.name} className="flex items-center gap-3 px-4 py-3 rounded-xl bg-accent/30 border border-border/50">
-                    <span className="font-semibold text-foreground">{lang.name}</span>
-                    <span className="text-sm text-muted-foreground">{lang.level}</span>
-                    {lang.note && (
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary">{lang.note}</span>
-                    )}
-                  </div>
-                ))}
+              <div>
+                <h2 className="pill-label mb-6">Languages</h2>
+                <dl className="divide-y divide-border border-y border-border">
+                  {languages.map((lang) => (
+                    <div key={lang.name} className="py-3.5">
+                      <div className="flex items-baseline justify-between gap-4">
+                        <dt className="font-semibold text-foreground">{lang.name}</dt>
+                        <dd className="text-sm text-foreground/70">{lang.level}</dd>
+                      </div>
+                      {lang.note && <dd className="mt-0.5 text-xs text-muted-foreground tabular-nums">{lang.note}</dd>}
+                    </div>
+                  ))}
+                </dl>
               </div>
             </motion.section>
 
@@ -286,12 +331,24 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8">Beyond Code</h2>
+              <h2 className="pill-label mb-6">Beyond Code</h2>
               <p className="text-lg leading-relaxed text-foreground/75 max-w-3xl mb-6">
-                Off the clock I captain my department&apos;s volleyball team, scuba dive, play guitar,
-                and develop film as darkroom officer of NTU&apos;s photography club. Most of it ends up
+                Off the clock I captain my department&apos;s volleyball team, play guitar, and develop
+                film as darkroom officer of NTU&apos;s photography club. I&apos;m a PADI Open Water
+                diver, paddled the 10 km kayak crossing to Keelung Islet, and spent two days
+                volunteering at the Chengdu Research Base of Giant Panda Breeding. Most of it ends up
                 in front of a camera sooner or later — the results live on the Photography page.
               </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                {lifePhotos.map((photo) => (
+                  <div
+                    key={photo.src}
+                    className={`rounded-xl overflow-hidden border border-border/50 bg-accent/30 ${photo.wide ? "col-span-2 row-span-2" : ""}`}
+                  >
+                    <img src={photo.src} alt={photo.alt} loading="lazy" className="w-full h-full object-cover aspect-square" />
+                  </div>
+                ))}
+              </div>
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/photography"
@@ -301,7 +358,7 @@ export default function About() {
                   View Photography
                 </Link>
                 <a
-                  href="https://open.spotify.com/user/21t6mkxonp73ou4n3ahjddbkq?si=78805a09a5b0464a"
+                  href={socials.spotify}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-[#1DB954]/10 text-[#1DB954] hover:bg-[#1DB954]/20 border border-[#1DB954]/30 transition-all"
@@ -320,7 +377,7 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-8">Resume</h2>
+              <h2 className="pill-label mb-6">Resume</h2>
               <div className="rounded-2xl border border-border overflow-hidden bg-card">
                 {/* Header bar */}
                 <div className="flex items-center justify-between px-4 py-3 bg-accent/50 border-b border-border">
@@ -334,7 +391,7 @@ export default function About() {
                   </div>
                   <div className="flex items-center gap-2">
                     <a
-                      href="/YuJia_resume.pdf"
+                      href={site.resume}
                       download
                       className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg hover:bg-accent transition-colors"
                     >
@@ -342,7 +399,7 @@ export default function About() {
                       Download
                     </a>
                     <a
-                      href="/YuJia_resume.pdf"
+                      href={site.resume}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg hover:bg-accent transition-colors"

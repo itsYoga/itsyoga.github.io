@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 
 interface BatteryManager extends EventTarget {
   level: number;
@@ -165,16 +165,18 @@ export function BatteryStatus() {
 }
 
 /** The clock, in the visitor's own time, the way a Mac's menu bar reads. */
-export function MenubarClock() {
-  const [now, setNow] = useState<string | null>(null);
+const formatClock = () =>
+  new Date().toLocaleString("en-US", { weekday: "short", hour: "numeric", minute: "2-digit" });
 
-  useEffect(() => {
-    const format = () =>
-      new Date().toLocaleString("en-US", { weekday: "short", hour: "numeric", minute: "2-digit" });
-    setNow(format());
-    const id = setInterval(() => setNow(format()), 15_000);
-    return () => clearInterval(id);
-  }, []);
+// The clock is external state: subscribe to a 15-second tick, and render
+// nothing on the server, where the visitor's time is unknown.
+function subscribeClock(onTick: () => void) {
+  const id = setInterval(onTick, 15_000);
+  return () => clearInterval(id);
+}
+
+export function MenubarClock() {
+  const now = useSyncExternalStore(subscribeClock, formatClock, () => null);
 
   return <span className="min-w-[10ch] text-right tabular-nums">{now}</span>;
 }

@@ -101,7 +101,6 @@ export default function Photography() {
           {/* Header */}
           <div className="mb-16 lg:mb-24">
             <EditorialHeader
-              index="03"
               title="Through My Lens"
               subtitle="Every collection is a roll of film — scroll through the frames, click one to develop the memory."
               size="large"

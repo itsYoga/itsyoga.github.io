@@ -182,3 +182,20 @@
   from { transform: scaleY(0.25); }
   to { transform: scaleY(1); }
 }
+
+/* The small rounded label a section opens with. */
+@layer components {
+  .pill-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--card);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+}

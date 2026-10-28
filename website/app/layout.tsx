@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import CommandPalette from "@/components/CommandPalette";
+import EasterEggs from "@/components/EasterEggs";
+import { THEME_SCRIPT } from "@/components/ThemeToggle";
 
 // LINE Seed Sans - clean, modern font
 const lineSeedSans = localFont({
@@ -87,8 +90,8 @@ export const viewport: Viewport = {
   maximumScale: 5,
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
-    { media: "(prefers-color-scheme: dark)", color: "#1a1a2e" },
+    { media: "(prefers-color-scheme: light)", color: "#f7f9fb" },
+    { media: "(prefers-color-scheme: dark)", color: "#060c14" },
   ],
 };
 
@@ -98,13 +101,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body className={`${lineSeedSans.variable} antialiased`} style={{ fontFamily: "var(--font-line-seed), system-ui, sans-serif" }}>
         <Navigation />
         <div className="pt-11">
           {children}
         </div>
         <Footer />
+        <CommandPalette />
+        <EasterEggs />
       </body>
     </html>
   );

@@ -4,16 +4,14 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Menu, X, SquareTerminal } from "lucide-react";
+import { Menu, X, SquareTerminal, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { pages } from "@/data/site";
+import { OPEN_PALETTE } from "@/components/CommandPalette";
+import ThemeToggle from "@/components/ThemeToggle";
 import { WifiStatus, BluetoothStatus, AirPodsStatus, BatteryStatus, MenubarClock } from "@/components/MenubarStatus";
 
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/photography", label: "Photography" },
-];
+const navItems = pages;
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -96,6 +94,17 @@ export default function Navigation() {
 
           {/* Status items */}
           <div className="flex items-center gap-1 text-foreground/80">
+            {/* Spotlight: opens the command palette (also ⌘K). */}
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event(OPEN_PALETTE))}
+              aria-label="Search the site (⌘K)"
+              title="Search (⌘K)"
+              className="grid place-items-center w-7 h-7 rounded-[5px] text-foreground/75 hover:bg-accent transition-colors"
+            >
+              <Search className="w-[15px] h-[15px]" />
+            </button>
+            <ThemeToggle />
             <Link
               href="/terminal"
               onClick={(e) => handleLinkClick("/terminal", e)}

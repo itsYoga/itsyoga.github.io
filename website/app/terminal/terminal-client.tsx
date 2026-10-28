@@ -2,49 +2,24 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { projects as projectData } from "@/data/projects";
+import { site, socials as siteSocials } from "@/data/site";
 
 const PROMPT = "yujia@yujialiang.com:~$";
 
-const projects: Record<string, { desc: string; url: string }> = {
-  riffnode: {
-    desc: "AI guitar effects studio — WWDC26 Swift Student Challenge Winner",
-    url: "/portfolio/riffnode",
-  },
-  toneleak: {
-    desc: "Does guitar tone transfer steal your touch? — independent research",
-    url: "/portfolio/toneleak",
-  },
-  soredemo: {
-    desc: "A macOS screen recorder that zooms in on what you click (Swift 6)",
-    url: "/portfolio/soredemo",
-  },
-  volleyball: {
-    desc: "Deep-learning volleyball analytics (ball tracking, action recognition)",
-    url: "/portfolio/volleyball",
-  },
-  ghote: {
-    desc: "Local-first AI note-taking app for macOS (Tauri + React)",
-    url: "/portfolio/ghote",
-  },
-  syncup: {
-    desc: "AI-powered social calendar app (Flutter + Gemini)",
-    url: "/portfolio/syncup",
-  },
-  archon: {
-    desc: "DeFi platform for real-world asset tokenization",
-    url: "/portfolio/archon",
-  },
-  asl: {
-    desc: "iOS app for learning American Sign Language (CoreML)",
-    url: "/portfolio/asl",
-  },
-};
+// Derived from the shared data so `ls projects` cannot drift from /portfolio.
+const projects: Record<string, { desc: string; url: string }> = Object.fromEntries(
+  projectData.map((p) => [
+    p.id,
+    { desc: p.award ? `${p.shortDesc} — ${p.award}` : p.shortDesc, url: `/portfolio/${p.id}` },
+  ])
+);
 
 const socials: Record<string, string> = {
-  github: "https://github.com/itsYoga",
-  linkedin: "https://www.linkedin.com/in/yujia-liang-77ab022a7/",
-  instagram: "https://www.instagram.com/yogaliang0702/",
-  resume: "/YuJia_resume.pdf",
+  github: siteSocials.github,
+  linkedin: siteSocials.linkedin,
+  instagram: siteSocials.instagram,
+  resume: site.resume,
 };
 
 const pages: Record<string, string> = {
@@ -189,7 +164,7 @@ export default function Terminal() {
         if (arg === "contact.txt") {
           return (
             <div className="space-y-1">
-              <p>email     : {link("mailto:ch993115@gmail.com", "ch993115@gmail.com")}</p>
+              <p>email     : {link(`mailto:${site.email}`, site.email)}</p>
               <p>github    : {link(socials.github, "github.com/itsYoga")}</p>
               <p>linkedin  : {link(socials.linkedin, "yujia-liang")}</p>
               <p>instagram : {link(socials.instagram, "@yogaliang0702")}</p>
@@ -301,7 +276,7 @@ export default function Terminal() {
           return (
             <div className="space-y-1">
               <p className="text-emerald-400">[sudo] permission granted ✓</p>
-              <p>Excellent decision. Reach me at {link("mailto:ch993115@gmail.com", "ch993115@gmail.com")}.</p>
+              <p>Excellent decision. Reach me at {link(`mailto:${site.email}`, site.email)}.</p>
             </div>
           );
         }
